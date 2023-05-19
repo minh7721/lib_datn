@@ -1,7 +1,7 @@
 // Exports the "fullscreen" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/fullscreen')
+//     require('tinymce/assets/fullscreen')
 //   ES2015:
-//     import 'tinymce/plugins/fullscreen'
+//     import 'tinymce/assets/fullscreen'
 require('./plugin.js');

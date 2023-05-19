@@ -1,7 +1,7 @@
 // Exports the "hr" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/hr')
+//     require('tinymce/assets/hr')
 //   ES2015:
-//     import 'tinymce/plugins/hr'
+//     import 'tinymce/assets/hr'
 require('./plugin.js');

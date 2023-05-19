@@ -28,7 +28,7 @@
     var hasProPlugin = function (editor) {
       if (editor.hasPlugin('tinymcespellchecker', true)) {
         if (typeof window.console !== 'undefined' && window.console.log) {
-          window.console.log('Spell Checker Pro is incompatible with Spell Checker plugin! ' + 'Remove \'spellchecker\' from the \'plugins\' option.');
+          window.console.log('Spell Checker Pro is incompatible with Spell Checker plugin! ' + 'Remove \'spellchecker\' from the \'assets\' option.');
         }
         return true;
       } else {

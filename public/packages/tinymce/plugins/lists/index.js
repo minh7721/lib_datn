@@ -1,7 +1,7 @@
 // Exports the "lists" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/lists')
+//     require('tinymce/assets/lists')
 //   ES2015:
-//     import 'tinymce/plugins/lists'
+//     import 'tinymce/assets/lists'
 require('./plugin.js');

@@ -1,7 +1,7 @@
 // Exports the "anchor" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/anchor')
+//     require('tinymce/assets/anchor')
 //   ES2015:
-//     import 'tinymce/plugins/anchor'
+//     import 'tinymce/assets/anchor'
 require('./plugin.js');

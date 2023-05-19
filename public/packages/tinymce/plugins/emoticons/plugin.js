@@ -307,7 +307,7 @@
 
     var global = tinymce.util.Tools.resolve('tinymce.util.Promise');
 
-    var DEFAULT_ID = 'tinymce.plugins.emoticons';
+    var DEFAULT_ID = 'tinymce.assets.emoticons';
     var getEmoticonDatabase = function (editor) {
       return editor.getParam('emoticons_database', 'emojis', 'string');
     };

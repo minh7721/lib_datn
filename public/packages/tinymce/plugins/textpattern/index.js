@@ -1,7 +1,7 @@
 // Exports the "textpattern" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/textpattern')
+//     require('tinymce/assets/textpattern')
 //   ES2015:
-//     import 'tinymce/plugins/textpattern'
+//     import 'tinymce/assets/textpattern'
 require('./plugin.js');

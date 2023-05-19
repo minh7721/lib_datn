@@ -42,6 +42,13 @@ return [
             'visibility' => 'public',
         ],
 
+//        'lib_storage' => [
+//            'driver' => 'local',
+//            'root' => env('LIB_STORAGE', storage_path('lib_storage')),
+//            'url' => env('APP_URL').'/data',
+//            'visibility' => 'public',
+//        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -68,6 +75,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+//        public_path('data') => env('LIB_STORAGE', storage_path('lib_storage')),
     ],
 
 ];

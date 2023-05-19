@@ -10,7 +10,7 @@
     factory(window.jQuery);
   }
 }(function($) {
-  // Extends plugins for adding hello.
+  // Extends assets for adding hello.
   //  - plugin is external module for customizing.
   $.extend($.summernote.plugins, {
     /**

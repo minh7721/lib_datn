@@ -1,7 +1,7 @@
 // Exports the "quickbars" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/quickbars')
+//     require('tinymce/assets/quickbars')
 //   ES2015:
-//     import 'tinymce/plugins/quickbars'
+//     import 'tinymce/assets/quickbars'
 require('./plugin.js');

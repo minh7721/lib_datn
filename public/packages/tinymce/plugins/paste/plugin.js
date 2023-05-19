@@ -28,7 +28,7 @@
     var hasProPlugin = function (editor) {
       if (editor.hasPlugin('powerpaste', true)) {
         if (typeof window.console !== 'undefined' && window.console.log) {
-          window.console.log('PowerPaste is incompatible with Paste plugin! Remove \'paste\' from the \'plugins\' option.');
+          window.console.log('PowerPaste is incompatible with Paste plugin! Remove \'paste\' from the \'assets\' option.');
         }
         return true;
       } else {

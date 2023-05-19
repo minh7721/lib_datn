@@ -1,7 +1,7 @@
 // Exports the "bbcode" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/bbcode')
+//     require('tinymce/assets/bbcode')
 //   ES2015:
-//     import 'tinymce/plugins/bbcode'
+//     import 'tinymce/assets/bbcode'
 require('./plugin.js');

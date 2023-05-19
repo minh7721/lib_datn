@@ -1,7 +1,7 @@
 // Exports the "noneditable" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/noneditable')
+//     require('tinymce/assets/noneditable')
 //   ES2015:
-//     import 'tinymce/plugins/noneditable'
+//     import 'tinymce/assets/noneditable'
 require('./plugin.js');

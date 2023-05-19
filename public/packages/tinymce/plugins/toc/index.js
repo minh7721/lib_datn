@@ -1,7 +1,7 @@
 // Exports the "toc" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/toc')
+//     require('tinymce/assets/toc')
 //   ES2015:
-//     import 'tinymce/plugins/toc'
+//     import 'tinymce/assets/toc'
 require('./plugin.js');

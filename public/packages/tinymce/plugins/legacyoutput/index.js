@@ -1,7 +1,7 @@
 // Exports the "legacyoutput" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/legacyoutput')
+//     require('tinymce/assets/legacyoutput')
 //   ES2015:
-//     import 'tinymce/plugins/legacyoutput'
+//     import 'tinymce/assets/legacyoutput'
 require('./plugin.js');

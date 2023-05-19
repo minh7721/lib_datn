@@ -1,7 +1,7 @@
 // Exports the "emoticons" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/emoticons')
+//     require('tinymce/assets/emoticons')
 //   ES2015:
-//     import 'tinymce/plugins/emoticons'
+//     import 'tinymce/assets/emoticons'
 require('./plugin.js');

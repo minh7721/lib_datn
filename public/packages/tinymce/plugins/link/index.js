@@ -1,7 +1,7 @@
 // Exports the "link" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/link')
+//     require('tinymce/assets/link')
 //   ES2015:
-//     import 'tinymce/plugins/link'
+//     import 'tinymce/assets/link'
 require('./plugin.js');

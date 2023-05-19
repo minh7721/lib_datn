@@ -1,7 +1,7 @@
 // Exports the "paste" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/paste')
+//     require('tinymce/assets/paste')
 //   ES2015:
-//     import 'tinymce/plugins/paste'
+//     import 'tinymce/assets/paste'
 require('./plugin.js');

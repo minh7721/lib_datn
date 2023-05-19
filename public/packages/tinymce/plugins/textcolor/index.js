@@ -1,7 +1,7 @@
 // Exports the "textcolor" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/textcolor')
+//     require('tinymce/assets/textcolor')
 //   ES2015:
-//     import 'tinymce/plugins/textcolor'
+//     import 'tinymce/assets/textcolor'
 require('./plugin.js');

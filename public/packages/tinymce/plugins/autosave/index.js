@@ -1,7 +1,7 @@
 // Exports the "autosave" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/autosave')
+//     require('tinymce/assets/autosave')
 //   ES2015:
-//     import 'tinymce/plugins/autosave'
+//     import 'tinymce/assets/autosave'
 require('./plugin.js');

@@ -1,7 +1,7 @@
 // Exports the "wordcount" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/wordcount')
+//     require('tinymce/assets/wordcount')
 //   ES2015:
-//     import 'tinymce/plugins/wordcount'
+//     import 'tinymce/assets/wordcount'
 require('./plugin.js');

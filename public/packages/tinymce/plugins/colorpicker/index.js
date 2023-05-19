@@ -1,7 +1,7 @@
 // Exports the "colorpicker" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/colorpicker')
+//     require('tinymce/assets/colorpicker')
 //   ES2015:
-//     import 'tinymce/plugins/colorpicker'
+//     import 'tinymce/assets/colorpicker'
 require('./plugin.js');

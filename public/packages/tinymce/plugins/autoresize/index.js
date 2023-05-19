@@ -1,7 +1,7 @@
 // Exports the "autoresize" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/autoresize')
+//     require('tinymce/assets/autoresize')
 //   ES2015:
-//     import 'tinymce/plugins/autoresize'
+//     import 'tinymce/assets/autoresize'
 require('./plugin.js');

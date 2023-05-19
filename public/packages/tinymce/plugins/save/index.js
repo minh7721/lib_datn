@@ -1,7 +1,7 @@
 // Exports the "save" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
-//     require('tinymce/plugins/save')
+//     require('tinymce/assets/save')
 //   ES2015:
-//     import 'tinymce/plugins/save'
+//     import 'tinymce/assets/save'
 require('./plugin.js');
