@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\DocumentController;
 use App\Http\Controllers\ViewerController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get( '/viewer/{filename}', [ViewerController::class, 'view'])->name('viewer.index');
+Route::get( '/document/{filename}', [DocumentController::class, 'view'])->name('document.detail');
 
