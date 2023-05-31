@@ -10,42 +10,90 @@ module.exports = {
   ],
   theme: {
       extend: {
-          colors:{
-              "primary": '#00A888',
-              "secondary":'#FFAA00',
-              "text-default": '#666666',
-              "search": '#CBCCCC',
-              "text-default-darker":"#333333",
-              "text-tag" : "#99999A"
+          colors: {
+              primary: "#00A888",
+              "primary-darker": "#006350",
+              "primary-lighter": "#00ecbf",
+              secondary: "#FFAA00",
+              "secondary-darker": "#cc8800",
+              "secondary-lighter": "#ffbb32",
+              warning: "#FFAA00",
+              info: "#5D789B",
+              success: "#00A888",
+              danger: "#E13D34",
+              error: "#E13D34",
+              default: "#333333",
+              "main-background": "#CBCCCC3C",
+              "default-lighter": "#666666",
           },
-          border:{
-              '1.5':'1.5px',
-          },
-          borderWidth: {
-              '1/2':'0.5px',
-              '1':'1px'
+          borderRadius: {
+              "1.5lg": "0.625rem",
+              "4xl": "1.75rem",
+              "4.5xl": "1.875rem",
           },
           boxShadow: {
-              '3xl': '0px 5px 5px -5px rgba(0, 0, 0, 0.25)',
+              hover: "5px 5px 8px #cccccc",
+              around: '2px 0px 10px #00000033'
           },
-          borderRadius:{
-              '4xl':'30px',
-              '2lg' : '10px',
+          fontSize: {
+              "3.25xl": ["2rem", "48px"],
           },
-          fontSize:{
-              '3.25xl': ['32px', {
-                  lineHeight: '48px',
-              }],
+          screens: {
+              lg: "1000px",
           },
-          fontFamily: {
-              libre: ['"Be Vietnam Pro"', ...defaultTheme.fontFamily.sans]
+          flex: {
+              max: "1 0 max-content",
           },
-          margin:{
-              '5.5':'22px',
+          typography: {
+              DEFAULT: {
+                  css: {
+                      maxWidth: "none",
+                      color: "var(--color-text-default)",
+                      fontWeight: "normal",
+                      lineHeight: "1.5rem",
+                      h1: {
+                          fontSize: "1.5rem",
+                          fontWeight: "600",
+                          color: "var(--color-text-default)",
+                      },
+                      h2: {
+                          fontWeight: "600",
+                          color: "var(--color-text-default)",
+                      },
+                      h3: {
+                          fontWeight: "500",
+                          color: "var(--color-text-default)",
+                      },
+                      h4: {
+                          fontWeight: "normal",
+                          color: "var(--color-text-default)",
+                      },
+                      p: {
+                          fontWeight: "normal",
+                          color: "var(--color-text-default)",
+                          marginTop: "0.6em",
+                          marginBottom: "0.6em",
+                      },
+                      a: {
+                          fontWeight: "normal",
+                          color: "#0080FF",
+                      },
+                      img: {
+                          display: "block",
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                          maxWidth: "500px",
+                      },
+                      figcaption: {
+                          textAlign: "center",
+                      },
+                  },
+              },
           },
-          minWidth: {
-              '1/2': '50%',
-          }
+          inset: {
+              0: 0,
+              "1/2": "50%",
+          },
       },
   },
     plugins: [

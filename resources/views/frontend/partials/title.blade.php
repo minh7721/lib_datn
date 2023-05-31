@@ -113,12 +113,12 @@
                             <!-- Modal footer -->
                             <div class="flex justify-end items-center p-6 space-x-2">
                                 <button data-modal-hide="reportModal" type="button"
-                                        class="text-primary hover:border-1 hover:border-red-600 hover:text-red-600 font-medium rounded-4xl text-base px-5 py-2.5 text-center">
+                                        class="colo text-primary hover:border-1 hover:border-red-600 hover:text-red-600 font-medium rounded-4xl text-base px-5 py-2.5 text-center">
                                     Cancel
                                 </button>
                                 <button data-modal-hide="reportModal" type="button"
-                                        class="text-white bg-primary hover:bg-opacity-75 rounded-4xl border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
-                                    Decline
+                                        class="text-white bg-primary hover:bg-opacity-75 rounded-4xl border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
+                                    Send
                                 </button>
                             </div>
                         </div>
