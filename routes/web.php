@@ -1,6 +1,6 @@
 <?php
-//
-//use App\Http\Controllers\Frontend\DocumentController;
+
+use App\Http\Controllers\Frontend\DocumentController;
 //use App\Http\Controllers\ViewerController;
 //use Illuminate\Support\Facades\Route;
 //
@@ -35,10 +35,13 @@ Route::get('/home', function () {
 //Route::get('/document', function () {
 //    return view('frontend_v4.pages.document.detail');
 //});
-Route::get('/document/{filename}', [\App\Http\Controllers\Frontend\DocumentController::class, 'view'])->name('document.detail');
-Route::get('/search', function (){
-    return view('frontend_v4.pages.search.search');
-});
+Route::get('/document/{slug}', [DocumentController::class, 'view'])->name('document.detail');
+//Route::get('/search', function (){
+//    return view('frontend_v4.pages.search.search');
+//});
+
+Route::get('/search', [DocumentController::class, 'search'])->name('document.search');
+
 
 Route::get('/institution', function () {
     return view('frontend_v4.pages.university.index');
