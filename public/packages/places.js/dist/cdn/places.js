@@ -6365,9 +6365,9 @@ var Promise$1 = function () {
   /**
     `finally` will be invoked regardless of the promise's fate just as native
     try/catch/finally behaves
-  
+
     Synchronous example:
-  
+
     ```js
     findAuthor() {
       if (Math.random() > 0.5) {
@@ -6375,7 +6375,7 @@ var Promise$1 = function () {
       }
       return new Author();
     }
-  
+
     try {
       return findAuthor(); // succeed or fail
     } catch(error) {
@@ -6385,9 +6385,9 @@ var Promise$1 = function () {
       // doesn't affect the return value
     }
     ```
-  
+
     Asynchronous example:
-  
+
     ```js
     findAuthor().catch(function(reason){
       return findOtherAuther();
@@ -6395,7 +6395,7 @@ var Promise$1 = function () {
       // author was either found, or not
     });
     ```
-  
+
     @method finally
     @param {Function} callback
     @return {Promise}
@@ -7044,7 +7044,7 @@ module.exports = autocomplete;
   // `$.zepto.fragment` takes a html string and an optional tag name
   // to generate DOM nodes from the given html string.
   // The generated DOM nodes are returned as an array.
-  // This function can be overridden in plugins for example to make
+  // This function can be overridden in assets for example to make
   // it compatible with browsers that don't support the DOM fully.
   zepto.fragment = function(html, name, properties) {
     var dom, nodes, container
@@ -7077,13 +7077,13 @@ module.exports = autocomplete;
 
   // `$.zepto.Z` swaps out the prototype of the given `dom` array
   // of nodes with `$.fn` and thus supplying all the Zepto functions
-  // to the array. This method can be overridden in plugins.
+  // to the array. This method can be overridden in assets.
   zepto.Z = function(dom, selector) {
     return new Z(dom, selector)
   }
 
   // `$.zepto.isZ` should return `true` if the given object is a Zepto
-  // collection. This method can be overridden in plugins.
+  // collection. This method can be overridden in assets.
   zepto.isZ = function(object) {
     return object instanceof zepto.Z
   }
@@ -7091,7 +7091,7 @@ module.exports = autocomplete;
   // `$.zepto.init` is Zepto's counterpart to jQuery's `$.fn.init` and
   // takes a CSS selector and an optional context (and handles various
   // special cases).
-  // This method can be overridden in plugins.
+  // This method can be overridden in assets.
   zepto.init = function(selector, context) {
     var dom
     // If nothing given, return an empty Zepto collection
@@ -7136,7 +7136,7 @@ module.exports = autocomplete;
   // `$` will be the base `Zepto` object. When calling this
   // function just call `$.zepto.init, which makes the implementation
   // details of selecting nodes and creating Zepto collections
-  // patchable in plugins.
+  // patchable in assets.
   $ = function(selector, context){
     return zepto.init(selector, context)
   }
@@ -7167,7 +7167,7 @@ module.exports = autocomplete;
 
   // `$.zepto.qsa` is Zepto's CSS selector implementation which
   // uses `document.querySelectorAll` and optimizes for some special cases, like `#id`.
-  // This method can be overridden in plugins.
+  // This method can be overridden in assets.
   zepto.qsa = function(element, selector){
     var found,
         maybeID = selector[0] == '#',
