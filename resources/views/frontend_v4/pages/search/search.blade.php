@@ -35,7 +35,7 @@
                     type="search" placeholder="Search for writer's name">
             </div>
         </div>
-        <div class="flex  container mx-auto px-4 md:px-0" x-cloak x-data="{
+        <div class="flex cursor-pointer container mx-auto px-4 md:px-0" x-cloak x-data="{
             open: false,
             selections: [
                 'Most popular documents',

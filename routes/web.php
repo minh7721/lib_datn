@@ -32,10 +32,10 @@ Route::get('/home', function () {
     return "HOME_2";
 });
 
-Route::get('/document', function () {
-    return view('frontend_v4.pages.document.detail');
-});
-
+//Route::get('/document', function () {
+//    return view('frontend_v4.pages.document.detail');
+//});
+Route::get('/document/{filename}', [\App\Http\Controllers\Frontend\DocumentController::class, 'view'])->name('document.detail');
 Route::get('/search', function (){
     return view('frontend_v4.pages.search.search');
 });

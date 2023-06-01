@@ -9,6 +9,6 @@ class DocumentController extends Controller
 {
     public function view(Request $request, $filename){
         $pdf_path = 'storage/pdffile/'.$filename;
-        return view('frontend.layouts.detail', compact('pdf_path'));
+        return view('frontend_v4.pages.document.detail', compact('pdf_path'));
     }
 }
