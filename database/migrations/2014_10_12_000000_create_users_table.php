@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('country')->nullable()->index();
             $table->string('language')->nullable()->index();
             $table->string('social_id')->nullable()->index();
-            $table->integer('total_view')->default(0)->index();
+            $table->integer('total_save')->default(0)->index();
             $table->integer('total_downloaded')->default(0)->index();
             $table->integer('total_document')->default(0)->index();
             $table->rememberToken();

@@ -15,7 +15,8 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('category_id')->default(1)->index();
             $table->string('title');
             $table->string('slug')->index();
             $table->text('source_url')->nullable();
@@ -40,6 +41,7 @@ class CreateDocumentsTable extends Migration
             $table->integer('is_approved')->default(0)->comment('0: wating, 1: yes, -1: no');
             $table->integer('can_download')->default(1);
             $table->dateTime('approved_at')->nullable();
+            $table->json('payload')->nullable();
             $table->timestamps();
         });
     }

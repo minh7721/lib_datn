@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentCategoryTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDocumentCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('document_category', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('document_id')->index();
-            $table->integer('category_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->integer('price')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateDocumentCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('document_category');
+        Schema::dropIfExists('payments');
     }
 }

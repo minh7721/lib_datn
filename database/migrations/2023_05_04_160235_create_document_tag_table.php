@@ -15,8 +15,8 @@ class CreateDocumentTagTable extends Migration
     {
         Schema::create('document_tag', function (Blueprint $table) {
             $table->id();
-            $table->integer('document_id');
-            $table->integer('tag_id');
+            $table->unsignedBigInteger('document_id');
+            $table->unsignedBigInteger('tag_id');
             $table->timestamps();
         });
     }
