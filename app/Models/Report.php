@@ -5,17 +5,19 @@ namespace App\Models;
 use App\Models\Traits\HasIdRangeScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Comment extends Model
+class Report extends Model
 {
     use CrudTrait;
     use HasIdRangeScope;
 
-    protected $table = 'comments';
+
+    protected $table = 'reports';
     protected $guarded = ['id'];
 
-    public function documents() {
+    public function document(): BelongsTo
+    {
         return $this->belongsTo(Document::class, 'document_id');
     }
 }

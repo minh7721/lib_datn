@@ -48,6 +48,21 @@ class User extends Authenticatable
 
     public function documents()
     {
-        return $this->hasMany(Document::class, 'document_id');
+        return $this->hasMany(Document::class, 'user_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'user_id');
+    }
+
+    public function downloads()
+    {
+        return $this->hasMany(Download::class, 'user_id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'user_id');
     }
 }

@@ -23,13 +23,14 @@ use App\Http\Controllers\Frontend\DocumentController;
 //Route::get( '/document/{filename}', [DocumentController::class, 'view'])->name('document.detail');
 //
 
+Route::get('/', [DocumentController::class, 'index'])->name('document.home.index');
 
-Route::get('/', function () {
-    return view('frontend_v4.index');
+Route::get('/document', function () {
+    return view('frontend_v4.pages.document.detail');
 });
 
 Route::get('/home', function () {
-    return "HOME_2";
+    return view('frontend_v4.pages.home.home');
 });
 
 //Route::get('/document', function () {
@@ -67,6 +68,3 @@ Route::get('/course', function () {
     return "Course";
 });
 
-Route::get('/', function () {
-    return view('frontend_v4.pages.components');
-});

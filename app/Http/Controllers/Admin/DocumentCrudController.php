@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\DocumentRequest;
 use App\Libs\CountriesHelper\Countries;
 use App\Libs\CountriesHelper\Languages;
+use App\Models\Category;
 use App\Models\Document;
 use App\Models\Enums\TypeDocument;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -41,6 +42,7 @@ class DocumentCrudController extends CrudController
             [
                 'name' => 'id',
                 'label' => '#',
+                'type' => 'preview_file'
             ],
             [
                 'name' => 'active',
@@ -51,7 +53,9 @@ class DocumentCrudController extends CrudController
             [
                 'name' => 'title',
                 'label' => 'title',
-                'type' => 'preview_file',
+                'type' => 'text',
+                'limit' => 20,
+                'wrapper' => ['class' => 'text-truncate'],
             ],
             [
                 'name' => 'page_number',
@@ -113,6 +117,19 @@ class DocumentCrudController extends CrudController
 //                return md5(uniqid()) . '.' . $file->getClientOriginalExtension();
 //            },/college/
 //            'prefix'    => 'pdftest/',
+            'wrapper' => [
+                'class' => 'form-group col-md-6'
+            ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'category_id',
+            'label' => "Category",
+            'type' => 'select2',
+            'entity' => 'categories',
+            'attribute' => 'name',
+            'model' => Category::class,
+            'allows_null' => false,
             'wrapper' => [
                 'class' => 'form-group col-md-6'
             ]

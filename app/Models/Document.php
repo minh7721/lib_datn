@@ -19,6 +19,7 @@ class Document extends Model
     protected $table = 'documents';
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'slug',
         'source_url',
@@ -92,14 +93,34 @@ class Document extends Model
         return $this->belongsToMany(Tag::class, 'document_tag', 'document_id', 'tag_id');
     }
 
-    public function categories(): BelongsToMany
+    public function payments(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, 'document_category', 'document_id', 'category_id');
+        return $this->belongsToMany(Payment::class, 'payment_documents', 'document_id', 'payment_id');
+    }
+
+    public function categories(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'document_id');
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class, 'document_id');
+    }
+
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class, 'document_id');
+    }
+
+    public function downloads(): HasMany
+    {
+        return $this->hasMany(Download::class, 'document_id');
     }
 
     public function setSourceUrlAttribute($value)

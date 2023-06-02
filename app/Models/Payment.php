@@ -6,13 +6,14 @@ use App\Models\Traits\HasIdRangeScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Rating extends Model
+class Payment extends Model
 {
     use CrudTrait;
     use HasIdRangeScope;
 
-    protected $table = 'ratings';
+    protected $table = 'payments';
     protected $guarded = ['id'];
 
     public function user(): BelongsTo
@@ -20,8 +21,8 @@ class Rating extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function document(): BelongsTo
+    public function documents(): BelongsToMany
     {
-        return $this->belongsTo(Document::class, 'document_id');
+        return $this->belongsToMany(Document::class, 'payment_documents', 'payment_id', 'document_id');
     }
 }
