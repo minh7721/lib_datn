@@ -44,6 +44,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Document|null $documents
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment idRange($id)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Comment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Comment query()
@@ -63,6 +64,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $user_id
+ * @property int $category_id
  * @property string $title
  * @property string $slug
  * @property string|null $source_url
@@ -87,12 +89,20 @@ namespace App\Models{
  * @property int $is_approved 0: wating, 1: yes, -1: no
  * @property int $can_download
  * @property string|null $approved_at
+ * @property mixed|null $payload
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $categories
- * @property-read int|null $categories_count
+ * @property-read \App\Models\Category|null $categories
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
  * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Download> $downloads
+ * @property-read int|null $downloads_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Payment> $payments
+ * @property-read int|null $payments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Rating> $ratings
+ * @property-read int|null $ratings_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Report> $reports
+ * @property-read int|null $reports_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
  * @property-read int|null $tags_count
  * @property-read \App\Models\User|null $user
@@ -103,6 +113,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereApprovedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereCanDownload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Document whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereCountry($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereDescription($value)
@@ -117,6 +128,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereOriginalSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document wherePageNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Document wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereRatingCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereRatingValue($value)
@@ -139,9 +151,12 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $document_id
- * @property mixed $payload
+ * @property mixed|null $payload
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Document|null $document
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Download idRange($id)
  * @method static \Illuminate\Database\Eloquent\Builder|Download newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Download newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Download query()
@@ -157,6 +172,31 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Payment
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
+ * @property-read int|null $documents_count
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment idRange($id)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUserId($value)
+ */
+	class Payment extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Rating
  *
  * @property int $id
@@ -166,6 +206,9 @@ namespace App\Models{
  * @property int|null $content
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Document|null $document
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Rating idRange($id)
  * @method static \Illuminate\Database\Eloquent\Builder|Rating newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Rating newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Rating query()
@@ -178,6 +221,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Rating whereUserId($value)
  */
 	class Rating extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Report
+ *
+ * @property int $id
+ * @property int $document_id
+ * @property string $message
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Document|null $document
+ * @method static \Illuminate\Database\Eloquent\Builder|Report idRange($id)
+ * @method static \Illuminate\Database\Eloquent\Builder|Report newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Report newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Report query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Report whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Report whereDocumentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Report whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Report whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Report whereUpdatedAt($value)
+ */
+	class Report extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -225,7 +291,7 @@ namespace App\Models{
  * @property string|null $country
  * @property string|null $language
  * @property string|null $social_id
- * @property int $total_view
+ * @property int $total_save
  * @property int $total_downloaded
  * @property int $total_document
  * @property string|null $remember_token
@@ -233,10 +299,16 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
  * @property-read int|null $documents_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Download> $downloads
+ * @property-read int|null $downloads_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Payment> $payments
+ * @property-read int|null $payments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
  * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Rating> $ratings
+ * @property-read int|null $ratings_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
@@ -266,7 +338,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSocialId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalDocument($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalDownloaded($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalView($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalSave($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
