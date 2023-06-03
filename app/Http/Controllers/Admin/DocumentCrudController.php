@@ -138,13 +138,7 @@ class DocumentCrudController extends CrudController
             ]
         ]);
 
-        $this->crud->addField([
-            'name' => 'description',
-            'label' => "Description",
-            'wrapper' => [
-                'class' => 'form-group col-md-6'
-            ]
-        ]);
+
         $this->crud->addField([
             'name' => 'page_number',
             'label' => "Page",
@@ -152,6 +146,10 @@ class DocumentCrudController extends CrudController
             'wrapper' => [
                 'class' => 'form-group col-md-6'
             ]
+        ]);
+        $this->crud->addField([
+            'name' => 'description',
+            'label' => "Description",
         ]);
         $this->crud->addField([
             'name' => 'price',

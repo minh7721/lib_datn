@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\DocumentProcess\Builder;
+use App\Libs\Nlp\Description\TextRankGenerator;
 use App\Libs\SeoSlugGenerator;
 use App\Models\Traits\HasIdRangeScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -65,8 +66,12 @@ class Document extends Model
             $model->user_id = backpack_user()->id;
             $model->slug = Str::slug((new SeoSlugGenerator($model->title))->run());
             $document_process = Builder::fromDocument($model)->get();
-            $model->full_text = $document_process->makeFulltext();
-
+            $fulltext = $document_process->makeFulltext();
+            $model->full_text = $fulltext;
+            $generator = TextRankGenerator::fromDSFullText($fulltext);
+            $description = $generator->getDescription();
+            $description = mb_substr($description, 0, 186) . "[r]";
+            $model->description = $description;
         });
 
         static::updating(function ($model) {

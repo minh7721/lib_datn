@@ -71,12 +71,12 @@ class Convert extends Command
         /** Create Description */
         $generator = TextRankGenerator::fromDSFullText($fulltext);
         $description = $generator->getDescription();
-        dd($description);
-        $document->description = mb_substr($description, 0, 186) . "[r]";
+        $description = mb_substr($description, 0, 186) . "[r]";
 
         /** Save fulltext to $document->fulltext */
         $document->update([
-            'full_text' => $fulltext
+            'full_text' => $fulltext,
+            'description' => $description
         ]);
 
     }
