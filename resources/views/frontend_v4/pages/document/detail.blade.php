@@ -201,8 +201,7 @@
             </div>
             <div class="lg:basis-2/3 mb-4 flex lg:flex-row flex-col">
                 <h1 class="md:text-lg lg:text-2xl break-words font-bold md:basis-2/3 my-auto leading-loose md:mb-5">
-                    Luận Văn Thạc Sĩ Sự Tham Gia Của Người Nghèo Trong Thực Hiện Chính Sách Giảm Nghèo Ở Quận Phú Nhuận,
-                    Thành Phố Hồ Chí Minh.pdf
+                    {{ $document->title }}
                 </h1>
                 <div class="hidden md:flex lg:basis-1/3 md:justify-between  lg:justify-end gap-2 mt-3 md:mt-0">
                     <div class="flex gap-2">
