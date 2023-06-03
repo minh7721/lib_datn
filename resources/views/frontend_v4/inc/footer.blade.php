@@ -72,7 +72,7 @@
         </div>
         <div class="basis-full md:basis-2/5 lg:text-right text-center">
             <p class="text-sm">
-                Copyright 123dok.com © 2023
+                Copyright libshare.xyz © 2023
             </p>
         </div>
     </div>

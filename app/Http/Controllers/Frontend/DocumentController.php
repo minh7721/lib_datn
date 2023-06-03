@@ -15,7 +15,7 @@ class DocumentController extends Controller
     public function view(Request $request, $slug){
         $document = Document::where('slug', $slug)->first();
         $pdf_path = $document->source_url;
-        return view('frontend_v4.pages.document.detail', compact('pdf_path'));
+        return view('frontend_v4.pages.document.detail', compact('document'));
     }
 
     public function search(Request $request){

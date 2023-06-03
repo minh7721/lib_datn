@@ -79,8 +79,8 @@ namespace App\Models{
  * @property int $type 0: default, 1: text, 2: image, 3: ...
  * @property string|null $language language code
  * @property string|null $country country code
- * @property int $rating_value
- * @property int $rating_count
+ * @property int $helpful_count
+ * @property int $unhelpful_count
  * @property int $viewed_count
  * @property int $downloaded_count
  * @property int $shared_count
@@ -120,6 +120,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereDisks($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereDownloadedCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereFullText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Document whereHelpfulCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereIsApproved($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereIsPublic($value)
@@ -130,13 +131,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Document wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Document whereRatingCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Document whereRatingValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereSharedCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereSourceUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Document whereUnhelpfulCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereViewedCount($value)

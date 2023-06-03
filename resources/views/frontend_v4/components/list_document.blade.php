@@ -1,4 +1,4 @@
-<a href="" class="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-6 px-6">
+<a href="{{ route('document.detail', ['slug' => $document->slug]) }}" class="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-6 px-6">
     <div
         class="flex gap-4 border border-slate-300 border-solid rounded-lg px-8 py-5 mb-2.5 hover:shadow-card">
         <div class="w-2/5 aspect-[3/4] bg-slate-100 ">

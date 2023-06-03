@@ -616,26 +616,58 @@
         <div class="container mx-auto px-3 mb-10">
             <div class="flex flex-col justify-center items-center">
                 <p class="mb-4 pt-12 lg:w-1/2 md:w-2/3 w-full border-t border-[#99999A] text-center font-medium text-3xl">
-                    Explore Top Schools</p>
+                    Top document</p>
                 <h2 class="mb-4 text-default-lighter font-semibold text-2xl">Master your classes with homework help, exam study guides, past papers, and more</h2>
             </div>
 
-            <div class="grid grid-cols-2 gap-x-20 gap-y-6">
-                @for($i=0; $i<20; $i++)
-                    <div
-                        class="border border-[#99999A] rounded-1.5lg px-10 py-12 flex flex-col justify-start items-start hover:bg-yellow-300 hover:bg-opacity-10">
-                        <a href="#" class="flex mb-7">
-                            <i class="fa-solid fa-graduation-cap mt-1 text-secondary mr-2"></i>
-                            <p class="font-medium text-base text-default">Đại học Công nghiệp Thực phẩm Thành phố Hồ Chí Minh</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-2 lg:gap-x-5">
+                @for ($i = 1; $i <= 10; $i++)
+                    <div class="w-full mb-6 md:mb-10 ">
+                        <a href="" class="group">
+                            <div
+                                class="border border-slate-300 border-solid rounded-1.5lg px-1 lg:px-2 pt-1 pb-2 mb-1 md:mb-2.5 group-hover:shadow-card ">
+                                <img src="https://picsum.photos/200" alt=""
+                                     class="max-w-full w-full object-cover max-h-[150px] ">
+                                <div class="px-2 lg:px-3.5 lg:pt-5">
+                                    <div class="mb-5">
+                                        <h2 class="text-primary font-semibold text-sm md:text-base line-clamp-2">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
+                                            asperiores assumenda consectetur consequatur doloribus eaque
+                                            eligendi
+                                        </h2>
+                                        <p class="text-default-lighter font-thin text-sm py-2 line-clamp-1"> Quan he
+                                            kinh te</p>
+                                    </div>
+                                    <div
+                                        class="flex justify-between text-default-lighter font-light text-xs lg:text-base ">
+                                        <div class="inline-flex items-center gap-1 md:gap-2">
+                                            <i class="fa-solid fa-file"></i>
+                                            <span>12</span>
+                                        </div>
+                                        <div class="inline-flex items-center gap-1 md:gap-2">
+                                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                                            <span>20</span>
+                                        </div>
+                                        <div class="inline-flex items-center gap-1 md:gap-2">
+                                            <i class="fa-solid fa-eye"></i>
+                                            <span>70</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="text-default-lighter flex justify-center gap-1 items-center border border-solid border-slate-300 w-full rounded-4xl py-2 text-xs lg:text-base group-hover:shadow-card">
+                                <i class="fa-solid fa-thumbs-up text-secondary"></i>
+                                <span class="text-text-default font-light lg:font-medium">100%</span>
+                            </div>
                         </a>
-                        <p class="text-default-lighter text-base text-default">466 documents</p>
                     </div>
                 @endfor
             </div>
         </div>
 
         <div class="text-center pb-10">
-            <p class="mb-10 text-black font-medium text-2xl">Get Started with 123dok</p>
+            <p class="mb-10 text-black font-medium text-2xl">Get Started with libshare</p>
             <button class="rounded-4.5xl bg-primary px-10 py-2 text-white font-semibold text-2xl">Join us</button>
         </div>
     </div>

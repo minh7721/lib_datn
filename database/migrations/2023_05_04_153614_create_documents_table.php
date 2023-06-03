@@ -20,7 +20,7 @@ class CreateDocumentsTable extends Migration
             $table->string('title');
             $table->string('slug')->index();
             $table->text('source_url')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('page_number')->nullable()->index();
             $table->integer('price')->index()->default(0);
             $table->integer('original_size')->default(0)->comment('Kich thuoc goc');
@@ -31,8 +31,8 @@ class CreateDocumentsTable extends Migration
             $table->integer('type')->default(0)->comment('0: default, 1: text, 2: image, 3: ...');
             $table->string('language')->nullable()->comment('language code');
             $table->string('country')->nullable()->comment('country code');
-            $table->integer('rating_value')->default(0);
-            $table->integer('rating_count')->default(0);
+            $table->integer('helpful_count')->default(0);
+            $table->integer('unhelpful_count')->default(0);
             $table->integer('viewed_count')->default(0);
             $table->integer('downloaded_count')->default(0);
             $table->integer('shared_count')->default(0);

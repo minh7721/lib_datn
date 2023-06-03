@@ -26,7 +26,7 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('assets/plugins/pdfjs/build/pdf.worker.js') }}';
 
     // Đường dẫn tới file PDF
-    const pdfUrl = '{{ asset($pdf_path) }}';
+    const pdfUrl = '{{ asset($document->source_url }}';
 
     let currentPage = 1;
     let zoomLevel = 1.0;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DocumentProcess\Builder;
 use App\Libs\SeoSlugGenerator;
 use App\Models\Traits\HasIdRangeScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -57,22 +58,26 @@ class Document extends Model
     {
         parent::boot();
 
-        static::creating(function ($model){
+        static::creating(function ($model) {
             if ($model->price === null) {
                 $model->price = 0;
             }
             $model->user_id = backpack_user()->id;
             $model->slug = Str::slug((new SeoSlugGenerator($model->title))->run());
+            $document_process = Builder::fromDocument($model)->get();
+            $model->full_text = $document_process->makeFulltext();
+
         });
 
         static::updating(function ($model) {
-            $oldImage = $model->getOriginal('source_url');
-            $oldImage = str_replace('storage/', '', $oldImage);
-
-            $newImage = $model->getAttribute('source_url');
-            if ($oldImage !== $newImage) {
-                \Storage::disk('public')->delete($oldImage);
-            }
+//            if ($model->getAttribute('source_url')) {
+//                $oldImage = $model->getOriginal('source_url');
+//                $oldImage = str_replace('storage/', '', $oldImage);
+//                $newImage = $model->getAttribute('source_url');
+//                if ($oldImage !== $newImage) {
+//                    \Storage::disk('public')->delete($oldImage);
+//                }
+//            }
         });
 
         static::deleting(function ($model) {

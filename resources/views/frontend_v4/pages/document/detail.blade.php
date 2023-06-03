@@ -15,7 +15,7 @@
     <script>
         const container = document.getElementById('pdfContainer');
         {{--const pdfUrl = "{{ url('assets_v4/packages/pdfjs/web/compressed.tracemonkey-pldi-09.pdf') }}";--}}
-        const pdfUrl = "{{ url($pdf_path) }}";
+        const pdfUrl = "{{ url($document->source_url) }}";
         let currentPage = 1;
         let totalPageCount = 0;
         const document_controller = document.getElementById('document_controller');
@@ -209,39 +209,42 @@
                         <button
                             class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-up"></i>
-                            <p>1</p>
+                            <p>{{ $document->helpful_count }}</p>
                             <p class="md:block hidden">Helpful</p>
                         </button>
                         <button
                             class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-down"></i>
-                            <p>0</p>
+                            <p>{{ $document->unhelpful_count }}</p>
                             <p class="md:block hidden">Unhelpful</p>
                         </button>
                     </div>
                     <div class="flex gap-2">
-                        <div x-data="{ open: false }" class="relative">
+                        <div x-data="{ open: false, hasCopy:false }" class="relative">
                             <button @click="open=!open" id="shareLinkDropdownButton" type="button"
                                     data-dropdown-toggle="shareLinkDropdown" :class="open && 'text-primary bg-green-100'"
-                                    class="bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary focus:outline-none ">
+                                    class="w-16 bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary focus:outline-none ">
                                 <i class="fa fa-link"></i>
                             </button>
                             <!-- Dropdown menu -->
-                            <div x-cloak @click.outside="open=false" x-show="open" id="shareLinkDropdown"
+                            <div x-cloak @click.outside="open=false; hasCopy=false" x-show="open" id="shareLinkDropdown"
                                  class="z-10 w-96 bg-white mt-4 divide-y divide-gray-100 border-2 border-primary rounded-md absolute  right-[10%]"
                                  data-popper-placement="bottom">
                                 <div class="mx-6 py-3 text-sm text-gray-700" aria-labelledby="shareLinkDropdownButton">
                                     <p class="text-2xl font-medium mb-4">Share this link with a friend: </p>
-                                    <input type="text" disabled id="document_share"
-                                           value="https://www.figma.com/file/0ZW2yQ3YX90maBglVO71nL/123dok-web-design?type=design&amp;node-id=651-35328&amp;t=pZZW0IIV6SMVfxQy-0"
-                                           class="border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg">
-                                    <div id="document_share_message" class="mt-2 text-[#F616B8] font-normal text-lg"></div>
+                                    <input type="text" :disabled="hasCopy" id="document_share"  @click="navigator.clipboard.writeText($el.value);hasCopy=true"
+                                           value="{{ url()->current() }}"
+                                           class="outline-none border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg peer mb-2" :class="hasCopy && 'text-white bg-blue-400'">
+                                    <div x-cloak x-show="hasCopy" class="text-[#F616B8] text-lg"> Copied!</div>
+
+
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <button @click="open_report=!open_report" type="button" :class="open_report && 'text-primary bg-green-100'"
-                                    class="bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary">
+                            <button @click="open_report=!open_report" type="button"
+                                    :class="open_report && 'text-primary bg-green-100'"
+                                    class="w-16 bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary">
                                 <i class="fa fa-flag"></i>
                             </button>
 
@@ -256,25 +259,25 @@
                 <div class="md:basis-2/3 text-sm md:text-base">
                     <div class="flex lg:flex-row flex-col gap-3">
                         <div class="w-full md:mt-0 lg:w-fit font-medium flex flex-row text-default-lighter">
-                            <i class="fa-solid fa-graduation-cap mt-1"></i>
+                            <i class="fa-solid fa-language mt-1"></i>
                             <a href="#" class="hover:underline ml-1 block">
-                                ĐH Công nghiệp TP Hồ Chí Minh
+                                {{ \App\Libs\CountriesHelper\Languages::getFullName($document->language) }}
                             </a>
                         </div>
                         <div class="lg:ml-16 md:mt-0 w-full  lg:w-fit font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-book mt-1"></i>
-                            <a href="#" class="hover:underline ml-2">Criminal Law</a>
+                            <a href="#" class="hover:underline ml-2">{{ $document->categories->name }}</a>
                         </div>
                     </div>
-                    <div class="flex lg:flex-row flex-col mt-3 lg:mt-5 gap-3">
+                    <div class="hidden md:flex lg:flex-row flex-col mt-3 lg:mt-5 gap-3">
                         <div class=" font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-user mt-1"></i>
-                            <a href="#" class="hover:underline ml-2">VNP Group</a>
+                            <a href="#" class="hover:underline ml-2">{{ $document->user->name }}</a>
                         </div>
                         <div class="lg:ml-16 md:mt-0 font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-calendar-days mt-1"></i>
                             <p class="ml-2">
-                                Academic year: <a href="#" class="text-gray-400 hover:underline">2021</a>
+                                Uploaded date: <a href="#" class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
                             </p>
                         </div>
                     </div>
@@ -310,12 +313,12 @@
                         <div class="flex lg:flex-row flex-col mt-5 gap-3">
                             <div class=" font-medium flex flex-row text-default-lighter">
                                 <i class="fa-solid fa-user mt-1"></i>
-                                <a href="#" class="hover:underline ml-2">VNP Group</a>
+                                <a href="#" class="hover:underline ml-2">{{ $document->user->name }}</a>
                             </div>
                             <div class="lg:ml-16 md:mt-0 font-medium flex flex-row text-default-lighter">
                                 <i class="fa-solid fa-calendar-days mt-1"></i>
                                 <p class="ml-2">
-                                    Academic year: <a href="#" class="text-gray-400 hover:underline">2021</a>
+                                    Uploaded date: <a href="#" class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
                                 </p>
                             </div>
                         </div>
@@ -323,34 +326,33 @@
                             <button
                                 class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-up"></i>
-                                <p>1</p>
+                                <p>{{ $document->helpful_count }}</p>
                                 <p class="md:block hidden">Helpful</p>
                             </button>
                             <button
                                 class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-down"></i>
-                                <p>0</p>
+                                <p>{{ $document->unhelpful_count }}</p>
                                 <p class="md:block hidden">Unhelpful</p>
                             </button>
-                            <div x-data="{ open: false }" class="relative">
+                            <div x-data="{ open: false, hasCopy:false }" class="relative">
                                 <button @click="open=!open" id="shareLinkDropdownButton" type="button"
                                         data-dropdown-toggle="shareLinkDropdown" :class="open && 'text-primary bg-green-100'"
-                                        class="bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary focus:outline-none ">
+                                        class="w-16 bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary focus:outline-none ">
                                     <i class="fa fa-link"></i>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div x-cloak @click.outside="open=false" x-show="open" id="shareLinkDropdown"
+                                <div x-cloak @click.outside="open=false;hasCopy=false" x-show="open" id="shareLinkDropdown"
                                      class="z-10 w-96 bg-white mt-4 divide-y divide-gray-100 border-2 border-primary rounded-md absolute -translate-x-[40%] md:translate-x-0 md:right-[10%]"
                                      data-popper-placement="bottom">
                                     <div class="mx-2 md:mx-6 py-3 text-sm text-gray-700"
                                          aria-labelledby="shareLinkDropdownButton">
                                         <p class="text-lg md:text-xl lg:text-2xl font-medium mb-4">Share this link with a
                                             friend: </p>
-                                        <input type="text" disabled id="document_share"
-                                               value="https://www.figma.com/file/0ZW2yQ3YX90maBglVO71nL/123dok-web-design?type=design&amp;node-id=651-35328&amp;t=pZZW0IIV6SMVfxQy-0"
-                                               class="border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg">
-                                        <div id="document_share_message" class="mt-2 text-[#F616B8] font-normal text-lg">
-                                        </div>
+                                        <input type="text" :disabled="hasCopy" id="document_share"  @click="navigator.clipboard.writeText($el.value);hasCopy=true"
+                                               value="{{ url()->current() }}"
+                                               class="outline-none border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg peer mb-2" :class="hasCopy && 'text-white bg-blue-400'">
+                                        <div x-cloak x-show="hasCopy" class="text-[#F616B8] text-lg"> Copied!</div>
                                     </div>
                                 </div>
                             </div>
@@ -365,15 +367,15 @@
                         <div class="flex md:justify-end items-end h-full lg:items-start gap-2 mb-4">
                             <div
                                 class="px-4 h-12 text-default-lighter rounded-1.5lg bg-gray-100 flex items-center justify-center ">
-                                <i class="fa-solid fa-eye mr-2"></i> 13
+                                <i class="fa-solid fa-eye mr-2"></i> {{ $document->viewed_count }}
                             </div>
                             <div
                                 class="px-4 h-12 text-default-lighter rounded-1.5lg bg-gray-100 flex items-center justify-center ">
-                                <i class="fa-solid fa-file mr-2"></i> 40
+                                <i class="fa-solid fa-file mr-2"></i> {{ $document->page_number }}
                             </div>
                             <div
                                 class="px-4 h-12 text-default-lighter rounded-1.5lg bg-gray-100 flex items-center justify-center ">
-                                <i class="fa-solid fa-cloud-arrow-down mr-2"></i> 33
+                                <i class="fa-solid fa-cloud-arrow-down mr-2"></i> {{ $document->downloaded_count }}
                             </div>
                         </div>
                         <div class="bg-white rounded-1.5lg p-5 border border-slate-300">
@@ -397,15 +399,15 @@
                     <div class="flex md:justify-end items-end h-full lg:items-start gap-2">
                         <div
                             class="px-4 md:h-12 text-default-lighter rounded-1.5lg bg-gray-100 h-10 flex items-center justify-center ">
-                            <i class="fa-solid fa-eye mr-2"></i> 13
+                            <i class="fa-solid fa-eye mr-2"></i> {{ $document->viewed_count }}
                         </div>
                         <div
                             class="px-4 md:h-12 text-default-lighter rounded-1.5lg bg-gray-100 h-10 flex items-center justify-center ">
-                            <i class="fa-solid fa-file mr-2"></i> 40
+                            <i class="fa-solid fa-file mr-2"></i>{{ $document->page_number }}
                         </div>
                         <div
                             class="px-4 md:h-12 text-default-lighter rounded-1.5lg bg-gray-100 h-10 flex items-center justify-center ">
-                            <i class="fa-solid fa-cloud-arrow-down mr-2"></i> 33
+                            <i class="fa-solid fa-cloud-arrow-down mr-2"></i> {{ $document->downloaded_count }}
                         </div>
                     </div>
                 </div>
@@ -622,158 +624,7 @@
                 <div
                     class="mt-4 px-3 border rounded-1.5lg prose break-words max-h-[50vh] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-2xl scrollbar-thumb-gray-500 scrollbar-track-gray-300">
                     <div class="page_container">
-                        <p>Trong những năm gần đây, sự phát triển không ngừng của Công nghệ thông tin nói chung và Internet
-                            nói riêng đã mang đến những thay đổi quan trọng trong cuộc sống. Internet đã thực sự là phương
-                            tiện thông tin kết nối mọi người trên thế giới với nhau, chia sẻ các vấn đề xã hội. Tận dụng môi
-                            trường Internet, xu hướng phát triển phần mềm hiện nay là xây dựng các ứng dụng có tính phân tán
-                            cao, hoạt động không phụ thuộc vào vị trí địa lý cũng như hệ điều hành, tạo điều kiện đôi bên
-                            cùng có lợi. có thể trao đổi, tìm kiếm thông tin, học hỏi dễ dàng, thuận tiện.</p>
-                        <p>Việc học nhóm không chỉ dành cho sinh viên đại học, mà còn dành cho tất cả mọi người, không phân
-                            biệt lứa tuổi, không có điều kiện đến trường. Đồ án tốt nghiệp “Tìm hiểu về Moodle và thiết lập
-                            website trắc nghiệm trực tuyến” sẽ tạo một website về đào tạo trực tuyến và trắc nghiệm trực
-                            tuyến được xây dựng trên nền tảng mã nguồn mở Moodle và kế thừa các tính năng của Moodle. phần
-                            mềm hữu ích này.</p>
-                        <h2>TÌM HIỂU VỀ ĐÀO TẠO TRỰC TUYẾN</h2>
-                        <h3>Tổng quan về đào tạo trực tuyến</h3>
-                        <ul>
-                            <li><i>Khái niệm đào tạo trực tuyến</i></li>
-                            <li><i>Đặc điểm chung của E-Learning</i></li>
-                            <li><i>Kiến trúc của một chương trình đào tạo E-Learning</i></li>
-                            <li><i>Một số hình thức đào tạo E-Learning</i></li>
-                            <li><i>Đối tượng của E-Learning</i></li>
-                            <li><i>Quy trình nghiệp vụ đào tạo trực tuyến</i></li>
-                        </ul>
-                        <p>Hệ thống E-Learning sẽ được tích hợp vào cổng thông tin của trường học hoặc doanh nghiệp. Như
-                            vậy, hệ thống e-learning sẽ cần giao tiếp tốt với các hệ thống khác. Các hệ thống như Hệ thống
-                            quản lý nội dung học tập (LCMS) cho phép tạo và quản lý nội dung trực tuyến.</p>
-                        <p>Một hệ thống tạo nội dung linh hoạt thường cho phép kết hợp việc lập kế hoạch bài học trực tuyến
-                            và ngoại tuyến. Tiêu chuẩn/quy cách là thành phần kết nối tất cả các thành phần của một hệ thống
-                            E-learning.</p>
-                        <h3>Tình hình phát triển và ứng dụng E-Learning</h3>
-                        <ul>
-                            <li><i>Trên thế giới</i></li>
-                            <li><i>Tại Việt Nam</i></li>
-                        </ul>
-                        <p>Đào tạo trực tuyến đang phát triển nhanh chóng, với doanh thu tăng trưởng với tốc độ 25% mỗi năm.
-                            Ngay sau khi nhận giải, AI đã phối hợp với Đài truyền hình kỹ thuật số VTC xây dựng trường đào
-                            tạo trực tuyến cho sinh viên tại địa chỉ www.truongtructuyen.vn, khai trương vào ngày
-                            29/04/2008. Sau gần một năm hoạt động, trường đã thu hút hơn 500.000 sinh viên trên toàn quốc.
-                            nước này sang học tập và trở thành một trong những điển hình ứng dụng thành công công nghệ thông
-                            tin trong đào tạo.</p>
-                        <p>Tuy nhiên, không dừng lại ở đó, được sự bảo trợ của Bộ Thông tin và Truyền thông, Bộ Khoa học và
-                            Công nghệ và sự hợp tác phát triển nội dung của Khoa Công nghệ Thông tin Trường Đại học Bách
-                            Khoa Hà Nội, với tư cách là đơn vị đầu ngành. tập đoàn công nghệ thông tin AI trong và ngoài
-                            nước tiếp tục xây dựng trường đào tạo CNTT trực tuyến: www.truongconghe.vn. Điều này cho thấy
-                            việc nghiên cứu và ứng dụng loại hình đào tạo này ở Việt Nam là đáng quan tâm.</p>
-                        <h3>Lợi ích và hạn chế của E-Learning</h3>
-                        <ul>
-                            <li><i>Tổng quan</i></li>
-                            <li><i>Lợi ích của E-Learning</i></li>
-                            <li><i>Hạn chế của E-Learning</i></li>
-                        </ul>
-                        <p>Hệ thống E-Learning hỗ trợ học theo năng lực của từng cá nhân, theo thời khóa biểu riêng để học
-                            viên tự lựa chọn phương pháp học phù hợp. Học viên có thể chủ động thay đổi nhịp độ học tập,
-                            giảm căng thẳng và tăng hiệu quả học tập. Giáo viên có thể đánh giá học sinh dựa trên cách họ
-                            trả lời các câu hỏi kiểm tra và thời gian họ trả lời chúng.</p>
-                        <p>Giáo viên và học viên có thể truy cập khóa học mọi lúc, mọi nơi mà không nhất thiết phải trùng
-                            lặp. Do đã quen với phương pháp học truyền thống nên học sinh và giáo viên sẽ gặp khó khăn trong
-                            học tập và giảng dạy.</p>
-                        <h3>Các chuẩn của E-Learning</h3>
-                        <ul>
-                            <li><i>Tổng quan</i></li>
-                            <li><i>Chuẩn đóng gói</i></li>
-                            <li><i>Chuẩn trao đổi thông tin</i></li>
-                            <li><i>Chuẩn metadata</i></li>
-                            <li><i>Chuẩn chất lượng</i></li>
-                            <li><i>Các chuẩn E-Learning khác</i></li>
-                        </ul>
-                        <p>Các tiêu chuẩn giao tiếp xác định ngôn ngữ mà mọi người hoặc mọi thứ có thể giao tiếp với nhau.
-                            Trong e-learning, các tiêu chuẩn trao đổi thông tin xác định ngôn ngữ mà hệ thống quản lý học
-                            tập có thể giao tiếp với các mô-đun. Có hai tổ chức chính cung cấp các tiêu chuẩn có thể tương
-                            tác được thực thi mạnh mẽ trong các hệ thống quản lý học tập.</p>
-                        <p>Tiêu chuẩn chất lượng đảm bảo rằng nội dung của bạn hữu ích, sinh viên dễ đọc và nội dung bạn tạo
-                            dễ sử dụng. Nếu không đảm bảo tiêu chuẩn chất lượng, bạn có thể mất học viên ngay lần học đầu
-                            tiên.</p>
-                        <h3>Moodle là gì?</h3>
-                        <p>Hơn 100.000 người đã đăng ký vào cộng đồng Moodle (http://www.moodle.org) và sẵn sàng giúp bạn
-                            giải quyết các vấn đề của mình. Cộng đồng Moodle Việt Nam được thành lập vào tháng 3 năm 2005
-                            với mục đích xây dựng phiên bản tiếng Việt và hỗ trợ các trường triển khai Moodle. Kể từ đó,
-                            nhiều trường đại học, tổ chức và cá nhân tại Việt Nam đã sử dụng Moodle.</p>
-                        <p>Có thể nói Moodle là một trong những LMS phổ biến nhất tại Việt Nam. Cộng đồng Moodle Việt Nam
-                            giúp bạn giải quyết các vấn đề về cài đặt, sử dụng tính năng, chỉnh sửa và phát triển.</p>
-                        <h3>Tại sao phải dùng Moodle?</h3>
-                        <p>Ngay cả khi bạn không phải là lập trình viên, bạn có thể cài đặt Moodle trên máy chủ, tạo các
-                            khóa học, cài đặt các mô-đun bổ sung và giải quyết các vấn đề với sự trợ giúp của cộng đồng
-                            Moodle. Các mức hỗ trợ cho phần mềm mã nguồn mở tốt là đáng kinh ngạc. Đôi khi PMNM, như trong
-                            trường hợp của Moodle và Sakai, bằng hoặc tốt hơn Blackboard/WebCT ở nhiều khía cạnh.</p>
-                        <p>Bởi vì cộng đồng các nhà giáo dục, mọt sách và chuyên gia thiết kế giáo dục là nhà phát triển
-                            chính của Moodle và kết quả là bạn có một sản phẩm đáp ứng tốt yêu cầu của người dùng. Ví dụ:
-                            Moodle có các tính năng tập trung vào giáo dục vì chúng được xây dựng bởi những người trong lĩnh
-                            vực giáo dục. Vì Moodle có một cộng đồng lớn như vậy nên phần mềm được dịch sang hơn 75 ngôn ngữ
-                            và được sử dụng ở 160 quốc gia khác nhau.</p>
-                        <p>Bạn sẽ rất hiếm khi tìm thấy một phần mềm đóng cửa phổ biến được dịch sang hơn 10 ngôn ngữ khác
-                            nhau. Moodle, giống như các công nghệ mã nguồn mở khác, được tải xuống và sử dụng miễn phí. Ví
-                            dụ, bạn có thể mở một công ty tư vấn Moodle và thuê một lập trình viên để phát triển phần mềm và
-                            chia sẻ miễn phí cho cộng đồng, vì càng nhiều người sử dụng thì công ty của bạn càng có nhiều cơ
-                            hội kinh doanh.</p>
-                        <p>Sinh viên có thể xây dựng một mô-đun cho LMS Moodle và chia sẻ nó với cộng đồng toàn cầu. Vì
-                            Moodle được thiết kế theo mô-đun nên việc xây dựng các mô-đun mới cho Moodle khá đơn giản nếu
-                            bạn biết PHP. Ví dụ, sinh viên Phạm Minh Đức - Đại học BK Hà Nội đã phát triển thành công module
-                            SCORM 2004 và sau đó đóng góp cho cộng đồng Moodle).</p>
-                        <h3>Các tính năng của Moodle</h3>
-                        <p>Thật tốt khi cho phép sinh viên CNTT phát triển một mô-đun cho LMS Moodle. Moodle còn tổ chức thi
-                            bằng cách thiết lập ngày giờ học viên truy cập để làm bài thi, thiết lập cách cộng trừ điểm sau
-                            mỗi bài thi..., bổ sung gói Scorm cho khóa học.</p>
-                        <h3>Một số công cụ đi kèm với Moodle khi giảng dạy</h3>
-                        <ul>
-                            <li><i>Reload</i></li>
-                            <li><i>Hot Potatoes</i></li>
-                            <li><i>LAMS</i></li>
-                            <li><i>eXe</i></li>
-                            <li><i>Các công cụ khác</i></li>
-                        </ul>
-                        <p>Có thể in đáp án ra giấy (ví dụ dùng phần mềm gõ văn bản như MS Word). Bạn có thể gửi câu đố của
-                            mình cho Hot Potatoes để học sinh có thể thử sức ở bất cứ đâu có máy tính kết nối Internet. LAMS
-                            là một công cụ mới mang tính cách mạng để lập kế hoạch, quản lý và cung cấp các hoạt động học
-                            tập hợp tác trực tuyến.</p>
-                        <p>Nó cung cấp cho giáo viên một môi trường tác giả trực quan cao để tạo ra các chuỗi hoạt động học
-                            tập. Các hoạt động này có thể bao gồm nhiều bài tập cá nhân, làm việc theo nhóm nhỏ và các hoạt
-                            động hợp tác và dựa trên nội dung của cả lớp. Điều này sẽ giúp giáo viên soạn bài trên máy tính
-                            cá nhân của họ và sau đó tải chúng lên Moodle.</p>
-                        <p>Course Genie cho phép bạn nhanh chóng và dễ dàng chuyển đổi các tài liệu Microsoft Word thành các
-                            khóa học và trang web tương tác trực tuyến. Math Type giúp bạn gõ công thức toán học một cách dễ
-                            dàng và nhanh chóng. SimpleRecorder cho phép bạn ghi lại hình ảnh và giọng nói của mình để tải
-                            lên Moodle nhằm làm cho bài giảng của bạn sinh động hơn.</p>
-                        <h2>THIẾT LẬP WEBSITE THI TRẮC NGHIỆM TRỰC TUYẾN</h2>
-                        <h3>Cách cài đặt Moodle</h3>
-                        <p>Điều rất quan trọng đối với cộng đồng mã nguồn mở là tôn trọng các quy tắc khai thác và sử dụng
-                            PMNM.</p>
-                        <!-- Figure: {"id":79,"document_id":5,"caption":"H\u00ecnh 3.2 B\u1eaft \u0111\u1ea7u c\u00e0i \u0111\u1eb7t Moodle ","caption_reliability":100,"figure_reliability":100,"type":2,"figure_position":{"p":27,"h":1263,"w":892,"xb":799,"xt":137,"yb":550,"yt":137,"slug":"hinh-bat-dau-cai-dat-moodle"},"status":0,"created_at":"2023-04-20T08:13:29.000000Z","updated_at":"2023-04-20T08:13:29.000000Z"} End Figure [79] -->
-                        <figure>
-                            <img src="https://data44.123dok.com/thumbv2/1libvncom/000/000/5/27.892.137.799.137.550/document-figure.webp"
-                                 loading="lazy">
-                            <figcaption>Hình 3.2 Bắt đầu cài đặt Moodle</figcaption>
-                        </figure>
-                        <h3>Thiết lập website thi trắc nghiệm trực tuyến</h3>
-                        <ul>
-                            <li><i>Chức năng người dùng trong hệ thống</i></li>
-                            <li><i>Các bước thiết lập website</i></li>
-                        </ul>
-                        <p>Thêm mới khóa học, khởi tạo khóa học Cập nhật thông tin cho khóa học. Thêm các hoạt động vào khóa
-                            học của bạn (diễn đàn, phòng trò chuyện, câu đố, scorms, thăm dò ý kiến, khảo sát, v.v.) Quản lý
-                            điểm của sinh viên Tạo và quản lý nhóm Xem danh sách lớp học.</p>
-                        <p>Thêm đề thi và đặt đề thi (thời gian thi…) Nhập danh sách đề thi từ file có định dạng cụ thể.
-                            Nhập danh sách câu hỏi dạng câu hỏi vào hệ thống Xem trước đề thi. Học sinh truy cập đề thi và
-                            làm bài Xem kết quả bài thi của học sinh.</p>
-                        <!-- Figure: {"id":86,"document_id":5,"caption":"H\u00ecnh 3.15 MH ch\u00ednh \u0111\u0103ng nh\u1eadp v\u1edbi ch\u1ee9c n\u0103ng Admin ","caption_reliability":100,"figure_reliability":100,"type":2,"figure_position":{"p":35,"h":1263,"w":892,"xb":796,"xt":143,"yb":476,"yt":108,"slug":"hinh-mh-dang-nhap-chuc-nang-admin"},"status":0,"created_at":"2023-04-20T08:13:29.000000Z","updated_at":"2023-04-20T08:13:29.000000Z"} End Figure [86] -->
-                        <figure>
-                            <img src="https://data44.123dok.com/thumbv2/1libvncom/000/000/5/35.892.143.796.108.476/document-figure.webp"
-                                 loading="lazy">
-                            <figcaption>Hình 3.15 MH chính đăng nhập với chức năng Admin</figcaption>
-                        </figure>
-                        <p>Kết quả đạt được</p>
-                        <p>Khả năng ứng dụng đề tài vào thực tiễn</p>
-                        <p>Hướng nghiên cứu tiếp</p>
+                        {!! $document->full_text !!}
                     </div>
                 </div>
             </div>

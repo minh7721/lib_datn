@@ -2,7 +2,7 @@
     <div class="container mx-auto flex items-center justify-between">
         <div class="py-4 flex flex-1 gap-4 items-center justify-start md:justify-start">
             <i class="fa-solid fa-xl fa-bars cursor-pointer" @click="open_sidebar = true"></i>
-            <a href="#" class=" hover:cursor-pointer">
+            <a href="{{ route('document.home.index') }}" class=" hover:cursor-pointer">
                 <img src="{{ asset('assets_v4/images/libshare-png-2.png') }}" alt=""
                     class="max-h-6 w-12 object-cover">
             </a>

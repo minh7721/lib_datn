@@ -7,9 +7,12 @@ use App\Libs\CountriesHelper\Countries;
 use App\Libs\CountriesHelper\Languages;
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\Enums\PrivacyStatus;
 use App\Models\Enums\TypeDocument;
+use App\Models\Page;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\BulkDeleteOperation;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 /**
@@ -166,11 +169,6 @@ class DocumentCrudController extends CrudController
             'wrapper' => [
                 'class' => 'form-group col-md-6'
             ]
-        ]);
-        $this->crud->addField([
-            'name' => 'full_text',
-            'label' => "Full text",
-            'type' => 'textarea',
         ]);
 
         $this->crud->addField([
