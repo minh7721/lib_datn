@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\DocumentRequest;
 use App\Libs\CountriesHelper\Countries;
 use App\Libs\CountriesHelper\Languages;
+use App\Libs\MakePath;
 use App\Models\Category;
 use App\Models\Document;
-use App\Models\Enums\PrivacyStatus;
 use App\Models\Enums\TypeDocument;
-use App\Models\Page;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\BulkDeleteOperation;
 use GuzzleHttp\Exception\GuzzleException;
@@ -148,10 +147,6 @@ class DocumentCrudController extends CrudController
             ]
         ]);
         $this->crud->addField([
-            'name' => 'description',
-            'label' => "Description",
-        ]);
-        $this->crud->addField([
             'name' => 'price',
             'label' => "Price",
             'type' => 'number',
@@ -200,4 +195,58 @@ class DocumentCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+//    public function store()
+//    {
+//        $this->crud->hasAccessOrFail('create');
+//
+//        // execute the FormRequest authorization and validation, if one is required
+//        $request = $this->crud->validateRequest();
+//        $disk = "public";
+//
+//        $file_upload = $this->crud->getRequest()->source_url;
+//
+//        $size = $file_upload->getSize(); // Get the file size in bytes
+//
+//        // You can convert the size to a human-readable format if desired
+//        $formattedSize = Document::formatSizeUnits($size);
+//
+//
+//        $document = Document::create([
+//            'title' => $this->crud->getRequest()->title,
+//            'source_url' => null,
+//            'category_id' => $this->crud->getRequest()->category_id,
+//            'page_number' => $this->crud->getRequest()->page_number,
+//            'price' => $this->crud->getRequest()->price,
+//            'type' => $this->crud->getRequest()->type,
+//            'language' => $this->crud->getRequest()->language,
+//            'country' => $this->crud->getRequest()->country,
+//            'path' => null,
+//            'disks' => $disk,
+//            'original_size' => $size,
+//            'original_format' => $formattedSize,
+//        ]);
+//
+//        $path =  'pdftest/'.MakePath::make($document->id, '') . ".pdf.pdf";
+//        $saved = \Storage::disk('public')->put($path, $file_upload);
+//
+//        if ($saved){
+//            $document->update([
+//               'path' => $path
+//            ]);
+//        }
+//
+//        // insert item in the db
+//        $item = $this->crud->create($this->crud->getStrippedSaveRequest());
+//        $this->data['entry'] = $this->crud->entry = $item;
+//
+//        // show a success message
+//        \Alert::success(trans('backpack::crud.insert_success'))->flash();
+//
+//        // save the redirect choice for next time
+//        $this->crud->setSaveAction();
+//
+//        return $this->crud->performSaveAction($item->getKey());
+//    }
+
 }

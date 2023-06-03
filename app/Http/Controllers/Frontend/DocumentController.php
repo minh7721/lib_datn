@@ -13,7 +13,10 @@ class DocumentController extends Controller
         return view('frontend_v4.pages.home.index', compact('documents'));
     }
     public function view(Request $request, $slug){
-        $document = Document::where('slug', $slug)->first();
+        $document = Document::where('slug', $slug)
+            ->where('active', true)
+            ->where('is_public', true)
+            ->first();
         $pdf_path = $document->source_url;
         return view('frontend_v4.pages.document.detail', compact('document'));
     }

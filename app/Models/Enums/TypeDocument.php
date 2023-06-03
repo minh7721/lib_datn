@@ -4,27 +4,28 @@ namespace App\Models\Enums;
 
 class TypeDocument extends MyEnum
 {
-    const DEFAULT = 0;
-    const TEXT = 1;
-    const IMAGE = 2;
-    const VIDEO = 3;
+    const TXT = 'txt';
 
-    const PDF = 4;
-    CONST WORD = 5;
-    CONST EXCEL = 6;
-    CONST POWERPOINT = 7;
-    CONST OTHER = 99;
+    const DOC = 'doc';
+    const DOCX = 'docx';
+    const PPT = 'ppt';
+    const PPTX = 'pptx';
+    const PPTM = 'pptm';
+    const ODT = 'odt';
+    const PDF = 'pdf';
+
+    const OTHER = 'other';
 
     protected static $ICON = [
-        self::DEFAULT => "<span class='badge badge-info'>DEFAULT</span>",
-        self::TEXT => "<span class='badge badge-info'>TEXT</span>",
-        self::IMAGE => "<span class='badge badge-info'>IMAGE</span>",
-        self::VIDEO => "<span class='badge badge-info'>VIDEO</span>",
+        self::TXT => "<span class='badge badge-info'>TXT</span>",
         self::PDF => "<span class='badge badge-info'>PDF</span>",
-        self::WORD => "<span class='badge badge-info'>WORD</span>",
-        self::EXCEL => "<span class='badge badge-info'>EXCEL</span>",
-        self::POWERPOINT=> "<span class='badge badge-info'>POWERPOINT</span>",
-        self::OTHER=> "<span class='badge badge-info'>OTHER</span>",
+        self::DOC => "<span class='badge badge-info'>DOC</span>",
+        self::DOCX => "<span class='badge badge-info'>DOCX</span>",
+        self::PPT => "<span class='badge badge-info'>PPT</span>",
+        self::PPTX => "<span class='badge badge-info'>PPTX</span>",
+        self::PPTM => "<span class='badge badge-info'>PPTM</span>",
+        self::ODT => "<span class='badge badge-info'>ODT</span>",
+        self::OTHER => "<span class='badge badge-info'>OTHER</span>",
     ];
 
 }

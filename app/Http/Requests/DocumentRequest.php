@@ -28,7 +28,6 @@ class DocumentRequest extends FormRequest
         return [
             'title' => 'required|min:5|max:255',
 //            'source_url' => 'required',
-            'description' => 'required',
             'page_number' => 'required|min:1',
         ];
     }

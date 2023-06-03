@@ -28,7 +28,7 @@ class CreateDocumentsTable extends Migration
             $table->text('full_text')->nullable();
             $table->string('disks')->nullable();
             $table->string('path')->nullable();
-            $table->integer('type')->default(0)->comment('0: default, 1: text, 2: image, 3: ...');
+            $table->string('type')->default('pdf');
             $table->string('language')->nullable()->comment('language code');
             $table->string('country')->nullable()->comment('country code');
             $table->integer('helpful_count')->default(0);
@@ -37,7 +37,7 @@ class CreateDocumentsTable extends Migration
             $table->integer('downloaded_count')->default(0);
             $table->integer('shared_count')->default(0);
             $table->boolean('active')->default(false);
-            $table->integer('is_public')->default(1)->comment('0: private, 1: public');
+            $table->integer('is_public')->default(0)->comment('0: private, 1: public');
             $table->integer('is_approved')->default(0)->comment('0: wating, 1: yes, -1: no');
             $table->integer('can_download')->default(1);
             $table->dateTime('approved_at')->nullable();

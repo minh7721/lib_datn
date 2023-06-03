@@ -15,7 +15,7 @@
     <script>
         const container = document.getElementById('pdfContainer');
         {{--const pdfUrl = "{{ url('assets_v4/packages/pdfjs/web/compressed.tracemonkey-pldi-09.pdf') }}";--}}
-        const pdfUrl = "{{ url($document->source_url) }}";
+        const pdfUrl = "{{ url('storage/'.$document->path) }}";
         let currentPage = 1;
         let totalPageCount = 0;
         const document_controller = document.getElementById('document_controller');

@@ -65,16 +65,19 @@ class Document extends Model
             }
             $model->user_id = backpack_user()->id;
             $model->slug = Str::slug((new SeoSlugGenerator($model->title))->run());
-            $document_process = Builder::fromDocument($model)->get();
-            $fulltext = $document_process->makeFulltext();
-            $model->full_text = $fulltext;
-            $generator = TextRankGenerator::fromDSFullText($fulltext);
-            $description = $generator->getDescription();
-            $description = mb_substr($description, 0, 186) . "[r]";
-            $model->description = $description;
+
+
+//            $document_process = Builder::fromDocument($model)->get();
+//            $fulltext = $document_process->makeFulltext();
+//            $model->full_text = $fulltext;
+//            $generator = TextRankGenerator::fromDSFullText($fulltext);
+//            $description = $generator->getDescription();
+//            $description = mb_substr($description, 0, 186) . "[r]";
+//            $model->description = $description;
         });
 
         static::updating(function ($model) {
+            $model->slug = Str::slug((new SeoSlugGenerator($model->title))->run());
 //            if ($model->getAttribute('source_url')) {
 //                $oldImage = $model->getOriginal('source_url');
 //                $oldImage = str_replace('storage/', '', $oldImage);
@@ -83,6 +86,14 @@ class Document extends Model
 //                    \Storage::disk('public')->delete($oldImage);
 //                }
 //            }
+
+//            $document_process = Builder::fromDocument($model)->get();
+//            $fulltext = $document_process->makeFulltext();
+//            $model->full_text = $fulltext;
+//            $generator = TextRankGenerator::fromDSFullText($fulltext);
+//            $description = $generator->getDescription();
+//            $description = mb_substr($description, 0, 186) . "[r]";
+//            $model->description = $description;
         });
 
         static::deleting(function ($model) {
@@ -147,7 +158,7 @@ class Document extends Model
         $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
         $this->attributes['disks'] = 'public';
         $this->attributes['path'] = $this->source_url;
-        $this->attributes['source_url'] = 'storage/' . $this->source_url;
+        $this->attributes['source_url'] = $this->source_url;
         $this->original_size = $size;
         $this->original_format = $formattedSize;
 //        Storage::disk($disk)->move($this->attributes['source_url'], $destination_path . '/' . $new_filename);
@@ -173,10 +184,10 @@ class Document extends Model
     public function getUrl(): ?string
     {
         $disk = $this->getAttribute('disks');
-        $path = $this->getAttribute('path');
+        $path = $this->getAttribute('source_url');
         if ($disk && $path) {
             return \Storage::disk($this->getAttribute('disks'))
-                ->url($this->getAttribute('path'));
+                ->url($this->getAttribute('source_url'));
         }
         return $this->url;
 
