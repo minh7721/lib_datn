@@ -16,6 +16,7 @@
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "3.3.2",
         "myclabs/php-enum": "^1.7",
         "patrickschur/language-detection": "^5.1",
         "php-science/textrank": "^1.2",

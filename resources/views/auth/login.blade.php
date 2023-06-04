@@ -23,16 +23,26 @@
                 </div>
                 <div class="field-container -username">
                     <input type="email"
-                           name="email" placeholder="Email"/>
+                           name="email" placeholder="Email" value="{{ old('email') }}"/>
                 </div>
 
                 <div class="field-container -password">
                     <input type="password" name="password" placeholder="Password"/>
                 </div>
 
-                @if ($errors->has('error'))
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (Session::has('error'))
                     <div class="errors">
-                        <i>{{ $errors->first('error') }}
+                        <i>{{Session::get('error')}}
                         </i>
                     </div>
                 @endif
@@ -64,7 +74,8 @@
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
                              fill="none"
                              stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <path
+                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                         <p>Log in using Google</p>

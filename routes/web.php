@@ -29,6 +29,7 @@ Route::get('/', [DocumentController::class, 'index'])->name('document.home.index
 
 Route::get('auth/login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
 Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
+Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
 
 Route::get('/document', function () {
     return view('frontend_v4.pages.document.detail');

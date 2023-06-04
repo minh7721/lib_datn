@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -24,24 +25,24 @@ class LoginController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
+            'email' => 'required|email|max:255',
             'password' => 'required',
         ]);
 
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $user = User::where('email', $email)->where('password', $password)->first();
-
-        if ($user) {
-            if (Auth::attempt([
-                'email' => $request->input('email'),
-                'password' => $request->input('password')
-            ])) {
-                return redirect('/');
-            }
+        if (Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        ])) {
+            return redirect('/');
         }
-        Session::flash('error', 'Email hoặc password không chính xác');
-        return redirect()->back();
-
+        Session::flash('error', 'These credentials do not match our records.');
+        return redirect()->back()->withInput($request->only('email'));
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('document.home.index');
+    }
+
 }
