@@ -1271,6 +1271,12 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-24 {
+  height: 6rem;
+}
+.h-auto {
+  height: auto;
+}
 .max-h-6 {
   max-height: 1.5rem;
 }
@@ -1376,6 +1382,9 @@ video {
 }
 .w-3\/5 {
   width: 60%;
+}
+.w-32 {
+  width: 8rem;
 }
 .min-w-\[20px\] {
   min-width: 20px;

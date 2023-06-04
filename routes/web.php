@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Frontend\DocumentController;
+use App\Http\Controllers\Frontend\LoginController;
+
 //use App\Http\Controllers\ViewerController;
 //use Illuminate\Support\Facades\Route;
 //
@@ -24,6 +26,9 @@ use App\Http\Controllers\Frontend\DocumentController;
 //
 
 Route::get('/', [DocumentController::class, 'index'])->name('document.home.index');
+
+Route::get('auth/login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
+Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
 
 Route::get('/document', function () {
     return view('frontend_v4.pages.document.detail');
