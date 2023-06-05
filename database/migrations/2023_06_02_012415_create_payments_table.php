@@ -16,7 +16,9 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
+            $table->integer('status')->default(0);
             $table->integer('price')->default(0);
+            $table->string('transaction_id')->comment('ID transaction of momo, paypal')->nullable();
             $table->timestamps();
         });
     }
