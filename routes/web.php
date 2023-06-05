@@ -44,6 +44,10 @@ Route::get('auth/facebook/callback', [LoginFacebookController::class, 'index']);
 Route::get('chinh-sach-rieng-tu', function (){
     return "<h1>Chinh sach rieng tu</h1>";
 });
+
+Route::get('dieu-khoan-dich-vu', function (){
+    return "<h1>Dieu khoan dich vu</h1>";
+});
 // Google
 Route::get('auth/google', function () {
     return Socialite::driver('google')->redirect();

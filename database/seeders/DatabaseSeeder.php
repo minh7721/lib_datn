@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $user = \App\Models\User::firstOrCreate([
-            'email' => 'admin111@admin.com',
+            'email' => 'admin@admin.com',
         ], [
             'name' => 'Administrator',
             'password' => bcrypt('password'),
