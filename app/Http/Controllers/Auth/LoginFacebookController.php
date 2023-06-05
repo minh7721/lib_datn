@@ -26,14 +26,13 @@ class LoginFacebookController extends Controller
                 return redirect()->route('document.home.index');
 
             }else{
-                $newUser = User::firstOrCreate([
-                    'social_id'=> $user->id,
-                    ],[
+                $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
+                    'social_id'=> $user->id,
                     'avatar' => $user->avatar,
                     'social_type'=> 'facebook',
-                    'password' => encrypt('my-google'),
+                    'password' => encrypt('my-facebook'),
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);
