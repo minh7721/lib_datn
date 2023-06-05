@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Backpack\PermissionManager\app\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,13 +15,22 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //default admin
-        \App\Models\User::firstOrCreate([
-            'email' => 'admin@admin.com',
-        ],[
+
+        $superAdminRole = Role::where('name', 'SuperAdmin')->first();
+        if (!$superAdminRole){
+            $role = Role::create(['name' => 'SuperAdmin']);
+        }
+
+        $user = \App\Models\User::firstOrCreate([
+            'email' => 'admin111@admin.com',
+        ], [
             'name' => 'Administrator',
             'password' => bcrypt('password'),
             'active_status' => true,
         ]);
+
+        $user->assignRole($role);
+
 
         $this->call(CategorySeeder::class);
     }
