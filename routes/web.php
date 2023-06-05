@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginFacebookController;
 use App\Http\Controllers\Auth\LoginGoogleController;
 use App\Http\Controllers\Frontend\DocumentController;
 use App\Http\Controllers\Frontend\LoginController;
@@ -38,10 +39,11 @@ Route::get('auth/facebook', function () {
     return Socialite::driver('facebook')->redirect();
 })->name('frontend.login.facebook');
 
-Route::get('auth/facebook/callback', function () {
-    return 'Call back Facebook';
-});
+Route::get('auth/facebook/callback', [LoginFacebookController::class, 'index']);
 
+Route::get('chinh-sach-rieng-tu', function (){
+    return "<h1>Chinh sach rieng tu</h1>";
+});
 // Google
 Route::get('auth/google', function () {
     return Socialite::driver('google')->redirect();
@@ -62,7 +64,7 @@ Route::get('/home', function () {
 
 Route::get('/document/{slug}', [DocumentController::class, 'view'])->name('document.detail');
 
-Route::get('/search', [DocumentController::class, 'search'])->name('document.search');
+Route::get('/search', [DocumentController::class, 'search'])->name('frontend.document.search');
 
 
 Route::get('/institution', function () {
