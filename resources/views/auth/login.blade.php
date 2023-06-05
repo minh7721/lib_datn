@@ -61,7 +61,7 @@
                 <div class="social-login-buttons">
                     <a class="facebook-login ripple-effect"
                        rel="nofollow"
-                       href="#">
+                       href="{{ route('frontend.login.facebook') }}">
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
                              fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>

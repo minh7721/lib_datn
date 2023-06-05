@@ -55,8 +55,6 @@ Route::get('auth/google', function () {
 
 Route::get('auth/google/callback', [LoginGoogleController::class, 'index']);
 
-
-
 Route::get('/document', function () {
     return view('frontend_v4.pages.document.detail');
 });
