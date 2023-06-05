@@ -76,7 +76,7 @@ namespace App\Models{
  * @property string|null $full_text
  * @property string|null $disks
  * @property string|null $path
- * @property int $type 0: default, 1: text, 2: image, 3: ...
+ * @property string $type
  * @property string|null $language language code
  * @property string|null $country country code
  * @property int $helpful_count
@@ -176,7 +176,9 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $user_id
+ * @property int $status
  * @property int $price
+ * @property string|null $transaction_id ID transaction of momo, paypal
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
@@ -189,6 +191,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUserId($value)
  */
@@ -288,9 +292,11 @@ namespace App\Models{
  * @property string|null $birthday
  * @property string|null $phone
  * @property string|null $address
+ * @property int $money
  * @property string|null $country
  * @property string|null $language
  * @property string|null $social_id
+ * @property string|null $social_type
  * @property int $total_save
  * @property int $total_downloaded
  * @property int $total_document
@@ -331,11 +337,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLanguage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMoney($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSocialId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSocialType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalDocument($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalDownloaded($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalSave($value)
