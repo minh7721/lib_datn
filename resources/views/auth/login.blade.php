@@ -70,7 +70,7 @@
                     </a>
                     <a class="google-login ripple-effect"
                        rel="nofollow"
-                       href="#">
+                       href="{{ route('frontend.login.google') }}">
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
                              fill="none"
                              stroke-linecap="round" stroke-linejoin="round">

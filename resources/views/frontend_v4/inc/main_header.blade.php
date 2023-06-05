@@ -46,13 +46,13 @@
 
             @if(Auth::check() === true)
                 <a href="#"
-                    class="bg-primary text-white font-medium rounded-full px-5 py-2 hidden lg:inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                    class="w-32 bg-primary text-white font-medium rounded-full px-5 py-2 hidden lg:inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
                     <i class="fa fa-cloud-arrow-up"></i>
                     Upload
                 </a>
             @else
                 <a href="{{ route('frontend.auth.getLogin') }}"
-                    class="bg-primary text-white font-medium rounded-full px-5 py-2 hidden lg:inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                    class="w-32 bg-primary text-white font-medium rounded-full px-5 py-2 hidden lg:inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
                     Login
                 </a>
             @endif

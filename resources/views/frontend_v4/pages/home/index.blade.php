@@ -533,7 +533,7 @@
                     <div class="flex flex-col">
                         <p class="text-default text-center text-3xl font-medium mb-4">Newly Uploaded Documents</p>
 
-                        <div class="flex flex-wrap -mx-6 ">
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-10 gap-x-12 lg:gap-x-20">
                             @foreach($documents as $document)
                                 @include('frontend_v4.components.list_document')
                             @endforeach
