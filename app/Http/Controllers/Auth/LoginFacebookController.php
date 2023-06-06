@@ -17,6 +17,7 @@ class LoginFacebookController extends Controller
     public function index(){
         try {
             $user = Socialite::driver('facebook')->user();
+            dd($user);
             $existed = User::where('social_id', $user->id)->first();
 
             if($existed){
