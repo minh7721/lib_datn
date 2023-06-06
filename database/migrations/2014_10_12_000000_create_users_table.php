@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('active_status')->default(0)->comment('0: not active, 1: active, 2: ban');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('https://lh3.googleusercontent.com/a/AEdFTp45mrUSLMGlduYjPfK7FMlyXLIvTKw8WS5gri6LyQ=s96-c');
             $table->string('avatar_disk')->nullable();
             $table->string('gender')->nullable()->default(0)->comment('0: none, 1: male, 2: female, 3: other');
             $table->date('birthday')->nullable();

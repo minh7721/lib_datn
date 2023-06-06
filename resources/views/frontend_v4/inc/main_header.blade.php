@@ -186,8 +186,8 @@
 {{--            </div>--}}
             <div x-data="{ open: false }" class="relative">
                 <div @click="open = !open " id="profile_icon" class="flex items-center hover:cursor-pointer">
-                    <img class="w-10 rounded-full"
-                        src="https://lh3.googleusercontent.com/a/AEdFTp45mrUSLMGlduYjPfK7FMlyXLIvTKw8WS5gri6LyQ=s96-c"
+                    <img class="w-10 h-10 rounded-full"
+                        src="{{ Auth::check() ? asset('storage/'.Auth::user()->avatar) : 'https://lh3.googleusercontent.com/a/AEdFTp45mrUSLMGlduYjPfK7FMlyXLIvTKw8WS5gri6LyQ=s96-c' }}"
                         alt="Student" loading="lazy" data-initials="GN">
                     <i class="text-sm md:text-base fa-solid fa-chevron-down ml-2"></i>
                 </div>

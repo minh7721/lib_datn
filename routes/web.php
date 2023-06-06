@@ -99,4 +99,5 @@ Route::prefix('/')
     ->middleware('web')
     ->group(function (){
     Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
+    Route::post('{id}/profile', [UserController::class, 'UpdateProfile'])->name('frontend_v4.users.postProfile');
 });
