@@ -44,11 +44,11 @@ Route::get('auth/facebook', function () {
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'index']);
 
 Route::get('policy', function (){
-    return "<h1>Chinh sach rieng tu</h1>";
+    return "Chinh sach rieng tu";
 });
 
-Route::get('dieu-khoan-dich-vu', function (){
-    return "<h1>Dieu khoan dich vu</h1>";
+Route::get('terms', function (){
+    return "Dieu khoan dich vu";
 });
 // Google
 Route::get('auth/google', function () {
