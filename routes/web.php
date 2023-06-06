@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginFacebookController;
 use App\Http\Controllers\Auth\LoginGoogleController;
 use App\Http\Controllers\Frontend\DocumentController;
 use App\Http\Controllers\Frontend\LoginController;
+use App\Http\Controllers\Frontend\UserController;
 use Laravel\Socialite\Facades\Socialite;
 
 //use App\Http\Controllers\ViewerController;
@@ -35,13 +36,14 @@ Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('fro
 Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
 
 // Login Facebook
+
 Route::get('auth/facebook', function () {
     return Socialite::driver('facebook')->redirect();
 })->name('frontend.login.facebook');
 
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'index']);
 
-Route::get('chinh-sach-rieng-tu', function (){
+Route::get('policy', function (){
     return "<h1>Chinh sach rieng tu</h1>";
 });
 
@@ -93,3 +95,8 @@ Route::get('/course', function () {
     return "Course";
 });
 
+Route::prefix('/')
+    ->middleware('web')
+    ->group(function (){
+    Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
+});

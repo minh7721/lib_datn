@@ -7,6 +7,7 @@ use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginGoogleController extends Controller
@@ -30,7 +31,7 @@ class LoginGoogleController extends Controller
                     'social_id'=> $user->id,
                     'avatar' => $user->avatar,
                     'social_type'=> 'google',
-                    'password' => encrypt('my-google'),
+                    'password' => bcrypt('my-google'),
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);
@@ -39,7 +40,9 @@ class LoginGoogleController extends Controller
             }
 
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            Session::flash('error', 'Login facabook failed!');
+
+            return redirect()->route('frontend.auth.getLogin');
         }
     }
 }

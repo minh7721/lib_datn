@@ -18578,7 +18578,7 @@ class JpxImage {
                 break;
             }
           } else if (method === 2) {
-            (0, _util.info)("ICC profile not supported");
+            (0, _util.info)("ICC users not supported");
           }
           break;
         case 0x6a703263:
@@ -57733,7 +57733,7 @@ class PDFWorkerStreamRangeReader {
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __w_pdfjs_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -57747,14 +57747,14 @@ class PDFWorkerStreamRangeReader {
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __w_pdfjs_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -57767,12 +57767,12 @@ class PDFWorkerStreamRangeReader {
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__w_pdfjs_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -57783,7 +57783,7 @@ class PDFWorkerStreamRangeReader {
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.

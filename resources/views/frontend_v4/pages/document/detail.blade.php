@@ -70,12 +70,10 @@
         }
 
 
-
         content.addEventListener('scroll', () => {
             checkIfPageInView();
             modifyDocumentController();
         });
-
 
 
         // View pdf
@@ -93,7 +91,7 @@
         }
 
         // Get pdf from prdUrl
-        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        pdfjsLib.getDocument(pdfUrl).promise.then(function (pdf) {
             totalPage.innerText = pdf.numPages;
             totalPageCount = pdf.numPages;
             currentPageElement.addEventListener('keyup', (e) => {
@@ -129,7 +127,7 @@
                 newDiv.id = 'page-' + pageNumber;
                 pageArray.push(pageNumber);
 
-                pdf.getPage(pageNumber).then(function(page) {
+                pdf.getPage(pageNumber).then(function (page) {
 
                     // New canvas
                     const newCanvas = document.createElement('canvas');
@@ -154,7 +152,7 @@
             }
 
 
-            toNextPage.addEventListener('click', function() {
+            toNextPage.addEventListener('click', function () {
                 if ((currentPageInView + 1) < currentPage) {
                     currentPageInView++;
                     document.getElementById('page-' + currentPageInView).scrollIntoView({
@@ -171,7 +169,7 @@
                 }
             });
 
-            toPreviousPage.addEventListener('click', function() {
+            toPreviousPage.addEventListener('click', function () {
                 if (currentPageInView > 1) {
                     currentPageInView--;
                     document.getElementById('page-' + currentPageInView).scrollIntoView({
@@ -182,11 +180,151 @@
 
             loadPage(currentPage);
 
-            loadPage(currentPage + 1);
+            if (totalPageCount > 1) {
+                loadPage(currentPage + 1);
+            }
 
             if (pdf.numPages <= 2) {
                 document.getElementById('toNextPage').disabled = true;
             }
+        });
+
+
+        // const documentFullScreenButton = document.getElementById("document_full_screen");
+        const pdfContainer = document.getElementById("pdfContainer");
+    </script>
+    <script>
+        let isFullScreen = false;
+        const document_full_screen = document.getElementById('document_full_screen');
+        const element = document.getElementById("pdf_wrapper");
+        document_full_screen.onclick = function () {
+            const svgElement = document_full_screen.querySelector("svg");
+            if (isFullScreen) {
+                element.classList.remove('bg-gray-100');
+                if (svgElement) {
+                    const svgString = `   <svg height="28px" width="28px" version="1.1" id="Layer_1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 viewBox="0 0 473.931 473.931" xml:space="preserve" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linoneecap="rounoned" stroke-linoneejoinone="rounoned">
+                                </g>
+                                <g id="SVGRepo_icononeCarrier">
+                                    <circle style="fill:none;" cx="236.966" cy="236.966" r="236.966"></circle>
+                                    <g>
+                                        <path style="fill:#cbcccc;"
+                                              d="M249.459,217.718c18.118,18.118,38.652-11.831,49.994-23.173 c10.859-10.859,21.721-21.725,32.58-32.583c1.01,11.352,2.099,22.709,3.772,33.949c2.653,17.867,24.782,24.542,32.946,8.801 c0.842-1.119,1.381-2.522,1.594-4.157c0.374-1.523,0.382-2.922,0.079-4.176c-0.292-14.724-0.584-29.448-0.876-44.175 c-0.284-14.353,1.643-29.953-3.611-43.431c-0.206-0.76-0.468-1.534-0.861-2.316c-1.059-2.122-4.539-8.976-0.109-0.116 c-1.265-2.522-3.588-3.974-6.148-4.513c-12.408-4.707-26.17-3.147-39.457-3.412c-16.501-0.329-33.002-0.655-49.503-0.992 c-19.068-0.382-19.745,24.123-5.818,32.28c6.956,4.079,18.14,3.611,25.863,4.404c4.969,0.513,9.938,0.977,14.915,1.463 c-10.795,10.787-21.582,21.579-32.366,32.362C261.126,179.253,231.394,199.653,249.459,217.718z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M96.736,198.014c-0.382,19.068,24.116,19.745,32.273,5.818c4.079-6.956,3.611-18.133,4.4-25.863 c0.513-4.965,0.98-9.938,1.463-14.907c10.787,10.787,21.575,21.582,32.366,32.366c11.319,11.326,31.726,41.055,49.799,22.986 c18.11-18.11-11.839-38.645-23.18-49.99c-10.859-10.859-21.721-21.721-32.587-32.579c11.356-1.014,22.712-2.103,33.953-3.772 c17.867-2.657,24.527-24.774,8.808-32.95c-1.119-0.834-2.522-1.373-4.157-1.594c-1.527-0.374-2.93-0.382-4.195-0.079 c-14.72,0.292-29.436,0.584-44.164,0.876c-14.309,0.284-29.867-1.631-43.322,3.57c-0.621,0.157-1.227,0.397-1.826,0.7 c-0.198,0.082-0.4,0.131-0.591,0.225c0.03,0.015,0.067,0.026,0.101,0.041c-0.109,0.06-0.213,0.105-0.314,0.168 c0.666-0.906,0.52-0.995-1.908,1.433c-1.557,1.557-2.376,3.296-2.69,5.059c-4.494,12.284-2.975,25.878-3.237,39 C97.394,165.015,97.065,181.513,96.736,198.014z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M103.781,364.238c0,0,0-0.007-0.007-0.007C105.263,365.712,106.651,367.108,103.781,364.238z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M103.767,364.223c0.007,0,0.007,0.004,0.007,0.004C102.217,362.666,100.579,361.035,103.767,364.223 z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M217.729,250.844c-18.118-18.118-38.652,11.831-49.994,23.173 c-10.859,10.862-21.721,21.728-32.579,32.587c-1.01-11.356-2.099-22.712-3.772-33.953c-2.653-17.863-24.774-24.527-32.946-8.808 c-0.834,1.123-1.381,2.529-1.594,4.165c-0.382,1.527-0.382,2.93-0.079,4.187c0.292,14.72,0.584,29.44,0.876,44.164 c0.277,14.077-1.572,29.347,3.311,42.641c0.307,1.774,1.126,3.525,2.698,5.096c0.052,0.056,0.079,0.082,0.131,0.138 c1.557,1.542,3.289,2.365,5.036,2.675c12.292,4.505,25.893,2.982,39.012,3.244c16.501,0.329,33.002,0.659,49.503,0.988 c19.068,0.378,19.745-24.119,5.818-32.28c-6.956-4.079-18.14-3.607-25.863-4.4c-4.969-0.513-9.938-0.973-14.915-1.463 c10.795-10.788,21.582-21.575,32.366-32.362C206.074,289.309,235.795,268.909,217.729,250.844z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M370.46,270.54c0.382-19.068-24.116-19.749-32.28-5.818c-4.071,6.956-3.603,18.133-4.4,25.859 c-0.513,4.969-0.973,9.942-1.463,14.911c-10.788-10.791-21.575-21.582-32.359-32.366c-11.326-11.326-31.73-41.055-49.799-22.986 c-18.118,18.11,11.831,38.649,23.173,49.986c10.866,10.862,21.728,21.725,32.587,32.583c-11.356,1.014-22.712,2.103-33.953,3.772 c-17.867,2.657-24.527,24.774-8.801,32.95c1.119,0.834,2.522,1.373,4.15,1.594c1.534,0.374,2.937,0.382,4.195,0.079 c14.72-0.292,29.444-0.584,44.164-0.876c14.077-0.281,29.35,1.564,42.641-3.311c1.777-0.307,3.528-1.126,5.1-2.698 c2.425-2.432,2.339-2.574,1.426-1.901c0.06-0.105,0.108-0.217,0.168-0.322c0.015,0.037,0.03,0.071,0.045,0.101 c0.086-0.202,0.146-0.408,0.236-0.61c0.284-0.565,0.513-1.152,0.674-1.747c4.831-12.471,3.244-26.327,3.51-39.704 C369.802,303.539,370.131,287.042,370.46,270.54z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>`
+                    const newSvgElement = createNewSvgElement(svgString); // Thẻ SVG mới đã có sẵn
+                    const svgElement = document_full_screen.querySelector("svg");
+                    if (svgElement) {
+                        document_full_screen.replaceChild(newSvgElement, svgElement);
+                    }
+                }
+                return exitFullScreen()
+            }
+
+            if (svgElement) {
+                const svgString = `<svg fill="#000000" width="26px" height="26px" viewBox="0 0 24 24" id="minimize-size" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M8.71,15.29,3,21M8.71,8.71,3,3M21,21l-5.71-5.71M21,3,15.29,8.71" style="fill: none; stroke: #cbcccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-2" data-name="primary" d="M4,15H8a1,1,0,0,1,1,1v4" style="fill: none; stroke: #cbcccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-3" data-name="primary" d="M9,4V8A1,1,0,0,1,8,9H4" style="fill: none; stroke: #cbcccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-4" data-name="primary" d="M15,20V16a1,1,0,0,1,1-1h4" style="fill: none; stroke: #cbcccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-5" data-name="primary" d="M20,9H16a1,1,0,0,1-1-1V4" style="fill: none; stroke: #cbcccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>`;
+                const newSvgElement = createNewSvgElement(svgString); // Thẻ SVG mới đã có sẵn
+                const svgElement = document_full_screen.querySelector("svg");
+                if (svgElement) {
+                    document_full_screen.replaceChild(newSvgElement, svgElement);
+                }
+            }
+            element.classList.add('bg-gray-100');
+            return requestFullScreen()
+
+        };
+
+        function createNewSvgElement(svgString) {
+            const parser = new DOMParser();
+            const newSvgDocument = parser.parseFromString(svgString, "image/svg+xml");
+            return newSvgDocument.documentElement;
+        }
+
+        function requestFullScreen() {
+            if (isFullScreen) return;
+
+            element.addEventListener('scroll', () => {
+                checkIfPageInView();
+            });
+
+            document_controller.classList.remove('absolute');
+            document_controller.classList.add('fixed');
+            document_controller_position_status = 'fixed';
+
+            const docElmWithBrowsersFullScreenFunctions = element;
+
+            if (docElmWithBrowsersFullScreenFunctions.requestFullscreen) {
+                docElmWithBrowsersFullScreenFunctions.requestFullscreen();
+            } else if (docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen) {
+                // Firefox
+                docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen();
+            } else if (docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen) {
+                // Chrome, Safari and Opera
+                docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen();
+            } else if (docElmWithBrowsersFullScreenFunctions.msRequestFullscreen) {
+                // IE/Edge
+                docElmWithBrowsersFullScreenFunctions.msRequestFullscreen();
+            }
+
+            isFullScreen = true;
+        }
+
+        function exitFullScreen() {
+            if (!isFullScreen) return;
+            element.removeEventListener('scroll', function () {
+            })
+            const docWithBrowsersExitFunctions = document;
+
+            if (docWithBrowsersExitFunctions.exitFullscreen) {
+                docWithBrowsersExitFunctions.exitFullscreen();
+            } else if (docWithBrowsersExitFunctions.mozCancelFullScreen) {
+                // Firefox
+                docWithBrowsersExitFunctions.mozCancelFullScreen();
+            } else if (docWithBrowsersExitFunctions.webkitExitFullscreen) {
+                // Chrome, Safari and Opera
+                docWithBrowsersExitFunctions.webkitExitFullscreen();
+            } else if (docWithBrowsersExitFunctions.msExitFullscreen) {
+                // IE/Edge
+                docWithBrowsersExitFunctions.msExitFullscreen();
+            }
+
+            isFullScreen = false;
+        }
+
+    </script>
+
+    {{-- Change bookmark icon--}}
+    <script>
+        const bookmarkIcon = document.getElementById('bookmarkIcon');
+
+        bookmarkIcon.addEventListener('mouseover', () => {
+            bookmarkIcon.classList.remove('fa-regular', 'text-lg', 'font-medium');
+            bookmarkIcon.classList.add('fa-solid', 'text-primary');
+        });
+
+        bookmarkIcon.addEventListener('mouseout', () => {
+            bookmarkIcon.classList.remove('fa-solid', 'text-primary');
+            bookmarkIcon.classList.add('fa-regular', 'text-lg', 'font-medium');
         });
     </script>
 @endpush
@@ -416,66 +554,68 @@
     <div x-cloak x-show="!open_comment_responsive" class="w-full lg:px-4">
         <div class="container mx-auto mt-4 flex flex-col lg:flex-row lg:gap-4">
             <div class="md:basis-9/12 relative flex items-center flex-col h-full">
-                <div class="w-full rounded-1.5lg" id="pdfContainer">
-
-                </div>
-                <div id="document_controller" style="display: none;"
-                     class="px-5 py-2 rounded-4xl bg-default absolute bottom-10 z-40 gap-4 items-center justify-center text-white">
-                    <div class="hidden md:block">
-                        <svg height="28px" width="28px" version="1.1" id="Layer_1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             viewBox="0 0 473.931 473.931" xml:space="preserve" fill="#000000">
+                <div id="pdf_wrapper" class="md:basis-9/12 relative flex items-center flex-col h-max overflow-y-auto">
+                    <div class="w-full rounded-1.5lg relative" id="pdfContainer">
+                    </div>
+                    <div id="document_controller" style="display: none;"
+                         class="px-5 py-2 rounded-4xl bg-default absolute bottom-10 z-40 gap-4 items-center justify-center text-white">
+                        <div id="document_full_screen" class="hidden md:block">
+                            <svg height="28px" width="28px" version="1.1" id="Layer_1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 viewBox="0 0 473.931 473.931" xml:space="preserve" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linoneecap="rounoned" stroke-linoneejoinone="rounoned">
-                            </g>
-                            <g id="SVGRepo_icononeCarrier">
-                                <circle style="fill:none;" cx="236.966" cy="236.966" r="236.966"></circle>
-                                <g>
-                                    <path style="fill:#cbcccc;"
-                                          d="M249.459,217.718c18.118,18.118,38.652-11.831,49.994-23.173 c10.859-10.859,21.721-21.725,32.58-32.583c1.01,11.352,2.099,22.709,3.772,33.949c2.653,17.867,24.782,24.542,32.946,8.801 c0.842-1.119,1.381-2.522,1.594-4.157c0.374-1.523,0.382-2.922,0.079-4.176c-0.292-14.724-0.584-29.448-0.876-44.175 c-0.284-14.353,1.643-29.953-3.611-43.431c-0.206-0.76-0.468-1.534-0.861-2.316c-1.059-2.122-4.539-8.976-0.109-0.116 c-1.265-2.522-3.588-3.974-6.148-4.513c-12.408-4.707-26.17-3.147-39.457-3.412c-16.501-0.329-33.002-0.655-49.503-0.992 c-19.068-0.382-19.745,24.123-5.818,32.28c6.956,4.079,18.14,3.611,25.863,4.404c4.969,0.513,9.938,0.977,14.915,1.463 c-10.795,10.787-21.582,21.579-32.366,32.362C261.126,179.253,231.394,199.653,249.459,217.718z">
-                                    </path>
-                                    <path style="fill:#cbcccc;"
-                                          d="M96.736,198.014c-0.382,19.068,24.116,19.745,32.273,5.818c4.079-6.956,3.611-18.133,4.4-25.863 c0.513-4.965,0.98-9.938,1.463-14.907c10.787,10.787,21.575,21.582,32.366,32.366c11.319,11.326,31.726,41.055,49.799,22.986 c18.11-18.11-11.839-38.645-23.18-49.99c-10.859-10.859-21.721-21.721-32.587-32.579c11.356-1.014,22.712-2.103,33.953-3.772 c17.867-2.657,24.527-24.774,8.808-32.95c-1.119-0.834-2.522-1.373-4.157-1.594c-1.527-0.374-2.93-0.382-4.195-0.079 c-14.72,0.292-29.436,0.584-44.164,0.876c-14.309,0.284-29.867-1.631-43.322,3.57c-0.621,0.157-1.227,0.397-1.826,0.7 c-0.198,0.082-0.4,0.131-0.591,0.225c0.03,0.015,0.067,0.026,0.101,0.041c-0.109,0.06-0.213,0.105-0.314,0.168 c0.666-0.906,0.52-0.995-1.908,1.433c-1.557,1.557-2.376,3.296-2.69,5.059c-4.494,12.284-2.975,25.878-3.237,39 C97.394,165.015,97.065,181.513,96.736,198.014z">
-                                    </path>
-                                    <path style="fill:#cbcccc;"
-                                          d="M103.781,364.238c0,0,0-0.007-0.007-0.007C105.263,365.712,106.651,367.108,103.781,364.238z">
-                                    </path>
-                                    <path style="fill:#cbcccc;"
-                                          d="M103.767,364.223c0.007,0,0.007,0.004,0.007,0.004C102.217,362.666,100.579,361.035,103.767,364.223 z">
-                                    </path>
-                                    <path style="fill:#cbcccc;"
-                                          d="M217.729,250.844c-18.118-18.118-38.652,11.831-49.994,23.173 c-10.859,10.862-21.721,21.728-32.579,32.587c-1.01-11.356-2.099-22.712-3.772-33.953c-2.653-17.863-24.774-24.527-32.946-8.808 c-0.834,1.123-1.381,2.529-1.594,4.165c-0.382,1.527-0.382,2.93-0.079,4.187c0.292,14.72,0.584,29.44,0.876,44.164 c0.277,14.077-1.572,29.347,3.311,42.641c0.307,1.774,1.126,3.525,2.698,5.096c0.052,0.056,0.079,0.082,0.131,0.138 c1.557,1.542,3.289,2.365,5.036,2.675c12.292,4.505,25.893,2.982,39.012,3.244c16.501,0.329,33.002,0.659,49.503,0.988 c19.068,0.378,19.745-24.119,5.818-32.28c-6.956-4.079-18.14-3.607-25.863-4.4c-4.969-0.513-9.938-0.973-14.915-1.463 c10.795-10.788,21.582-21.575,32.366-32.362C206.074,289.309,235.795,268.909,217.729,250.844z">
-                                    </path>
-                                    <path style="fill:#cbcccc;"
-                                          d="M370.46,270.54c0.382-19.068-24.116-19.749-32.28-5.818c-4.071,6.956-3.603,18.133-4.4,25.859 c-0.513,4.969-0.973,9.942-1.463,14.911c-10.788-10.791-21.575-21.582-32.359-32.366c-11.326-11.326-31.73-41.055-49.799-22.986 c-18.118,18.11,11.831,38.649,23.173,49.986c10.866,10.862,21.728,21.725,32.587,32.583c-11.356,1.014-22.712,2.103-33.953,3.772 c-17.867,2.657-24.527,24.774-8.801,32.95c1.119,0.834,2.522,1.373,4.15,1.594c1.534,0.374,2.937,0.382,4.195,0.079 c14.72-0.292,29.444-0.584,44.164-0.876c14.077-0.281,29.35,1.564,42.641-3.311c1.777-0.307,3.528-1.126,5.1-2.698 c2.425-2.432,2.339-2.574,1.426-1.901c0.06-0.105,0.108-0.217,0.168-0.322c0.015,0.037,0.03,0.071,0.045,0.101 c0.086-0.202,0.146-0.408,0.236-0.61c0.284-0.565,0.513-1.152,0.674-1.747c4.831-12.471,3.244-26.327,3.51-39.704 C369.802,303.539,370.131,287.042,370.46,270.54z">
-                                    </path>
+                                <g id="SVGRepo_tracerCarrier" stroke-linoneecap="rounoned" stroke-linoneejoinone="rounoned">
                                 </g>
-                            </g>
+                                <g id="SVGRepo_icononeCarrier">
+                                    <circle style="fill:none;" cx="236.966" cy="236.966" r="236.966"></circle>
+                                    <g>
+                                        <path style="fill:#cbcccc;"
+                                              d="M249.459,217.718c18.118,18.118,38.652-11.831,49.994-23.173 c10.859-10.859,21.721-21.725,32.58-32.583c1.01,11.352,2.099,22.709,3.772,33.949c2.653,17.867,24.782,24.542,32.946,8.801 c0.842-1.119,1.381-2.522,1.594-4.157c0.374-1.523,0.382-2.922,0.079-4.176c-0.292-14.724-0.584-29.448-0.876-44.175 c-0.284-14.353,1.643-29.953-3.611-43.431c-0.206-0.76-0.468-1.534-0.861-2.316c-1.059-2.122-4.539-8.976-0.109-0.116 c-1.265-2.522-3.588-3.974-6.148-4.513c-12.408-4.707-26.17-3.147-39.457-3.412c-16.501-0.329-33.002-0.655-49.503-0.992 c-19.068-0.382-19.745,24.123-5.818,32.28c6.956,4.079,18.14,3.611,25.863,4.404c4.969,0.513,9.938,0.977,14.915,1.463 c-10.795,10.787-21.582,21.579-32.366,32.362C261.126,179.253,231.394,199.653,249.459,217.718z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M96.736,198.014c-0.382,19.068,24.116,19.745,32.273,5.818c4.079-6.956,3.611-18.133,4.4-25.863 c0.513-4.965,0.98-9.938,1.463-14.907c10.787,10.787,21.575,21.582,32.366,32.366c11.319,11.326,31.726,41.055,49.799,22.986 c18.11-18.11-11.839-38.645-23.18-49.99c-10.859-10.859-21.721-21.721-32.587-32.579c11.356-1.014,22.712-2.103,33.953-3.772 c17.867-2.657,24.527-24.774,8.808-32.95c-1.119-0.834-2.522-1.373-4.157-1.594c-1.527-0.374-2.93-0.382-4.195-0.079 c-14.72,0.292-29.436,0.584-44.164,0.876c-14.309,0.284-29.867-1.631-43.322,3.57c-0.621,0.157-1.227,0.397-1.826,0.7 c-0.198,0.082-0.4,0.131-0.591,0.225c0.03,0.015,0.067,0.026,0.101,0.041c-0.109,0.06-0.213,0.105-0.314,0.168 c0.666-0.906,0.52-0.995-1.908,1.433c-1.557,1.557-2.376,3.296-2.69,5.059c-4.494,12.284-2.975,25.878-3.237,39 C97.394,165.015,97.065,181.513,96.736,198.014z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M103.781,364.238c0,0,0-0.007-0.007-0.007C105.263,365.712,106.651,367.108,103.781,364.238z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M103.767,364.223c0.007,0,0.007,0.004,0.007,0.004C102.217,362.666,100.579,361.035,103.767,364.223 z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M217.729,250.844c-18.118-18.118-38.652,11.831-49.994,23.173 c-10.859,10.862-21.721,21.728-32.579,32.587c-1.01-11.356-2.099-22.712-3.772-33.953c-2.653-17.863-24.774-24.527-32.946-8.808 c-0.834,1.123-1.381,2.529-1.594,4.165c-0.382,1.527-0.382,2.93-0.079,4.187c0.292,14.72,0.584,29.44,0.876,44.164 c0.277,14.077-1.572,29.347,3.311,42.641c0.307,1.774,1.126,3.525,2.698,5.096c0.052,0.056,0.079,0.082,0.131,0.138 c1.557,1.542,3.289,2.365,5.036,2.675c12.292,4.505,25.893,2.982,39.012,3.244c16.501,0.329,33.002,0.659,49.503,0.988 c19.068,0.378,19.745-24.119,5.818-32.28c-6.956-4.079-18.14-3.607-25.863-4.4c-4.969-0.513-9.938-0.973-14.915-1.463 c10.795-10.788,21.582-21.575,32.366-32.362C206.074,289.309,235.795,268.909,217.729,250.844z">
+                                        </path>
+                                        <path style="fill:#cbcccc;"
+                                              d="M370.46,270.54c0.382-19.068-24.116-19.749-32.28-5.818c-4.071,6.956-3.603,18.133-4.4,25.859 c-0.513,4.969-0.973,9.942-1.463,14.911c-10.788-10.791-21.575-21.582-32.359-32.366c-11.326-11.326-31.73-41.055-49.799-22.986 c-18.118,18.11,11.831,38.649,23.173,49.986c10.866,10.862,21.728,21.725,32.587,32.583c-11.356,1.014-22.712,2.103-33.953,3.772 c-17.867,2.657-24.527,24.774-8.801,32.95c1.119,0.834,2.522,1.373,4.15,1.594c1.534,0.374,2.937,0.382,4.195,0.079 c14.72-0.292,29.444-0.584,44.164-0.876c14.077-0.281,29.35,1.564,42.641-3.311c1.777-0.307,3.528-1.126,5.1-2.698 c2.425-2.432,2.339-2.574,1.426-1.901c0.06-0.105,0.108-0.217,0.168-0.322c0.015,0.037,0.03,0.071,0.045,0.101 c0.086-0.202,0.146-0.408,0.236-0.61c0.284-0.565,0.513-1.152,0.674-1.747c4.831-12.471,3.244-26.327,3.51-39.704 C369.802,303.539,370.131,287.042,370.46,270.54z">
+                                        </path>
+                                    </g>
+                                </g>
                         </svg>
-                    </div>
-                    <div class="h-10 hidden md:block w-0.5 bg-white"></div>
-                    <button class="mr-3 disabled:text-gray-500" id="toPreviousPage" disabled>
-                        <i class="fa-solid fa-arrow-up"></i>
-                    </button>
-                    <button class="disabled:text-gray-500" id="toNextPage">
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </button>
-                    <div class="h-10 block md:hidden w-0.5 bg-white"></div>
-                    <div class=" px-2 py-1 border border-slate-200 rounded-1.5lg flex flex-row">
-                        <input id="current_page" class="mr-1 text-black w-8 text-center rounded-1.5lg outline-none"
-                               value="1" />
-                        /
-                        <div id="total_page" class="ml-1"></div>
-                    </div>
-                    <div class=" justify-center ">
-                        <a href="#" type="button"
-                           class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
-                            <i class="fa-solid fa-cloud-arrow-down"></i>
-                            <span class="sm:block hidden ml-2">Download</span>
-                        </a>
-                    </div>
-                    <div class=" sm:block hidden pr-2">
-                        <i class="fa-regular fa-bookmark text-lg font-medium hover:text-primary"></i>
+                        </div>
+                        <div class="h-10 hidden md:block w-0.5 bg-white"></div>
+                        <button class="mr-3 disabled:text-gray-500" id="toPreviousPage" disabled>
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                        <button class="disabled:text-gray-500" id="toNextPage">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <div class="h-10 block md:hidden w-0.5 bg-white"></div>
+                        <div class=" px-2 py-1 border border-slate-200 rounded-1.5lg flex flex-row">
+                            <input id="current_page" class="mr-1 text-black w-8 text-center rounded-1.5lg outline-none"
+                                   value="1"/>
+                            /
+                            <div id="total_page" class="ml-1"></div>
+                        </div>
+                        <div class=" justify-center ">
+                            <a href="#" type="button"
+                               class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
+                                <i class="fa-solid fa-cloud-arrow-down"></i>
+                                <span class="sm:block hidden ml-2">Download</span>
+                            </a>
+                        </div>
+                        <div class="sm:block hidden pr-2">
+                            <i id="bookmarkIcon" class="fa-regular fa-bookmark text-lg font-medium hover:text-primary"></i>
+                            {{--                        <i class="fa-solid fa-bookmark text-primary"></i>--}}
+                        </div>
                     </div>
                 </div>
             </div>

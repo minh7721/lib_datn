@@ -202,7 +202,7 @@
                                 <span class="font-thin  group-hover:text-primary ">Home</span>
                                 <i class="fa-solid fa-house text-primary"></i>
                             </a>
-                            <a href=""
+                            <a href="{{ route('frontend_v4.users.profile', Auth::id()) }}"
                                class="flex justify-between items-center hover:cursor-pointer group px-6 py-4 hover:bg-green-100 hover:text-primary ">
                                 <span class="font-thin ">Profile</span>
                                 <i class="fa-solid fa-user text-primary"></i>

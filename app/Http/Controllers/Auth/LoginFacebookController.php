@@ -7,6 +7,7 @@ use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginFacebookController extends Controller
@@ -18,6 +19,7 @@ class LoginFacebookController extends Controller
         try {
             $user = Socialite::driver('facebook')->user();
 
+            dd($user);
             $existed = User::where('social_id', $user->id)->first();
 
             if($existed){
@@ -33,7 +35,7 @@ class LoginFacebookController extends Controller
                     'social_id'=> $user->id,
                     'avatar' => $user->avatar,
                     'social_type'=> 'facebook',
-                    'password' => encrypt('my-facebook'),
+                    'password' => bcrypt('my-facebook'),
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);
@@ -42,7 +44,9 @@ class LoginFacebookController extends Controller
             }
 
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            Session::flash('error', 'Login facabook failed!');
+
+            return redirect()->route('frontend.auth.getLogin');
         }
     }
 }
