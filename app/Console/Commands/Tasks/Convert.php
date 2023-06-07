@@ -60,9 +60,14 @@ class Convert extends Command
             $documents = Document::where('full_text', null)->get();
         }
         foreach ($documents as $document) {
-            $this->makePdf($document);
-            $this->makeText($document);
-            $this->info("Get fulltext of {$document->id} success");
+            try {
+                $this->makePdf($document);
+                $this->makeText($document);
+                $this->info("Get fulltext of {$document->id} success");
+            }
+            catch (\Exception $err){
+                continue;
+            }
         }
         return self::SUCCESS;
     }
