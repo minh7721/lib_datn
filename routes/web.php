@@ -43,11 +43,11 @@ Route::get('auth/facebook', function () {
 
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'index']);
 
-Route::get('policy', function () {
+Route::get('statics/policy', function () {
     return "Chinh sach rieng tu";
 });
 
-Route::get('terms', function () {
+Route::get('statics/terms-of-use', function () {
     return "Dieu khoan dich vu";
 });
 // Google
