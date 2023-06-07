@@ -33,7 +33,6 @@ class PdfToText {
     }
 
     public function convert($path, $first_page = 1, $last_page = -1, $output_hidden_text = true){
-        dump("Path: ".$path);
         $input = file_get_contents($path);
         return $this->convertStream($input, $first_page, $last_page, $output_hidden_text);
     }

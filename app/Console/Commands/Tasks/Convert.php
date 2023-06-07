@@ -62,6 +62,7 @@ class Convert extends Command
             try {
                 $this->makePdf($document);
                 $this->makeText($document);
+
                 $this->info("Get fulltext of {$document->id} success");
             }
             catch (\Exception $err){
@@ -124,26 +125,22 @@ class Convert extends Command
 //        if ($document->full_text && $document->description) {
 //            return;
 //        }
-        dump("Start makeText");
         try {
             $fulltext = $this->makeTextV2($document);
         } catch (\Exception $exception) {
             $this->error("\tConvert fulltext error : " . $exception->getMessage());
         }
 
-        dump("Done full-text");
         /** Create Description */
         $generator = TextRankGenerator::fromDSFullText($fulltext);
         $description = $generator->getDescription();
         $description = mb_substr($description, 0, 186) . "[r]";
 
-        dump("Done description: {$description}");
         /** Save fulltext to $document->fulltext */
         $document->update([
             'full_text' => $fulltext,
             'description' => $description
         ]);
-        die();
     }
 
     /**
