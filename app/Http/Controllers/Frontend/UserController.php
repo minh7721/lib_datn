@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\UserRequest;
 use App\Libs\MakePath;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -49,5 +52,19 @@ class UserController extends Controller
             Log::info($err->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function changePass(UserRequest $request, $id){
+
+        $user = User::where('id', $id)->first();
+        if (!Hash::check($request->input('current_password'), $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Incorrect current password']);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->input('new_password')),
+        ]);
+        Session::flash('success', 'Update password success');
+        return redirect()->back();
     }
 }

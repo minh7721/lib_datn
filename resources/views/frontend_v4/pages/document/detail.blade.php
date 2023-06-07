@@ -650,7 +650,7 @@
                     </div>
                     <p class="font-light text-sm text-default-lighter mt-3 text-center">Your document will be enriched,
                         shared
-                        on 123dok to
+                        on libshare to
                         assist in studying</p>
                 </div>
 

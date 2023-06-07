@@ -43,11 +43,11 @@ Route::get('auth/facebook', function () {
 
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'index']);
 
-Route::get('policy', function (){
+Route::get('policy', function () {
     return "Chinh sach rieng tu";
 });
 
-Route::get('terms', function (){
+Route::get('terms', function () {
     return "Dieu khoan dich vu";
 });
 // Google
@@ -97,7 +97,8 @@ Route::get('/course', function () {
 
 Route::prefix('/')
     ->middleware('web')
-    ->group(function (){
-    Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
-    Route::post('{id}/profile', [UserController::class, 'UpdateProfile'])->name('frontend_v4.users.postProfile');
-});
+    ->group(function () {
+        Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
+        Route::post('{id}/profile', [UserController::class, 'UpdateProfile'])->name('frontend_v4.users.postProfile');
+        Route::post('{id}/profile/password', [UserController::class, 'changePass'])->name('frontend_v4.users.postChangePass');
+    });

@@ -55,7 +55,6 @@ class Convert extends Command
 
         if ($force) {
             $documents = Document::all();
-//            $documents = Document::where('id', 6)->get();
         } else {
             $documents = Document::where('full_text', null)->get();
         }
@@ -128,7 +127,6 @@ class Convert extends Command
         dump("Start makeText");
         try {
             $fulltext = $this->makeTextV2($document);
-            dump($fulltext);
         } catch (\Exception $exception) {
             $this->error("\tConvert fulltext error : " . $exception->getMessage());
         }
@@ -145,7 +143,7 @@ class Convert extends Command
             'full_text' => $fulltext,
             'description' => $description
         ]);
-
+        die();
     }
 
     /**

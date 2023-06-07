@@ -42,7 +42,7 @@
 @include('frontend_v4.inc.sidebar')
 
 
-<div :class="open_comment_responsive && 'bg-white'" class="flex-1 overflow-x-hidden scrollbar scrollbar-w-3 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 scroll-smooth"
+<div :class="open_comment_responsive && 'bg-white'" class="flex-1 overflow-x-hidden lg:scrollbar scrollbar-w-3 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 scroll-smooth"
      id="content">
     <main class="w-full" :class="open_comment_responsive && 'h-full'">
         @yield('content')

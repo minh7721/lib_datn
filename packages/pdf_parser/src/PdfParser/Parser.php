@@ -145,8 +145,11 @@ class Parser {
     public function process($re_convert = false): Document {
 
         dump($this->path);
+        dump("re_convert: {$re_convert}");
         if($re_convert || !$this->xml){
-            $this->xml = ( new PdfToText() )->convert( $this->path, $this->first_page, $this->last_page, $this->output_hidden_text );
+            dd(1);
+            $this->xml = ( new PdfToText() )->
+            convert( $this->path, $this->first_page, $this->last_page, $this->output_hidden_text );
         }
 
         /** Tạo Document object cơ bản từ pdf -> xml -> Document */
