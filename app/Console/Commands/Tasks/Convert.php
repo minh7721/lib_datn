@@ -74,38 +74,17 @@ class Convert extends Command
 
     protected function makePdf(Document $document)
     {
-//        if ($document->source_url) {
-//            return;
-//        }
-
-//        if (!$document->original_file && !$document->pdf) {
-//            throw new \Exception("No original file when make pdf for document " . $document->id);
-//        }
-
         $path = $document->source_url;
         $original_file = \Storage::disk('public')->get($path);
 
-//        if ($document->source_url) {
-//            $pdf_content = $this->convertor->convert(
-//                content: $original_file,
-//                input_format: $document->type,
-//                output_format: 'pdf',
-//            );
-//        } else {
-//            $pdf_content = $original_file;
-//        }
-        if ($document->type = TypeDocument::PDF) {
-            $pdf_content = $original_file;
+        if ($document->source_url) {
+            $pdf_content = $this->convertor->convert(
+                content: $original_file,
+                input_format: $document->type,
+                output_format: 'pdf',
+            );
         } else {
-            if ($document->source_url) {
-                $pdf_content = $this->convertor->convert(
-                    content: $original_file,
-                    input_format: $document->type,
-                    output_format: 'pdf',
-                );
-            } else {
-                $pdf_content = $original_file;
-            }
+            $pdf_content = $original_file;
         }
         $path = 'pdf_maked/' . MakePath::make($document->id, '') . ".pdf.pdf";
         $saved = \Storage::disk('public')->put($path, $pdf_content);
@@ -148,6 +127,7 @@ class Convert extends Command
         $description = $generator->getDescription();
         $description = mb_substr($description, 0, 186) . "[r]";
 
+        dump($description);
         /** Save fulltext to $document->fulltext */
         $document->update([
             'full_text' => $fulltext,
