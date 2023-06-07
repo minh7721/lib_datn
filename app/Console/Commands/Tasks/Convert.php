@@ -64,8 +64,7 @@ class Convert extends Command
                 $this->makeText($document);
 
                 $this->info("Get fulltext of {$document->id} success");
-            }
-            catch (\Exception $err){
+            } catch (\Exception $err) {
                 continue;
             }
         }
@@ -85,24 +84,37 @@ class Convert extends Command
 
         $path = $document->source_url;
         $original_file = \Storage::disk('public')->get($path);
-        if ($document->source_url) {
-            $pdf_content = $this->convertor->convert(
-                content: $original_file,
-                input_format: $document->type,
-                output_format: 'pdf',
-            );
-        } else {
+
+//        if ($document->source_url) {
+//            $pdf_content = $this->convertor->convert(
+//                content: $original_file,
+//                input_format: $document->type,
+//                output_format: 'pdf',
+//            );
+//        } else {
+//            $pdf_content = $original_file;
+//        }
+        if ($document->type = TypeDocument::PDF) {
             $pdf_content = $original_file;
+        } else {
+            if ($document->source_url) {
+                $pdf_content = $this->convertor->convert(
+                    content: $original_file,
+                    input_format: $document->type,
+                    output_format: 'pdf',
+                );
+            } else {
+                $pdf_content = $original_file;
+            }
         }
-        $path =  'pdf_maked/'.MakePath::make($document->id, '') . ".pdf.pdf";
+        $path = 'pdf_maked/' . MakePath::make($document->id, '') . ".pdf.pdf";
         $saved = \Storage::disk('public')->put($path, $pdf_content);
 
-        if($saved){
-           $document->update([
-               'path' => $path
-           ]);
-        }
-        else{
+        if ($saved) {
+            $document->update([
+                'path' => $path
+            ]);
+        } else {
             $this->error("Can not save file");
         }
 //        $preview_max_pages = 20;
