@@ -127,15 +127,18 @@ class Convert extends Command
 //        }
         try {
             $fulltext = $this->makeTextV2($document);
+            dump($fulltext);
         } catch (\Exception $exception) {
             $this->error("\tConvert fulltext error : " . $exception->getMessage());
         }
 
+        dump("Done full-text");
         /** Create Description */
         $generator = TextRankGenerator::fromDSFullText($fulltext);
         $description = $generator->getDescription();
         $description = mb_substr($description, 0, 186) . "[r]";
 
+        dump("Done description: {$description}");
         /** Save fulltext to $document->fulltext */
         $document->update([
             'full_text' => $fulltext,
