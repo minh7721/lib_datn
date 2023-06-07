@@ -144,6 +144,7 @@ class Parser {
      */
     public function process($re_convert = false): Document {
 
+        dump($this->path);
         if($re_convert || !$this->xml){
             $this->xml = ( new PdfToText() )->convert( $this->path, $this->first_page, $this->last_page, $this->output_hidden_text );
         }

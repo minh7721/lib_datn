@@ -148,6 +148,9 @@ class Convert extends Command
 
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function makeTextV2(Document $document)
     {
         $document_process = Builder::fromDocument($document)->get();
