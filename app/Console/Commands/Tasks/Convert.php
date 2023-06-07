@@ -125,6 +125,7 @@ class Convert extends Command
 //        if ($document->full_text && $document->description) {
 //            return;
 //        }
+        dump("Start makeText");
         try {
             $fulltext = $this->makeTextV2($document);
             dump($fulltext);
