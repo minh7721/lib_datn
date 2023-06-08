@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -17,9 +18,8 @@ class LoginController extends Controller
             // nếu đăng nhập thàng công thì
             return redirect(route('document.home.index'));
         } else {
-            return view('auth.login');
+            return view('frontend_v4.auth.login');
         }
-
     }
 
     public function postLogin(Request $request)
@@ -44,5 +44,6 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('document.home.index');
     }
+
 
 }

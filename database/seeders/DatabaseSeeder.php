@@ -15,13 +15,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //default admin
-
         $superAdminRole = Role::where('name', 'SuperAdmin')->first();
         if (!$superAdminRole){
-            $role = Role::create(['name' => 'SuperAdmin']);
+            $superAdminRole = Role::create(['name' => 'SuperAdmin']);
         }
 
-        $user = \App\Models\User::firstOrCreate([
+        $userRole = Role::where('name', 'User')->first();
+        if (!$userRole){
+            $userRole = Role::create(['name' => 'User']);
+        }
+
+        $admin = \App\Models\User::firstOrCreate([
             'email' => 'admin@admin.com',
         ], [
             'name' => 'Administrator',
@@ -29,7 +33,16 @@ class DatabaseSeeder extends Seeder
             'active_status' => true,
         ]);
 
-        $user->assignRole($role);
+        $user = \App\Models\User::firstOrCreate([
+            'email' => 'usertest@gmail.com',
+        ], [
+            'name' => 'Hoang Nhat Minh',
+            'password' => bcrypt('password'),
+            'active_status' => true,
+        ]);
+
+        $admin->assignRole($superAdminRole);
+        $user->assignRole($userRole);
 
 
         $this->call(CategorySeeder::class);
