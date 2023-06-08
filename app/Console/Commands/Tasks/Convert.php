@@ -21,6 +21,7 @@ class Convert extends Command
      * @var string
      */
     protected $signature = 'task:convert
+    {--id= : id, ids, id range}
     {--f|force : Force to reconvert}
 
     ';
@@ -50,13 +51,18 @@ class Convert extends Command
     public function handle()
     {
         $force = $this->option('force');
-
+        $id = $this->option('id');
         $this->convertor = new DocumentConverter();
 
-        if ($force) {
-            $documents = Document::all();
-        } else {
-            $documents = Document::where('full_text', null)->get();
+        if ($id){
+            $documents = Document::idRange($id)->get();
+        }
+        else {
+            if ($force) {
+                $documents = Document::all();
+            } else {
+                $documents = Document::where('full_text', null)->get();
+            }
         }
         foreach ($documents as $document) {
             try {
@@ -99,19 +105,6 @@ class Convert extends Command
         } else {
             $this->error("Can not save file");
         }
-//        $preview_max_pages = 20;
-//        $min_diff_page_count = 5;
-//
-//        if ($document->pages < $preview_max_pages + $min_diff_page_count
-//            || ($document->preview)) {
-//            return;
-//        }
-//        $preview_content = $this->convertor->convert(
-//            content: $pdf_content,
-//            input_format: 'pdf',
-//            output_format: 'pdf',
-//            options: ['first_page' => 1, 'last_page' => $preview_max_pages]
-//        );
     }
 
     protected function makeText(Document $document)
@@ -131,10 +124,9 @@ class Convert extends Command
         $description = mb_substr($description, 0, 186) . "[r]";
 
         /** Save fulltext to $document->fulltext */
-        $document->update([
-            'full_text' => $fulltext,
-            'description' => $description
-        ]);
+        $document->full_text = $fulltext;
+        $document->description = $description;
+        $document->save();
     }
 
     /**

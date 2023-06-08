@@ -50,9 +50,6 @@ class Document extends Model
         'updated_at',
     ];
 
-//    protected $fillable = [
-//        'source_url',
-//    ];
     protected $guarded = ['id'];
 
     protected static function boot()
