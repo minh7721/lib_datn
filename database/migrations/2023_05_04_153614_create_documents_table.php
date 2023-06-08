@@ -25,7 +25,7 @@ class CreateDocumentsTable extends Migration
             $table->integer('price')->index()->default(0);
             $table->integer('original_size')->default(0)->comment('Kich thuoc goc');
             $table->string('original_format')->default(0)->comment('kick thuoc sau khi format');
-            $table->text('full_text')->nullable();
+            $table->longText('full_text')->nullable();
             $table->string('disks')->nullable();
             $table->string('path')->nullable();
             $table->string('type')->default('pdf');
