@@ -60,7 +60,10 @@ class Convert extends Command
         }
         foreach ($documents as $document) {
             try {
-                $this->makePdf($document);
+
+                if ($document->type != TypeDocument::PDF){
+                    $this->makePdf($document);
+                }
                 $this->makeText($document);
 
                 $this->info("Get fulltext of {$document->id} success");
@@ -127,7 +130,6 @@ class Convert extends Command
         $description = $generator->getDescription();
         $description = mb_substr($description, 0, 186) . "[r]";
 
-        dump($description);
         /** Save fulltext to $document->fulltext */
         $document->update([
             'full_text' => $fulltext,
