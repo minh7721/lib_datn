@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginFacebookController;
 use App\Http\Controllers\Auth\LoginGoogleController;
 use App\Http\Controllers\Frontend\DocumentController;
 use App\Http\Controllers\Frontend\LoginController;
+use App\Http\Controllers\Frontend\RegisterController;
 use App\Http\Controllers\Frontend\UserController;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -34,6 +35,9 @@ Route::get('/', [DocumentController::class, 'index'])->name('document.home.index
 Route::get('auth/login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
 Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
 Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
+
+Route::get('auth/register', [RegisterController::class, 'getRegister'])->name('frontend.auth.getRegister');
+Route::post('auth/login/post', [RegisterController::class, 'postRegister'])->name('frontend.auth.postLogin');
 
 // Login Facebook
 
