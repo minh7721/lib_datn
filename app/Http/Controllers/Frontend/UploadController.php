@@ -22,7 +22,7 @@ class UploadController extends Controller
     public function postUpload(DocumentRequest $request)
     {
         try {
-            if ($file_upload = $request->file('file_upload')) {
+            if ($file_upload = $request->file('source_url')) {
                 $disk = "public";
                 $destination_path = 'public/pdftest';
                 $file_path = $file_upload->store($destination_path);

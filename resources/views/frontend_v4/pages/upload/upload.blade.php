@@ -22,11 +22,11 @@
                             <div class="bg-primary-100 flex rounded border border-dashed border-[#00A888] mb-14">
                                 <div class="max-w-max mx-auto mt-20 mb-10">
 
-                                    <label for="file_upload" class="flex flex-col items-center cursor-pointer">
+                                    <label for="source_url" class="flex flex-col items-center cursor-pointer">
                                         <i class="fa-solid fa-cloud-arrow-up text-primary text-3.25xl mb-5"></i>
                                         <span class="font-medium ">DRAG HERE OR SELECT FILE</span>
                                     </label>
-                                    <input id="file_upload" name="file_upload" type="file" class="hidden" >
+                                    <input id="source_url" name="source_url" type="file" class="hidden" >
 
                                     <p class="font-light mb-5 text-center">Formats accepted: doc, docx, odt, pdf, ppt, pptx, rtf, xls, xlsx</p>
                                 </div>
