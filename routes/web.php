@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginGoogleController;
 use App\Http\Controllers\Frontend\DocumentController;
 use App\Http\Controllers\Frontend\LoginController;
 use App\Http\Controllers\Frontend\RegisterController;
+use App\Http\Controllers\Frontend\UploadController;
 use App\Http\Controllers\Frontend\UserController;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -105,4 +106,8 @@ Route::prefix('/')
         Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
         Route::post('{id}/profile', [UserController::class, 'UpdateProfile'])->name('frontend_v4.users.postProfile');
         Route::post('{id}/profile/password', [UserController::class, 'changePass'])->name('frontend_v4.users.postChangePass');
+
+//Upload
+        Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
+        Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
     });

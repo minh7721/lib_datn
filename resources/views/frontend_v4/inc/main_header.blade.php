@@ -45,7 +45,7 @@
             </button>
 
             @if(Auth::check() === true)
-                <a href="#"
+                <a href="{{ route('frontend_v4.users.getUpload') }}"
                     class="w-32 bg-primary text-white font-medium rounded-full px-5 py-2 hidden lg:inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
                     <i class="fa fa-cloud-arrow-up"></i>
                     Upload

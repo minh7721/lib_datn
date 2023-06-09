@@ -19,19 +19,18 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
     public function getRegister(){
-        if (Auth::check()) {
-            // nếu đăng nhập thàng công thì
-            return redirect(route('document.home.index'));
-        } else {
+//        if (Auth::check()) {
+//            return redirect(route('document.home.index'));
+//        } else {
             return view('frontend_v4.auth.register');
-        }
+//        }
     }
 
     public function postRegister(RegisterRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         if ($user){
-            return redirect()->back()->withErrors(['email' => 'Email already exists'])->withInput($request->only('email'));
+            return redirect()->back()->withErrors(['email' => 'Email already exists'])->withInput($request->only(['email', 'name']));
         }
 
         $user = User::create([

@@ -52,7 +52,7 @@ class DocumentRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'required' => 'This field can not empty'
         ];
     }
 }

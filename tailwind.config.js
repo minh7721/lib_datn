@@ -14,6 +14,8 @@ module.exports = {
               primary: "#00A888",
               "primary-darker": "#006350",
               "primary-lighter": "#00ecbf",
+              "primary-100": "#97cbc133",
+              "primary-200": "#52bfaa33",
               secondary: "#FFAA00",
               "secondary-darker": "#cc8800",
               "secondary-lighter": "#ffbb32",
@@ -25,6 +27,7 @@ module.exports = {
               default: "#333333",
               "main-background": "#CBCCCC3C",
               "default-lighter": "#666666",
+              "gray-primary": "#ccced1",
           },
           borderRadius: {
               "1.5lg": "0.625rem",

@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <div id="log-in">
-        <form class="login-form" action="{{ route('frontend.auth.postLogin') }}" method="post">
+        <form class="login-form" action="{{ route('frontend.auth.postRegister') }}" method="post">
             {{ csrf_field() }}
 
             <div class="content">
@@ -24,10 +24,10 @@
                     </a>
                 </div>
                 <div class="field-container -name">
-                    <input type="text" name="name" id="name" placeholder="Name"/>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Name"/>
                 </div>
                 <div class="field-container -username">
-                    <input type="email" name="email" id="email" placeholder="Email"/>
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Email"/>
                 </div>
                 <div class="field-container -password">
                     <input type="password" name="password" placeholder="Password"/>

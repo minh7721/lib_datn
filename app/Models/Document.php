@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class Document extends Model
@@ -141,28 +142,26 @@ class Document extends Model
         return $this->hasMany(Download::class, 'document_id');
     }
 
-    public function setSourceUrlAttribute($value)
-    {
-        $size = $value->getSize(); // Get the file size in bytes
+//    public function setSourceUrlAttribute($value)
+//    {
+//            $size = $value->getSize(); // Get the file size in bytes
+//
+//            // You can convert the size to a human-readable format if desired
+//            $formattedSize = $this->formatSizeUnits($size);
+//
+//            $attribute_name = 'source_url';
+//            $disk = "public";
+//            $destination_path = 'pdftest';
+//
+//            $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+//            $this->attributes['disks'] = 'public';
+//            $this->attributes['path'] = $this->source_url;
+//            $this->attributes['source_url'] = $this->source_url;
+//            $this->original_size = $size;
+//            $this->original_format = $formattedSize;
+//    }
 
-        // You can convert the size to a human-readable format if desired
-        $formattedSize = $this->formatSizeUnits($size);
-
-        $attribute_name = 'source_url';
-        $disk = "public";
-        $destination_path = 'pdftest';
-
-        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
-        $this->attributes['disks'] = 'public';
-        $this->attributes['path'] = $this->source_url;
-        $this->attributes['source_url'] = $this->source_url;
-        $this->original_size = $size;
-        $this->original_format = $formattedSize;
-//        Storage::disk($disk)->move($this->attributes['source_url'], $destination_path . '/' . $new_filename);
-
-    }
-
-    private function formatSizeUnits($bytes)
+    public function formatSizeUnits($bytes)
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
 
