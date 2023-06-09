@@ -25,7 +25,7 @@
             font-family: 'Be Vietnam Pro', sans-serif;
             font-size: 16px;
             color: var(--color-default);
-        {{ \Illuminate\Support\Facades\Route::is('frontend_v4.document.detail') ? 'background-color: var(--color-main-background);' : 'background-color: white;'}}
+        {{ \Illuminate\Support\Facades\Route::is('document.detail') ? 'background-color: var(--color-main-background);' : 'background-color: white;'}}
 
 
         }

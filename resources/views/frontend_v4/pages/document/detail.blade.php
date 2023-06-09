@@ -642,11 +642,11 @@
                 <div class="hidden lg:block bg-white rounded-1.5lg p-5">
                     <p class="font-medium text-center	">Upload your study materials to download all documents.</p>
                     <div class="flex justify-center mt-4 w-full">
-                        <button type="button"
+                        <a href="{{ route('frontend_v4.users.getUpload') }}" type="button"
                                 class="w-full bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
                             <i class="fa fa-cloud-arrow-up"></i>
                             <span>Choose a doc</span>
-                        </button>
+                        </a>
                     </div>
                     <p class="font-light text-sm text-default-lighter mt-3 text-center">Your document will be enriched,
                         shared
