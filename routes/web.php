@@ -37,7 +37,7 @@ Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('fro
 Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
 
 Route::get('auth/register', [RegisterController::class, 'getRegister'])->name('frontend.auth.getRegister');
-Route::post('auth/login/post', [RegisterController::class, 'postRegister'])->name('frontend.auth.postLogin');
+Route::post('auth/register/post', [RegisterController::class, 'postRegister'])->name('frontend.auth.postRegister');
 
 // Login Facebook
 
