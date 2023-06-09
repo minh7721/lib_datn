@@ -52,7 +52,8 @@ class DocumentRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'This field can not empty'
+            'required' => 'This field can not empty',
+            'source_url.mimes' => 'Formats accepted: doc, docx, odt, pdf, ppt, pptx, txt'
         ];
     }
 }

@@ -19,8 +19,8 @@
                 {{ csrf_field() }}
                 <div class="flex flex-col md:flex-row w-full gap-4 md:gap-12">
                     <div class="flex flex-col w-full">
-                            <div class="bg-primary-100 flex rounded border border-dashed border-[#00A888] mb-14">
-                                <div class="max-w-max mx-auto mt-20 mb-10">
+                            <div class="@error('source_url') border-red-300 @enderror bg-primary-100 flex rounded border border-dashed border-[#00A888] mb-14">
+                                <div class="max-w-max mx-auto mt-20 mb-10 flex flex-col">
 
                                     <label for="source_url" class="flex flex-col items-center cursor-pointer">
                                         <i class="fa-solid fa-cloud-arrow-up text-primary text-3.25xl mb-5"></i>
@@ -28,7 +28,10 @@
                                     </label>
                                     <input id="source_url" name="source_url" type="file" class="hidden" >
 
-                                    <p class="font-light mb-5 text-center">Formats accepted: doc, docx, odt, pdf, ppt, pptx, rtf, xls, xlsx</p>
+                                    <p class="font-light mb-5 text-center">Formats accepted: doc, docx, odt, pdf, ppt, pptx, txt</p>
+                                    @error('source_url')
+                                    <span class="text-red-500 font-semibold mt-3 text-lg text-center">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>

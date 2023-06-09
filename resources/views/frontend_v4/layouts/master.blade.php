@@ -10,7 +10,7 @@
     @stack('before_styles')
     {{--    {!! SEO::generate(true) !!} --}}
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <link href="{{ asset('assets_v4/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets_v4/css/themes/default.css') }}" rel="stylesheet">
     @stack('after_styles')
@@ -25,7 +25,9 @@
             font-family: 'Be Vietnam Pro', sans-serif;
             font-size: 16px;
             color: var(--color-default);
-            background-color: var(--color-main-background);
+        {{ \Illuminate\Support\Facades\Route::is('frontend_v4.document.detail') ? 'background-color: var(--color-main-background);' : 'background-color: white;'}}
+
+
         }
 
         [x-cloak] {
@@ -42,7 +44,8 @@
 @include('frontend_v4.inc.sidebar')
 
 
-<div :class="open_comment_responsive && 'bg-white'" class="flex-1 overflow-x-hidden lg:scrollbar scrollbar-w-3 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 scroll-smooth"
+<div :class="open_comment_responsive && 'bg-white'"
+     class="flex-1 overflow-x-hidden lg:scrollbar scrollbar-w-3 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 scroll-smooth"
      id="content">
     <main class="w-full" :class="open_comment_responsive && 'h-full'">
         @yield('content')
