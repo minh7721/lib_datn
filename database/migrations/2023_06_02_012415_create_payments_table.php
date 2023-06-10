@@ -18,7 +18,10 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->integer('status')->default(0);
             $table->integer('price')->default(0);
-            $table->string('transaction_id')->comment('ID transaction of momo, paypal')->nullable();
+            $table->string('source')->comment('Source : VNPay, Paypal,...');
+            $table->string('trading_code')->comment('Mã giao dịch');
+            $table->string('transaction_id')->comment('Số hóa đơn');
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }
