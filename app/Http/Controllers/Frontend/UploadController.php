@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\DocumentProcess\Builder;
-use App\DocumentProcess\Converter\DocumentConverter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DocumentRequest;
-use App\Libs\MakePath;
-use App\Libs\Nlp\Description\TextRankGenerator;
 use App\Models\Document;
+use App\Service\MakePDF;
+use App\Service\MakeText;
 use Illuminate\Support\Facades\Session;
 
 
@@ -43,20 +41,16 @@ class UploadController extends Controller
                     'is_approved' => 1,
                     'can_download' => true
                 ]);
-                $document = $this->makePdf($document);
+                $document = MakePDF::makePdf($document);
                 // Format size
                 $size = $file_upload->getSize();
 
                 $formattedSize = $document->formatSizeUnits($size);
 
                 // Get fulltext
-                $document_process = Builder::fromDocument($document)->get();
-                $full_text = $document_process->makeFulltext();
-
+                $full_text = MakeText::makeText($document);
                 // Generate description
-                $generator = TextRankGenerator::fromDSFullText($full_text);
-                $description = $generator->getDescription();
-                $description = mb_substr($description, 0, 186) . "[r]";
+                $description = MakeText::makeDescription($full_text);
 
                 $document->update([
                     'original_size' => $size,
@@ -76,30 +70,5 @@ class UploadController extends Controller
             Session::flash('error', 'Upload failed!!!');
             return redirect()->back();
         }
-    }
-
-    protected function makePdf(Document $document)
-    {
-        $path = $document->source_url ?? $document->path;
-        $original_file = \Storage::disk('public')->get($path);
-        $convertor = new DocumentConverter();
-        if ($path) {
-            $pdf_content = $convertor->convert(
-                content: $original_file,
-                input_format: $document->type,
-                output_format: 'pdf',
-            );
-        } else {
-            $pdf_content = $original_file;
-        }
-        $path = 'pdf_maked/' . MakePath::make($document->id, '') . ".pdf.pdf";
-        $saved = \Storage::disk('public')->put($path, $pdf_content);
-
-        if ($saved) {
-            $document->update([
-                'path' => $path
-            ]);
-        }
-        return $document;
     }
 }

@@ -5,14 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\DocumentRequest;
 use App\Libs\CountriesHelper\Countries;
 use App\Libs\CountriesHelper\Languages;
-use App\Libs\MakePath;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\Enums\TypeDocument;
+use App\Service\MakeText;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\BulkDeleteOperation;
-use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Http\Request;
 
 /**
  * Class DocumentCrudController
@@ -22,7 +20,9 @@ use Illuminate\Http\Request;
 class DocumentCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -216,4 +216,43 @@ class DocumentCrudController extends CrudController
     }
 
 
+    /**
+     * @throws \Exception
+     */
+    public function store()
+    {
+        // do something before validation, before save, before everything
+        $response = $this->traitStore();
+        $entryId = $this->data['entry']['id'];
+
+        $document = Document::where('id', $entryId)->first();
+        $file_upload = $response->getRequest()->file('source_url');
+        $disk = "public";
+        $destination_path = 'public/pdftest';
+        $file_path = $file_upload->store($destination_path);
+        $last_path = str_replace("public/", "", $file_path);
+        // Format size
+        $size = $file_upload->getSize();
+
+        $formattedSize = $document->formatSizeUnits($size);
+
+        $document->source_url = $last_path;
+        $document->path = $last_path;
+        $document->disks = $disk;
+        $document->original_size = $size;
+        $document->original_format = $formattedSize;
+        $document->save();
+
+        // Get fulltext
+        $full_text = MakeText::makeText($document);
+        // Generate description
+        $description = MakeText::makeDescription($full_text);
+
+        $document->full_text = $full_text;
+        $document->description = $description;
+        $document->save();
+
+        return $response;
+
+    }
 }
