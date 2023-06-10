@@ -207,6 +207,7 @@ class DocumentCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+        $this->crud->removeField('source_url');
     }
 
 

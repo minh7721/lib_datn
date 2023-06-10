@@ -27,7 +27,7 @@ class DocumentRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:255',
-            'source_url' => 'required|mimes:pdf,doc,docx,ppt,pptx,txt',
+            'source_url' => 'mimes:pdf,doc,docx,ppt,pptx,txt',
 //            'page_number' => 'required|min:1',
         ];
     }

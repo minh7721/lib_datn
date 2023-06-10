@@ -29,7 +29,6 @@ class UploadController extends Controller
                 $document = Document::create([
                     'title' => $request->title,
                     'category_id' => $request->category,
-                    'page_number' => $request->page_number,
                     'price' => $request->price,
                     'type' => $request->type_document,
                     'disks' => $disk,
