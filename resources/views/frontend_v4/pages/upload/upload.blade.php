@@ -65,18 +65,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col w-full md:w-1/2">
-                        <p class="font-medium text-base text-default mb-2 ml-2">Page number</p>
-                        <input type="number" name="page_number" placeholder="Page number" value="1" class="@error('page_number') border-red-300 @enderror border border-default-lighter rounded-1.5lg px-4 py-2 hover:border-primary outline-primary">
-                        @error('page_number')
-                        <span class="text-red-500 mt-3 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
+{{--                    <div class="flex flex-col w-full md:w-1/2">--}}
+{{--                        <p class="font-medium text-base text-default mb-2 ml-2">Page number</p>--}}
+{{--                        <input type="number" name="page_number" placeholder="Page number" value="1" class="@error('page_number') border-red-300 @enderror border border-default-lighter rounded-1.5lg px-4 py-2 hover:border-primary outline-primary">--}}
+{{--                        @error('page_number')--}}
+{{--                        <span class="text-red-500 mt-3 text-sm">{{ $message }}</span>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
                 </div>
                 <div class="flex flex-col md:flex-row w-full gap-4 md:gap-12">
                     <div class="flex flex-col w-full md:w-1/2">
                         <p class="font-medium text-base text-default mb-2 ml-2">Price</p>
-                        <input type="number" name="price" placeholder="Price" value="1" class="border border-default-lighter rounded-1.5lg px-4 py-2 hover:border-primary outline-primary">
+                        <input type="number" name="price" placeholder="Price" value="0" class="border border-default-lighter rounded-1.5lg px-4 py-2 hover:border-primary outline-primary">
                     </div>
                     <div class="flex flex-col w-full md:w-1/2">
                         <p class="font-medium text-base text-default mb-2 ml-2">Type document</p>

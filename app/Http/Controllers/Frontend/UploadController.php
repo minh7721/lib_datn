@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
+use App\Service\CountPages;
 use App\Service\MakePDF;
 use App\Service\MakeText;
 use Illuminate\Support\Facades\Session;
@@ -47,17 +48,18 @@ class UploadController extends Controller
 
                 $formattedSize = $document->formatSizeUnits($size);
 
+                $total_page = CountPages::TotalPages($document);
+
                 // Get fulltext
                 $full_text = MakeText::makeText($document);
                 // Generate description
                 $description = MakeText::makeDescription($full_text);
-
-                $document->update([
-                    'original_size' => $size,
-                    'original_format' => $formattedSize,
-                    'full_text' => $full_text,
-                    'description' => $description,
-                ]);
+                $document->original_size = $size;
+                $document->original_format = $formattedSize;
+                $document->full_text = $full_text;
+                $document->description = $description;
+                $document->page_number = $total_page;
+                $document->save();
 
                 Session::flash('success', 'Upload success');
                 return redirect()->back();

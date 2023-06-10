@@ -8,6 +8,8 @@ use App\Libs\CountriesHelper\Languages;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\Enums\TypeDocument;
+use App\Service\CountPages;
+use App\Service\MakePDF;
 use App\Service\MakeText;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\BulkDeleteOperation;
@@ -158,14 +160,6 @@ class DocumentCrudController extends CrudController
 
 
         $this->crud->addField([
-            'name' => 'page_number',
-            'label' => "Page",
-            'type' => 'number',
-            'wrapper' => [
-                'class' => 'form-group col-md-6'
-            ]
-        ]);
-        $this->crud->addField([
             'name' => 'price',
             'label' => "Price",
             'type' => 'number',
@@ -233,7 +227,6 @@ class DocumentCrudController extends CrudController
         $last_path = str_replace("public/", "", $file_path);
         // Format size
         $size = $file_upload->getSize();
-
         $formattedSize = $document->formatSizeUnits($size);
 
         $document->source_url = $last_path;
@@ -243,11 +236,15 @@ class DocumentCrudController extends CrudController
         $document->original_format = $formattedSize;
         $document->save();
 
+        $document = MakePDF::makePdf($document);
+
+        $total_page = CountPages::TotalPages($document);
         // Get fulltext
         $full_text = MakeText::makeText($document);
         // Generate description
         $description = MakeText::makeDescription($full_text);
 
+        $document->page_number = $total_page;
         $document->full_text = $full_text;
         $document->description = $description;
         $document->save();
