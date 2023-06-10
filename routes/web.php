@@ -111,3 +111,8 @@ Route::prefix('/')
         Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
         Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
     });
+
+
+
+Route::get('/vnpay/payment', [DocumentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
+Route::get('/vnpay/payment/response', [DocumentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');

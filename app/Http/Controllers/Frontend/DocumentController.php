@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Service\VNPayService;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -29,5 +30,18 @@ class DocumentController extends Controller
     public function search(Request $request){
         $documents = Document::where('active', true)->limit(10)->get();
         return view('frontend_v4.pages.search.search', compact('documents'));
+    }
+
+
+    public function VNPayRedirectPayment(){
+        $vnpay_service = VNPayService::create();
+        return redirect($vnpay_service);
+//        $response = VNPayService::response();
+    }
+
+    public function VNPayGetResponse(){
+        dump($_GET);
+        $vnpay_service = VNPayService::response();
+        dd($vnpay_service);
     }
 }
