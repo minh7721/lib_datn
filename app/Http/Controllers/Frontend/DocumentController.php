@@ -10,7 +10,12 @@ use Illuminate\Http\Request;
 class DocumentController extends Controller
 {
     public function index(){
-        $documents = Document::with('categories')->where('active', true)->orderByDesc('created_at')->limit(9)->get();
+        $documents = Document::with('categories')
+            ->where('active', true)
+            ->where('is_public', true)
+            ->orderByDesc('created_at')
+            ->limit(9)
+            ->get();
         return view('frontend_v4.pages.home.index', compact('documents'));
     }
     public function view(Request $request, $slug){
