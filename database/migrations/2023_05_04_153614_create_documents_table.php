@@ -21,7 +21,7 @@ class CreateDocumentsTable extends Migration
             $table->string('slug')->index();
             $table->text('source_url')->nullable();
             $table->text('description')->nullable();
-            $table->integer('page_number')->nullable()->index();
+            $table->integer('page_number')->default(0)->index();
             $table->integer('price')->index()->default(0);
             $table->integer('original_size')->default(0)->comment('Kich thuoc goc');
             $table->string('original_format')->default(0)->comment('kick thuoc sau khi format');
