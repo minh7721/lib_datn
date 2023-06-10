@@ -109,68 +109,68 @@
                 <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-4 py-2 text-white w-3/12 md:w-2/12 lg:w-1/12">Save</button>
             </form>
 
-            <div class="flex flex-col mb-8 gap-6 border-t border-main-background">
-                <p class="font-semibold text-xl py-6 text-default">Email settings</p>
-                <div class="flex gap-4">
-                    <input type="checkbox" name="" id="email_setting">
-                    <label class="text-default font-light text-base" for="email_setting">I'm ok with receiving email about my uploads, recommendations, updates, promotions and more</label>
-                </div>
+{{--            <div class="flex flex-col mb-8 gap-6 border-t border-main-background">--}}
+{{--                <p class="font-semibold text-xl py-6 text-default">Email settings</p>--}}
+{{--                <div class="flex gap-4">--}}
+{{--                    <input type="checkbox" name="" id="email_setting">--}}
+{{--                    <label class="text-default font-light text-base" for="email_setting">I'm ok with receiving email about my uploads, recommendations, updates, promotions and more</label>--}}
+{{--                </div>--}}
 
-                <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-4 py-2 text-white w-3/12 md:w-2/12 lg:w-1/12">Save</button>
-            </div>
+{{--                <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-4 py-2 text-white w-3/12 md:w-2/12 lg:w-1/12">Save</button>--}}
+{{--            </div>--}}
 
-            <div class="flex flex-col mb-8 gap-6 border-t border-main-background">
-                <p class="font-semibold text-xl py-6 text-default">Social</p>
-                <div class="flex gap-4">
-                    <input type="checkbox" name="" id="social_setting" checked>
-                    <label class="text-default font-light text-base" for="social_setting">Use social profile picture</label>
-                </div>
+{{--            <div class="flex flex-col mb-8 gap-6 border-t border-main-background">--}}
+{{--                <p class="font-semibold text-xl py-6 text-default">Social</p>--}}
+{{--                <div class="flex gap-4">--}}
+{{--                    <input type="checkbox" name="" id="social_setting" checked>--}}
+{{--                    <label class="text-default font-light text-base" for="social_setting">Use social profile picture</label>--}}
+{{--                </div>--}}
 
-                <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-4 py-2 text-white w-3/12 md:w-2/12 lg:w-1/12">Save</button>
-            </div>
+{{--                <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-4 py-2 text-white w-3/12 md:w-2/12 lg:w-1/12">Save</button>--}}
+{{--            </div>--}}
 
-            <div x-data="{delete_account:false}">
-                <div @click="delete_account=!delete_account" class="flex flex-row py-6 items-center border-t border-main-background">
-                    <button type="submit" class="px-4 py-2 text-base font-light border border-default-lighter rounded-4.5xl hover:bg-main-background">
-                        <i class="fa-solid fa-trash-can mr-2"></i>
-                        Delete account
-                    </button>
-                </div>
-                <div
-                    x-data="{ modal_delete_account: true }" x-cloak x-show="delete_account"
-                    tabindex="-1" aria-hidden="true"
-                    class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
-                    aria-modal="true" role="dialog">
-                    <div @click.outside="delete_account=false; modal_delete_account=true"
-                         class="relative max-w-2xl max-h-full mx-auto mt-48">
-                        <!-- Modal content -->
-                        <div
-                            class="relative bg-white rounded-lg shadow px-10 py-4">
-                            <!-- Modal header -->
-                            <div class="flex items-start justify-between py-2 rounded-t">
-                                <h3 class="font-semibold text-2xl my-2">
-                                    Delete account
-                                </h3>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="space-y-6 ">
-                                <p class="font-light text-base">Are you absolutely sure you want to delete your account? All information will be lost, there is no way back!</p>
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="flex justify-end items-center p-6 space-x-2">
-                                <button @click="delete_account=false" data-modal-hide="modal_report" type="button"
-                                        class="text-primary hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
-                                    Cancel
-                                </button>
-                                <button @click="delete_account=false" data-modal-hide="modal_report" type="button"
-                                        class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--            <div x-data="{delete_account:false}">--}}
+{{--                <div @click="delete_account=!delete_account" class="flex flex-row py-6 items-center border-t border-main-background">--}}
+{{--                    <button type="submit" class="px-4 py-2 text-base font-light border border-default-lighter rounded-4.5xl hover:bg-main-background">--}}
+{{--                        <i class="fa-solid fa-trash-can mr-2"></i>--}}
+{{--                        Delete account--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <div--}}
+{{--                    x-data="{ modal_delete_account: true }" x-cloak x-show="delete_account"--}}
+{{--                    tabindex="-1" aria-hidden="true"--}}
+{{--                    class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"--}}
+{{--                    aria-modal="true" role="dialog">--}}
+{{--                    <div @click.outside="delete_account=false; modal_delete_account=true"--}}
+{{--                         class="relative max-w-2xl max-h-full mx-auto mt-48">--}}
+{{--                        <!-- Modal content -->--}}
+{{--                        <div--}}
+{{--                            class="relative bg-white rounded-lg shadow px-10 py-4">--}}
+{{--                            <!-- Modal header -->--}}
+{{--                            <div class="flex items-start justify-between py-2 rounded-t">--}}
+{{--                                <h3 class="font-semibold text-2xl my-2">--}}
+{{--                                    Delete account--}}
+{{--                                </h3>--}}
+{{--                            </div>--}}
+{{--                            <!-- Modal body -->--}}
+{{--                            <div class="space-y-6 ">--}}
+{{--                                <p class="font-light text-base">Are you absolutely sure you want to delete your account? All information will be lost, there is no way back!</p>--}}
+{{--                            </div>--}}
+{{--                            <!-- Modal footer -->--}}
+{{--                            <div class="flex justify-end items-center p-6 space-x-2">--}}
+{{--                                <button @click="delete_account=false" data-modal-hide="modal_report" type="button"--}}
+{{--                                        class="text-primary hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">--}}
+{{--                                    Cancel--}}
+{{--                                </button>--}}
+{{--                                <button @click="delete_account=false" data-modal-hide="modal_report" type="button"--}}
+{{--                                        class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">--}}
+{{--                                    Delete--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         </div>
     </div>
