@@ -351,17 +351,18 @@
                 <div class="hidden md:flex lg:basis-1/3 md:justify-between  lg:justify-end gap-2 mt-3 md:mt-0">
                     <div class="flex gap-2">
                         <a
-                            href="{{ route('frontend_v4.document.like', ['slug' => $document->slug, 'action' => 'like']) }}"
+                            href="{{ route('frontend_v4.document.like', ['slug' => $document->slug]) }}"
                             class="bg-primary-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-up"></i>
                             <p>{{ $document->helpful_count }}</p>
                             <p class="md:block hidden">Helpful</p>
                         </a>
-                        <button
+                        <a
+                            href="{{ route('frontend_v4.document.dislike', ['slug' => $document->slug]) }}"
                             class="bg-primary-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-down"></i>
                             <p class="md:block hidden">Unhelpful</p>
-                        </button>
+                        </a>
                     </div>
                     <div class="flex gap-2">
                         <div x-data="{ open: false, hasCopy:false }" class="relative">

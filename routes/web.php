@@ -107,7 +107,7 @@ Route::prefix('/')
         Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
         Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
 
-        Route::get('/document/{slug}/like/{action}', [DocumentController::class, 'like'])->name('frontend_v4.document.like');
+        Route::get('/document/{slug}/like', [DocumentController::class, 'like'])->name('frontend_v4.document.like');
         Route::get('/document/{slug}/dislike', [DocumentController::class, 'dislike'])->name('frontend_v4.document.dislike');
 
     });

@@ -48,26 +48,30 @@ class DocumentController extends Controller
         return view('frontend_v4.pages.search.search', compact('documents'));
     }
 
-    public function like(Request $request, $slug, $action){
+    public function like(Request $request, $slug){
         $document = Document::where('slug', $slug)
             ->first();
         $currentTime = Carbon::now();
         $lastHelpfulTime = Carbon::parse($document->updated_at);
         $timeDiff = $currentTime->diffInMinutes($lastHelpfulTime);
         if ($timeDiff >= 5){
-            if ($action == 'like'){
                 $document->helpful_count++;
-            }
-            if ($action == 'unlike'){
-                $document->helpful_count--;
-            }
             $document->save();
         }
         return redirect()->back();
     }
 
     public function dislike(Request $request, $slug){
-
+        $document = Document::where('slug', $slug)
+            ->first();
+        $currentTime = Carbon::now();
+        $lastHelpfulTime = Carbon::parse($document->updated_at);
+        $timeDiff = $currentTime->diffInMinutes($lastHelpfulTime);
+        if ($timeDiff >= 5){
+            $document->unhelpful_count++;
+            $document->save();
+        }
+        return redirect()->back();
     }
 
     public function VNPayRedirectPayment(){
