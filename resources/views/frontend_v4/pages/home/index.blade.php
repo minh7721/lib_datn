@@ -11,7 +11,7 @@
 @section('content')
     <div class="bg-white">
         {{-- Title --}}
-        <div class="container mx-auto flex px-3 mb-2 lg:px-5 items-center justify-center flex-col fade-in">
+        <div class="container mx-auto flex mb-2 items-center justify-center flex-col fade-in">
             <div class="my-10 w-1/2 lg:w-1/3">
                 <svg viewBox="0 0 931 757" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -431,9 +431,17 @@
                                     <path
                                         d="M359.903882,253.95349 C360.287274,254.354677 360.369624,254.589876 360.368671,254.555882 C360.363546,255.068084 359.936417,255.862495 359.61309,256.287262 L358.280814,258.188457 C357.905526,258.72424 357.939134,259.550041 358.356015,260.033455 C358.550273,260.258242 358.794346,260.369257 359.036394,260.369257 C359.31503,260.369257 359.591638,260.222871 359.793048,259.936681 L361.087664,258.085098 C361.221857,257.91268 362.40266,256.344684 362.40266,254.54792 C362.40266,253.641116 362.00604,252.783925 361.190394,251.929337 C360.755161,251.473331 360.114467,251.556938 359.759559,252.114923 C359.404531,252.674288 359.469601,253.497485 359.903882,253.95349 Z"
                                         id="Shape"></path>
-                                    <path
-                                        d="M346.808594,282.274928 C345.784122,280.816056 344.563671,278.528587 344.563671,275.911122 C344.563671,274.348088 345.002526,272.723555 345.868758,271.081368 C346.168244,270.513914 346.065509,269.731808 345.64089,269.332516 C345.215277,268.933225 344.627673,269.068872 344.328299,269.636325 C343.235079,271.710319 342.68047,273.820799 342.68047,275.911122 C342.68047,279.348504 344.177673,282.202249 345.433766,283.991265 C345.619262,284.25491 345.870635,284.387908 346.121125,284.387908 C346.351862,284.387908 346.583484,284.276242 346.765227,284.048937 C347.144714,283.575642 347.164467,282.780883 346.808594,282.274928 Z"
-                                        id="Shape"></path>
+                                    d="M346.808594,282.274928 C345.784122,280.816056 344.563671,278.528587
+                                    344.563671,275.911122 C344.563671,274.348088 345.002526,272.723555
+                                    345.868758,271.081368 C346.168244,270.513914 346.065509,269.731808
+                                    345.64089,269.332516 C345.215277,268.933225 344.627673,269.068872
+                                    344.328299,269.636325 C343.235079,271.710319 342.68047,273.820799
+                                    342.68047,275.911122 C342.68047,279.348504 344.177673,282.202249
+                                    345.433766,283.991265 C345.619262,284.25491 345.870635,284.387908
+                                    346.121125,284.387908 C346.351862,284.387908 346.583484,284.276242
+                                    346.765227,284.048937 C347.144714,283.575642 347.164467,282.780883
+                                    346.808594,282.274928 Z"
+                                    id="Shape"></path>
                                     <path
                                         d="M335.875304,259.226025 C332.121868,260.481815 329.963734,260.248657 328.454211,258.422591 L327.227956,256.454553 L332.587065,256.008432 C333.282344,255.951404 333.799395,255.338063 333.742505,254.641112 C333.684281,253.944159 333.074931,253.423191 332.377134,253.482891 L325.719618,254.03668 L323.962532,251.218132 L332.707217,249.636512 C333.393754,249.512359 333.850063,248.853277 333.726208,248.163898 C333.602353,247.475708 332.949891,247.015777 332.25713,247.142454 L322.519974,248.903918 L322.205151,248.40077 C321.387202,246.945977 321.103936,246.384465 321.103936,245.221196 C321.103936,244.759927 321.772694,244.207326 322.669015,243.919664 L350.407555,238.864572 C351.094092,238.739081 351.550401,238.078811 351.425213,237.390771 C351.300024,236.702729 350.643858,236.247697 349.95495,236.370663 L322.142038,241.439863 C322.095222,241.448774 322.049739,241.460209 322.002923,241.472833 C319.920643,242.103847 318.575569,243.573936 318.575569,245.221344 C318.575569,247.022163 319.091435,248.025785 320.031905,249.694876 L326.353116,259.833129 C326.379636,259.876197 326.408673,259.918076 326.440378,259.956094 C328.013014,261.91151 329.962549,262.552772 331.941122,262.552772 C333.563092,262.552772 335.20536,262.121947 336.674437,261.631422 C337.336826,261.409698 337.695946,260.692401 337.474755,260.02827 C337.253268,259.365475 336.540359,259.002964 335.875304,259.226025 Z"
                                         id="Shape"></path>
@@ -459,33 +467,33 @@
                 </svg>
             </div>
             <div class="text-center lg:w-2/3 w-full">
-                <h1 class="title-font lg:text-6xl sm:text-5xl text-4xl leading-tight mb-4 font-semibold text-secondary">
+                <h1 class="title-font lg:text-6xl sm:text-5xl text-3xl leading-tight mb-4 font-semibold text-secondary">
                     Knowledge is power</h1>
-                <p class="mb-8 text-xl leading-relaxed text-[#503500]">
+                <p class="mb-8 text-lg leading-relaxed text-[#503500] text-sm md:text-base lg:text-lg font-medium">
                     Find your answers quickly, expand your research through our recommendation system and give you
                     opportunities to gain in-depth insights into trending research topics
                 </p>
             </div>
 
             <div x-data="searchs"
-                 class="w-[70%] h-12 flex items-center container_search mx-4 mb-6 lg:max-w-full lg:ml-10 relative border border-slate-300 rounded-4xl hover:border-primary grow group">
+                 class="w-10/12 md:w-9/12 h-12 flex items-center container_search mx-4 mb-6 lg:max-w-full lg:ml-10 relative border border-slate-300 rounded-4xl hover:border-primary grow group">
                 <div class="grow flex items-center justify-between md:mr-3">
                     <input x-model="search" id="search_global"
-                           class="search rounded-4xl md:pl-6 w-full  px-4 outline-none placeholder:text-base placeholder:font-thin placeholder:text-search  peer "
+                           class="text-xs md:text-base search rounded-4xl md:pl-6 w-full px-4 outline-none placeholder:text-base placeholder:font-thin placeholder:text-search  peer "
                            type="text" placeholder="Search for documents, universities and other resources">
-                    <ul id="relative_search_result"
-                        class="hidden absolute border shadow border-slate-300 rounded bg-white  w-full peer-focus:block top-[calc(100%+10px)]  max-h-[50vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 z-50">
-                        <li class="p-2.5 text-primary" x-show="!noResults"># Relative search result</li>
-                        <template x-for="item in filterSearchs">
-                            <li class="hover:bg-slate-100 px-2.5">
-                                <a href=""
-                                   class="text-base text-text-default-darker inline-block p-2 font-medium"
-                                   x-text="item.name">
-                                </a>
-                            </li>
-                        </template>
-                        <li class="text-red-400 p-2.5" x-show="noResults"> No result!</li>
-                    </ul>
+                    {{--                        <ul id="relative_search_result"--}}
+                    {{--                            class="hidden absolute border shadow border-slate-300 rounded bg-white  w-full peer-focus:block top-[calc(100%+10px)]  max-h-[50vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 z-50">--}}
+                    {{--                            <li class="p-2.5 text-primary" x-show="!noResults"># Relative search result</li>--}}
+                    {{--                            <template x-for="item in filterSearchs">--}}
+                    {{--                                <li class="hover:bg-slate-100 px-2.5">--}}
+                    {{--                                    <a href=""--}}
+                    {{--                                       class="text-base text-text-default-darker inline-block p-2 font-medium"--}}
+                    {{--                                       x-text="item.name">--}}
+                    {{--                                    </a>--}}
+                    {{--                                </li>--}}
+                    {{--                            </template>--}}
+                    {{--                            <li class="text-red-400 p-2.5" x-show="noResults"> No result!</li>--}}
+                    {{--                        </ul>--}}
                 </div>
                 <button class="mr-4 text-gray-500 group-hover:text-primary">
                     <i class=" fa-solid fa-magnifying-glass"></i>
@@ -493,31 +501,31 @@
             </div>
 
             <div class="text-center mb-6 lg:w-2/3 w-full">
-                <p class="font-normal text-default-lighter text-xl">OR EXPLORE</p>
+                <p class="font-normal text-default-lighter text-base md:text-xl">OR EXPLORE</p>
             </div>
-            <div class="flex flex-col md:flex-row justify-center items-center mb-10">
-                <div
-                    class="w-52 flex md:justify-center mb-3 md:mb-0 text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 md:mr-7 cursor-pointer hover:text-white hover:bg-secondary">
-                    <i class="fa-solid fa-file-lines mt-2 mr-3"></i>
-                    <p class="text-[#503500] font-semibold text-2xl">Document</p>
-                </div>
+            <div class="flex flex-row justify-center items-center mb-6 md:mb-10 gap-2">
+                <a href="#newly_uploaded"
+                   class="flex justify-center items-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 md:mr-7 hover:text-white hover:bg-secondary">
+                    <i class="fa-solid fa-file-lines mr-2 md:mr-3"></i>
+                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Document</p>
+                </a>
 
-                <div
-                    class="w-52 flex md:justify-center mb-3 md:mb-0 text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 md:mr-7 cursor-pointer hover:text-white hover:bg-secondary">
-                    <i class="fa-solid fa-book mt-2 mr-3"></i>
-                    <p class="text-[#503500] font-semibold text-2xl">Subjects</p>
-                </div>
+                <a href="#popular_subjects"
+                   class="flex justify-center items-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 md:mr-7 hover:text-white hover:bg-secondary">
+                    <i class="fa-solid fa-book mr-2 md:mr-3"></i>
+                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Subjects</p>
+                </a>
 
-                <div
-                    class="w-52 flex md:justify-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 cursor-pointer hover:text-white hover:bg-secondary">
-                    <i class="fa-solid fa-graduation-cap mt-2 mr-3"></i>
-                    <p class="text-[#503500] font-semibold text-2xl">Schools</p>
-                </div>
+                <a href="#top_schools"
+                   class="flex justify-center items-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 hover:text-white hover:bg-secondary">
+                    <i class="fa-solid fa-graduation-cap mr-2 md:mr-3"></i>
+                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Schools</p>
+                </a>
             </div>
 
-            <div class="text-center">
+            <a href="#newly_uploaded" class="text-center">
                 <i class="fa-solid fa-chevron-down text-[#99999A] text-2xl cursor-pointer"></i>
-            </div>
+            </a>
         </div>
 
         {{-- Newly Uploaded Documents --}}
@@ -530,14 +538,13 @@
                         <h2 class="text-default-lighter font-semibold text-2xl">More than 5 million documents even those
                             of your professors</h2>
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col" id="newly_uploaded">
                         <p class="text-default text-center text-3xl font-medium mb-4">Newly Uploaded Documents</p>
 
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-10 gap-x-12 lg:gap-x-20">
                             @foreach($documents as $document)
                                 @include('frontend_v4.components.list_document')
                             @endforeach
-
                         </div>
                     </div>
                 </div>
@@ -546,7 +553,7 @@
         </div>
 
         {{-- Popular Subjects --}}
-        <div class="container mx-auto px-3 mb-10">
+        <div class="container mx-auto px-3 mb-10" id="popular_subjects">
             <div class="flex flex-col justify-center items-center">
                 <p class="mb-4 pt-12 lg:w-1/2 md:w-2/3 w-full border-t border-[#99999A] text-center font-medium text-3xl">
                     Popular Subjects</p>
@@ -556,13 +563,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-10">
                 <div
                     class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/money_bag_dollar 1.png') }}" alt="">
+                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/money_bag_dollar 1.png') }}"
+                         alt="">
                     <p class="text-default text-center font-semibold text-2xl">Business Economics</p>
                 </div>
 
                 <div
                     class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/chemistry_test_tube.png') }}" alt="">
+                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/chemistry_test_tube.png') }}"
+                         alt="">
                     <p class="text-default text-center font-semibold text-2xl">Sociology of Sciences</p>
                 </div>
 
@@ -574,7 +583,8 @@
 
                 <div
                     class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/medical_history (1) 1.png') }}" alt="">
+                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/medical_history (1) 1.png') }}"
+                         alt="">
                     <p class="text-default text-center font-semibold text-2xl">Health psychology</p>
                 </div>
 
@@ -586,7 +596,8 @@
 
                 <div
                     class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/acceleration_graphic (1) 1.png') }}"
+                    <img class="md:w-28 mb-3"
+                         src="{{ asset('assets_v4/images/subjects/acceleration_graphic (1) 1.png') }}"
                          alt="">
                     <p class="text-default text-center font-semibold text-2xl">Development Economics</p>
                 </div>
@@ -599,7 +610,8 @@
 
                 <div
                     class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/internet_connection 1.png') }}" alt="">
+                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/internet_connection 1.png') }}"
+                         alt="">
                     <p class="text-default text-center font-semibold text-2xl">Information Technology</p>
                 </div>
 
@@ -613,56 +625,20 @@
 
 
         {{-- Explore Top Schools --}}
-        <div class="container mx-auto px-3 mb-10">
+        <div class="container mx-auto px-3 mb-10" id="top_schools">
             <div class="flex flex-col justify-center items-center">
                 <p class="mb-4 pt-12 lg:w-1/2 md:w-2/3 w-full border-t border-[#99999A] text-center font-medium text-3xl">
                     Top document</p>
-                <h2 class="mb-4 text-default-lighter font-semibold text-2xl">Master your classes with homework help, exam study guides, past papers, and more</h2>
+                <h2 class="mb-4 text-default-lighter font-semibold text-2xl">Master your classes with homework help,
+                    exam study guides, past papers, and more</h2>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-2 lg:gap-x-5">
-                @for ($i = 1; $i <= 10; $i++)
+                    @foreach($top_documents as $document)
                     <div class="w-full mb-6 md:mb-10 ">
-                        <a href="" class="group">
-                            <div
-                                class="border border-slate-300 border-solid rounded-1.5lg px-1 lg:px-2 pt-1 pb-2 mb-1 md:mb-2.5 group-hover:shadow-card ">
-                                <img src="https://picsum.photos/200" alt=""
-                                     class="max-w-full w-full object-cover max-h-[150px] ">
-                                <div class="px-2 lg:px-3.5 lg:pt-5">
-                                    <div class="mb-5">
-                                        <h2 class="text-primary font-semibold text-sm md:text-base line-clamp-2">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
-                                            asperiores assumenda consectetur consequatur doloribus eaque
-                                            eligendi
-                                        </h2>
-                                        <p class="text-default-lighter font-thin text-sm py-2 line-clamp-1"> Quan he
-                                            kinh te</p>
-                                    </div>
-                                    <div
-                                        class="flex justify-between text-default-lighter font-light text-xs lg:text-base ">
-                                        <div class="inline-flex items-center gap-1 md:gap-2">
-                                            <i class="fa-solid fa-file"></i>
-                                            <span>12</span>
-                                        </div>
-                                        <div class="inline-flex items-center gap-1 md:gap-2">
-                                            <i class="fa-solid fa-cloud-arrow-down"></i>
-                                            <span>20</span>
-                                        </div>
-                                        <div class="inline-flex items-center gap-1 md:gap-2">
-                                            <i class="fa-solid fa-eye"></i>
-                                            <span>70</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="text-default-lighter flex justify-center gap-1 items-center border border-solid border-slate-300 w-full rounded-4xl py-2 text-xs lg:text-base group-hover:shadow-card">
-                                <i class="fa-solid fa-thumbs-up text-secondary"></i>
-                                <span class="text-text-default font-light lg:font-medium">100%</span>
-                            </div>
-                        </a>
+                            @include('frontend_v4.components.document-card-item')
                     </div>
-                @endfor
+                    @endforeach
             </div>
         </div>
 

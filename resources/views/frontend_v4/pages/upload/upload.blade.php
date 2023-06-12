@@ -65,33 +65,9 @@
                             </div>
                         </div>
                     </div>
-{{--                    <div class="flex flex-col w-full md:w-1/2">--}}
-{{--                        <p class="font-medium text-base text-default mb-2 ml-2">Page number</p>--}}
-{{--                        <input type="number" name="page_number" placeholder="Page number" value="1" class="@error('page_number') border-red-300 @enderror border border-default-lighter rounded-1.5lg px-4 py-2 hover:border-primary outline-primary">--}}
-{{--                        @error('page_number')--}}
-{{--                        <span class="text-red-500 mt-3 text-sm">{{ $message }}</span>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
-                </div>
-                <div class="flex flex-col md:flex-row w-full gap-4 md:gap-12">
                     <div class="flex flex-col w-full md:w-1/2">
                         <p class="font-medium text-base text-default mb-2 ml-2">Price</p>
                         <input type="number" name="price" placeholder="Price" value="0" class="border border-default-lighter rounded-1.5lg px-4 py-2 hover:border-primary outline-primary">
-                    </div>
-                    <div class="flex flex-col w-full md:w-1/2">
-                        <p class="font-medium text-base text-default mb-2 ml-2">Type document</p>
-                        <div class="relative">
-                            <select name="type_document" class="appearance-none w-full border border-default-lighter rounded-1.5lg px-4 py-2 bg-white hover:border-primary outline-primary">
-                                @foreach(\App\Models\Enums\TypeDocument::toArray() as $key => $type)
-                                    <option value="{{ $type }}">{{ $key }}</option>
-                                @endforeach
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M10 12l-6-6h12l-6 6z" />
-                                </svg>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row w-full gap-4 md:gap-12">
