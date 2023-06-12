@@ -14,6 +14,8 @@ class TypeDocument extends MyEnum
     const ODT = 'odt';
     const PDF = 'pdf';
 
+//    const XLS = 'xls';
+//    const XLSX = 'xlsx';
     const OTHER = 'other';
 
     protected static $ICON = [
@@ -24,6 +26,8 @@ class TypeDocument extends MyEnum
         self::PPT => "<span class='badge badge-info'>PPT</span>",
         self::PPTX => "<span class='badge badge-info'>PPTX</span>",
         self::PPTM => "<span class='badge badge-info'>PPTM</span>",
+//        self::XLS => "<span class='badge badge-info'>XLS</span>",
+//        self::XLSX => "<span class='badge badge-info'>XLSX</span>",
         self::ODT => "<span class='badge badge-info'>ODT</span>",
         self::OTHER => "<span class='badge badge-info'>OTHER</span>",
     ];

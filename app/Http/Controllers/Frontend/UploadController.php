@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DocumentRequest;
+use App\Libs\MimeHelper;
 use App\Models\Document;
 use App\Service\CountPages;
 use App\Service\MakePDF;
@@ -22,6 +23,8 @@ class UploadController extends Controller
     {
         try {
             if ($file_upload = $request->file('source_url')) {
+                $mimeType = $file_upload->getMimeType();
+                $type = MimeHelper::getCode($mimeType);
                 $disk = "public";
                 $destination_path = 'public/pdftest';
                 $file_path = $file_upload->store($destination_path);
@@ -30,7 +33,7 @@ class UploadController extends Controller
                     'title' => $request->title,
                     'category_id' => $request->category,
                     'price' => $request->price,
-                    'type' => $request->type_document,
+                    'type' => $type,
                     'disks' => $disk,
                     'source_url' => $last_path,
                     'path' => $last_path,
@@ -59,7 +62,6 @@ class UploadController extends Controller
                 $document->description = $description;
                 $document->page_number = $total_page;
                 $document->save();
-
                 Session::flash('success', 'Upload success');
                 return redirect()->back();
             } else {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\DocumentRequest;
 use App\Libs\CountriesHelper\Countries;
 use App\Libs\CountriesHelper\Languages;
+use App\Libs\MimeHelper;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\Enums\TypeDocument;
@@ -167,15 +168,6 @@ class DocumentCrudController extends CrudController
                 'class' => 'form-group col-md-6'
             ]
         ]);
-        $this->crud->addField([
-            'name' => 'type',
-            'label' => "Type",
-            'type' => 'select_from_array',
-            'options' => TypeDocument::toOptions(),
-            'wrapper' => [
-                'class' => 'form-group col-md-6'
-            ]
-        ]);
 
         $this->crud->addField([
             'name' => 'language',
@@ -222,6 +214,8 @@ class DocumentCrudController extends CrudController
 
         $document = Document::where('id', $entryId)->first();
         $file_upload = $response->getRequest()->file('source_url');
+        $mimeType = $file_upload->getMimeType();
+        $type = MimeHelper::getCode($mimeType);
         $disk = "public";
         $destination_path = 'public/pdftest';
         $file_path = $file_upload->store($destination_path);
@@ -230,6 +224,7 @@ class DocumentCrudController extends CrudController
         $size = $file_upload->getSize();
         $formattedSize = $document->formatSizeUnits($size);
 
+        $document->type = $type;
         $document->source_url = $last_path;
         $document->path = $last_path;
         $document->disks = $disk;

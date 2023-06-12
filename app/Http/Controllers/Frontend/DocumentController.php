@@ -16,19 +16,29 @@ class DocumentController extends Controller
             ->orderByDesc('created_at')
             ->limit(9)
             ->get();
-        return view('frontend_v4.pages.home.index', compact('documents'));
+
+        $top_documents = Document::with('categories')
+            ->where('active', true)
+            ->where('is_public', true)
+            ->orderByDesc('created_at')
+            ->limit(20)
+            ->get();
+
+        return view('frontend_v4.pages.home.index', compact('documents', 'top_documents'));
     }
+
     public function view(Request $request, $slug){
         $document = Document::where('slug', $slug)
             ->where('active', true)
             ->where('is_public', true)
             ->first();
-
         if (!$document){
             $document = Document::where('id', 1)
                 ->where('active', true)
                 ->first();
         }
+        $document->viewed_count++;
+        $document->save();
         return view('frontend_v4.pages.document.detail', compact('document'));
     }
 
