@@ -69,7 +69,7 @@ namespace App\Models{
  * @property string $slug
  * @property string|null $source_url
  * @property string|null $description
- * @property int|null $page_number
+ * @property int $page_number
  * @property int $price
  * @property int $original_size Kich thuoc goc
  * @property string $original_format kick thuoc sau khi format
@@ -178,7 +178,10 @@ namespace App\Models{
  * @property int $user_id
  * @property int $status
  * @property int $price
- * @property string|null $transaction_id ID transaction of momo, paypal
+ * @property string $source Source : VNPay, Paypal,...
+ * @property string $trading_code Mã giao dịch
+ * @property string $transaction_id Số hóa đơn
+ * @property string|null $message
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
@@ -190,8 +193,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Payment query()
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereSource($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereTradingCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUserId($value)
@@ -203,26 +209,12 @@ namespace App\Models{
 /**
  * App\Models\Rating
  *
- * @property int $id
- * @property int $user_id
- * @property int $document_id
- * @property int $rate 1 to 5 star
- * @property int|null $content
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Document|null $document
  * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Rating idRange($id)
  * @method static \Illuminate\Database\Eloquent\Builder|Rating newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Rating newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Rating query()
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereDocumentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rating whereUserId($value)
  */
 	class Rating extends \Eloquent {}
 }
@@ -286,7 +278,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property int $active_status 0: not active, 1: active, 2: ban
- * @property string|null $avatar
+ * @property string $avatar
  * @property string|null $avatar_disk
  * @property string|null $gender 0: none, 1: male, 2: female, 3: other
  * @property string|null $birthday
