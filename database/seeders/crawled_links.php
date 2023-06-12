@@ -25,7 +25,7 @@ return [
         'keywords' => 'Pasteurella multocida, neumonía, infección respiratoria, Education'
     ],
     [
-        'title' => '被説明変数のとりうる値に制約のあるモデル',
+        'title' => 'Toán lớp 5 thi cuối kỳ',
         'source_url' => 'https://web.ung.edu/media/Chemistry2/Chemistry-LR.pdf',
         'url' => base_path('files_for_faker/12.pdf'),
         'keywords' => 'モデル,選択'
@@ -36,12 +36,12 @@ return [
         'url' => base_path('files_for_faker/5.pdf'),
         'keywords' => 'CV, Jobs, Career'
     ],
-//    [
-//        'title' => 'Ỳ THI CHỌN HỌC SINH GIỎI CẤP TỈNH LỚP 12 THPT NĂM HỌC 2012-2013',
-//        'source_url' => 'https://web.ung.edu/media/Chemistry2/Chemistry-LR.pdf',
-//        'url' => base_path('files_for_faker/6.pdf'),
-//        'keywords' => 'Test, THPT, Thi'
-//    ],
+    [
+        'title' => 'Ỳ THI CHỌN HỌC SINH GIỎI CẤP TỈNH LỚP 12 THPT NĂM HỌC 2012-2013',
+        'source_url' => 'https://web.ung.edu/media/Chemistry2/Chemistry-LR.pdf',
+        'url' => base_path('files_for_faker/6.pdf'),
+        'keywords' => 'Test, THPT, Thi'
+    ],
     [
         'title' => 'The Role of Net1 Phosphorylation in Regulating CDC14 Release During Mitotic Exit',
         'source_url' => 'https://kinhnghiemdayhoc.net/wp-content/uploads/2019/08/Giao-an-Hoat-dong-trai-nghiem-sang-tao-Lop-5.doc',
@@ -49,13 +49,13 @@ return [
         'keywords' => 'Cooperative Phase Transitions, Dimyristoyl, Differential Scanning Calorimetry, DSC',
         'topics' => 9,
     ],
-//    [
-//        'title' => 'Micromechanics-inspired three-dimensional constitutive model for the thermomechanical response of shape-memory alloys',
-//        'source_url' => 'https://thesis.library.caltech.edu/1725/1/Thesis_AmirSadjadpour.pdf',
-//        'url' => 'https://thesis.library.caltech.edu/1725/1/Thesis_AmirSadjadpour.pdf',
-//        'keywords' => 'Constitutive Modeling, Martensitic Phase Transformation, NiTi, Pure Iron, Shape Memory Alloys, SMA',
-//        'topics' => 9,
-//    ],
+    [
+        'title' => 'Micromechanics-inspired three-dimensional constitutive model for the thermomechanical response of shape-memory alloys',
+        'source_url' => 'https://thesis.library.caltech.edu/1725/1/Thesis_AmirSadjadpour.pdf',
+        'url' => 'https://thesis.library.caltech.edu/1725/1/Thesis_AmirSadjadpour.pdf',
+        'keywords' => 'Constitutive Modeling, Martensitic Phase Transformation, NiTi, Pure Iron, Shape Memory Alloys, SMA',
+        'topics' => 9,
+    ],
 //    [
 //        'title' => 'Differential Scanning Calorimetry of Bilayer Membrane Phase Transitions',
 //        'source_url' => 'http://www.colby.edu/chemistry/PChem/lab/DSCMembrane.pdf',
@@ -99,16 +99,16 @@ return [
 //        'url' => base_path('files_for_faker/11.pdf'),
 //        'keywords' => 'C-Terminal Flap Endonuclease'
 //    ],
-//    [
-//        'title' => 'A Similar document 1',
-//        'source_url' => 'https://www.genetics.org/content/suppl/2009/07/13/genetics.109.103937.DC3',
-//        'url' => base_path('files_for_faker/en_dup_1.pdf'),
-//        'keywords' => 'C-Terminal Flap Endonuclease'
-//    ],
-//    [
-//        'title' => 'A Similar document 2',
-//        'source_url' => 'https://www.genetics.org/content/suppl/2009/07/13/genetics.109.103937.DC4',
-//        'url' => base_path('files_for_faker/en_dup_2.pdf'),
-//        'keywords' => 'C-Terminal Flap Endonuclease'
-//    ],
+    [
+        'title' => 'A Similar document 1',
+        'source_url' => 'https://www.genetics.org/content/suppl/2009/07/13/genetics.109.103937.DC3',
+        'url' => base_path('files_for_faker/en_dup_1.pdf'),
+        'keywords' => 'C-Terminal Flap Endonuclease'
+    ],
+    [
+        'title' => 'A Similar document 2',
+        'source_url' => 'https://www.genetics.org/content/suppl/2009/07/13/genetics.109.103937.DC4',
+        'url' => base_path('files_for_faker/en_dup_2.pdf'),
+        'keywords' => 'C-Terminal Flap Endonuclease'
+    ],
 ];
