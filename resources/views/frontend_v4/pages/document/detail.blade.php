@@ -7,6 +7,13 @@
 @endpush
 
 @push('before_scripts')
+{{--    <script>--}}
+{{--        $.ajaxSetup({--}}
+{{--            headers: {--}}
+{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
 @endpush
 
 @push('after_scripts')
@@ -343,23 +350,24 @@
                 </h1>
                 <div class="hidden md:flex lg:basis-1/3 md:justify-between  lg:justify-end gap-2 mt-3 md:mt-0">
                     <div class="flex gap-2">
-                        <button
+                        <a
+                            href="{{ route('frontend_v4.document.like', ['slug' => $document->slug, 'action' => 'like']) }}"
                             class="bg-primary-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-up"></i>
                             <p>{{ $document->helpful_count }}</p>
                             <p class="md:block hidden">Helpful</p>
-                        </button>
+                        </a>
                         <button
                             class="bg-primary-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-down"></i>
-{{--                            <p>{{ $document->unhelpful_count }}</p>--}}
                             <p class="md:block hidden">Unhelpful</p>
                         </button>
                     </div>
                     <div class="flex gap-2">
                         <div x-data="{ open: false, hasCopy:false }" class="relative">
                             <button @click="open=!open" id="shareLinkDropdownButton" type="button"
-                                    data-dropdown-toggle="shareLinkDropdown" :class="open && 'text-primary bg-green-100'"
+                                    data-dropdown-toggle="shareLinkDropdown"
+                                    :class="open && 'text-primary bg-green-100'"
                                     class="w-16 bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary focus:outline-none ">
                                 <i class="fa fa-link"></i>
                             </button>
@@ -369,9 +377,11 @@
                                  data-popper-placement="bottom">
                                 <div class="mx-6 py-3 text-sm text-gray-700" aria-labelledby="shareLinkDropdownButton">
                                     <p class="text-2xl font-medium mb-4">Share this link with a friend: </p>
-                                    <input type="text" :disabled="hasCopy" id="document_share"  @click="navigator.clipboard.writeText($el.value);hasCopy=true"
+                                    <input type="text" :disabled="hasCopy" id="document_share"
+                                           @click="navigator.clipboard.writeText($el.value);hasCopy=true"
                                            value="{{ url()->current() }}"
-                                           class="outline-none border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg peer mb-2" :class="hasCopy && 'text-white bg-blue-400'">
+                                           class="outline-none border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg peer mb-2"
+                                           :class="hasCopy && 'text-white bg-blue-400'">
                                     <div x-cloak x-show="hasCopy" class="text-[#F616B8] text-lg"> Copied!</div>
 
 
@@ -414,7 +424,8 @@
                         <div class="lg:ml-16 md:mt-0 font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-calendar-days mt-1"></i>
                             <p class="ml-2">
-                                Uploaded date: <a href="#" class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
+                                Uploaded date: <a href="#"
+                                                  class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
                             </p>
                         </div>
                     </div>
@@ -426,7 +437,7 @@
                                      viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                           d="M6 12C2.68629 12 0 9.31371 0 6C0 2.68629 2.68629 0 6 0C9.31371 0 12 2.68629 12 6C12 9.31371 9.31371 12 6 12ZM6.00001 2.33333C5.44772 2.33333 5.00001 2.78105 5.00001 3.33333C5.00001 3.88562 5.44772 4.33333 6.00001 4.33333H6.00667C6.55896 4.33333 7.00667 3.88562 7.00667 3.33333C7.00667 2.78105 6.55896 2.33333 6.00667 2.33333H6.00001ZM5 5C4.44772 5 4 5.44772 4 6C4 6.55228 4.44772 7 5 7V8.66667C5 9.21895 5.44772 9.66667 6 9.66667H7.33333C7.88562 9.66667 8.33333 9.21895 8.33333 8.66667C8.33333 8.11438 7.88562 7.66667 7.33333 7.66667H7V6C7 5.44772 6.55228 5 6 5H5Z"
-                                          fill="" />
+                                          fill=""/>
                                 </svg>
                                 <span class="group-hover:text-primary">infor</span>
                                 <i x-cloak x-show="open_comment_responsive"
@@ -455,7 +466,8 @@
                             <div class="lg:ml-16 md:mt-0 font-medium flex flex-row text-default-lighter">
                                 <i class="fa-solid fa-calendar-days mt-1"></i>
                                 <p class="ml-2">
-                                    Uploaded date: <a href="#" class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
+                                    Uploaded date: <a href="#"
+                                                      class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
                                 </p>
                             </div>
                         </div>
@@ -469,33 +481,38 @@
                             <button
                                 class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-down"></i>
-                                <p>{{ $document->unhelpful_count }}</p>
                                 <p class="md:block hidden">Unhelpful</p>
                             </button>
                             <div x-data="{ open: false, hasCopy:false }" class="relative">
                                 <button @click="open=!open" id="shareLinkDropdownButton" type="button"
-                                        data-dropdown-toggle="shareLinkDropdown" :class="open && 'text-primary bg-green-100'"
+                                        data-dropdown-toggle="shareLinkDropdown"
+                                        :class="open && 'text-primary bg-green-100'"
                                         class="w-16 bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary focus:outline-none ">
                                     <i class="fa fa-link"></i>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div x-cloak @click.outside="open=false;hasCopy=false" x-show="open" id="shareLinkDropdown"
+                                <div x-cloak @click.outside="open=false;hasCopy=false" x-show="open"
+                                     id="shareLinkDropdown"
                                      class="z-10 w-96 bg-white mt-4 divide-y divide-gray-100 border-2 border-primary rounded-md absolute -translate-x-[40%] md:translate-x-0 md:right-[10%]"
                                      data-popper-placement="bottom">
                                     <div class="mx-2 md:mx-6 py-3 text-sm text-gray-700"
                                          aria-labelledby="shareLinkDropdownButton">
-                                        <p class="text-lg md:text-xl lg:text-2xl font-medium mb-4">Share this link with a
+                                        <p class="text-lg md:text-xl lg:text-2xl font-medium mb-4">Share this link with
+                                            a
                                             friend: </p>
-                                        <input type="text" :disabled="hasCopy" id="document_share"  @click="navigator.clipboard.writeText($el.value);hasCopy=true"
+                                        <input type="text" :disabled="hasCopy" id="document_share"
+                                               @click="navigator.clipboard.writeText($el.value);hasCopy=true"
                                                value="{{ url()->current() }}"
-                                               class="outline-none border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg peer mb-2" :class="hasCopy && 'text-white bg-blue-400'">
+                                               class="outline-none border-2 border-gray-100 px-4 py-2 w-full font-normal text-xl rounded-1.5lg peer mb-2"
+                                               :class="hasCopy && 'text-white bg-blue-400'">
                                         <div x-cloak x-show="hasCopy" class="text-[#F616B8] text-lg"> Copied!</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <button @click="open_report=!open_report" type="button" :class="open_report && 'text-primary bg-green-100'"
+                                <button @click="open_report=!open_report" type="button"
+                                        :class="open_report && 'text-primary bg-green-100'"
                                         class="bg-opacity-20 bg-gray-300 text-default-lighter font-medium rounded-1.5lg px-5 py-2 h-12 inline-flex items-center justify-center gap-1 hover:bg-green-100 hover:text-primary">
                                     <i class="fa fa-flag"></i>
                                 </button>
@@ -564,7 +581,8 @@
                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  viewBox="0 0 473.931 473.931" xml:space="preserve" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linoneecap="rounoned" stroke-linoneejoinone="rounoned">
+                                <g id="SVGRepo_tracerCarrier" stroke-linoneecap="rounoned"
+                                   stroke-linoneejoinone="rounoned">
                                 </g>
                                 <g id="SVGRepo_icononeCarrier">
                                     <circle style="fill:none;" cx="236.966" cy="236.966" r="236.966"></circle>
@@ -613,7 +631,8 @@
                             </a>
                         </div>
                         <div class="sm:block hidden pr-2">
-                            <i id="bookmarkIcon" class="fa-regular fa-bookmark text-lg font-medium hover:text-primary"></i>
+                            <i id="bookmarkIcon"
+                               class="fa-regular fa-bookmark text-lg font-medium hover:text-primary"></i>
                             {{--                        <i class="fa-solid fa-bookmark text-primary"></i>--}}
                         </div>
                     </div>
@@ -643,7 +662,7 @@
                     <p class="font-medium text-center	">Upload your study materials to download all documents.</p>
                     <div class="flex justify-center mt-4 w-full">
                         <a href="{{ route('frontend_v4.users.getUpload') }}" type="button"
-                                class="w-full bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                           class="w-full bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
                             <i class="fa fa-cloud-arrow-up"></i>
                             <span>Choose a doc</span>
                         </a>
@@ -709,7 +728,8 @@
 
     </div>
     <div x-cloak x-show="!open_comment_responsive" class="w-full bg-white py-6 px-4">
-        <div class="container mx-auto mb-4 block lg:hidden bg-white rounded-1.5lg p-5 pb-0 shadow-around lg:shadow-none">
+        <div
+            class="container mx-auto mb-4 block lg:hidden bg-white rounded-1.5lg p-5 pb-0 shadow-around lg:shadow-none">
             <h2 class="lg:font-medium lg:text-center font-semibold text-xl">Other related documents</h2>
             <div class="flex flex-wrap mt-4 xl:px-6">
                 @for ($i = 0; $i < 6; $i++)
@@ -777,26 +797,30 @@
                         <a href="#" target="_blank"
                            class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
                            style="aspect-ratio: 1">
-                            <img src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/70.595.115.514.205.448/gambar-perbabandingan-pretest-posttest-kelompok-kontrolrol.webp"
-                                 class="w-full h-full object-cover">
+                            <img
+                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/70.595.115.514.205.448/gambar-perbabandingan-pretest-posttest-kelompok-kontrolrol.webp"
+                                class="w-full h-full object-cover">
                         </a>
                         <a href="#" target="_blank"
                            class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
                            style="aspect-ratio: 1">
-                            <img src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/72.595.113.514.237.351/grafik-perbandingan-gambar-kemampuan-berpikir-kreatif-berdasarkan-kategorisasi.webp"
-                                 class="w-full h-full object-cover">
+                            <img
+                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/72.595.113.514.237.351/grafik-perbandingan-gambar-kemampuan-berpikir-kreatif-berdasarkan-kategorisasi.webp"
+                                class="w-full h-full object-cover">
                         </a>
                         <a href="#" target="_blank"
                            class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
                            style="aspect-ratio: 1">
-                            <img src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/78.595.131.494.277.693/tabel-data-hasil-angket.webp"
-                                 class="w-full h-full object-cover">
+                            <img
+                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/78.595.131.494.277.693/tabel-data-hasil-angket.webp"
+                                class="w-full h-full object-cover">
                         </a>
                         <a href="#" target="_blank"
                            class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
                            style="aspect-ratio: 1">
-                            <img src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/94.595.144.479.109.753/tabel-data-hasil-observasi-pertemuan-iii.webp"
-                                 class="w-full h-full object-cover">
+                            <img
+                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/94.595.144.479.109.753/tabel-data-hasil-observasi-pertemuan-iii.webp"
+                                class="w-full h-full object-cover">
                             <div
                                 class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
                                 <span class="text-3.25xl text-white font-medium">+18</span>
@@ -813,14 +837,16 @@
                 <p class="font-semibold text-xl">Reference</p>
                 <div class="mt-4 p-3 border rounded-1.5lg prose break-all">
                     <p>
-                        <b>[1]</b> M. Dahl, “A (Fake) Terms-of-Service Contract Asked People to Give Up Their Firstborn,”
+                        <b>[1]</b> M. Dahl, “A (Fake) Terms-of-Service Contract Asked People to Give Up Their
+                        Firstborn,”
                         The Cut, Aug. 23, 2016.
                         <a
                             href="https://www.thecut.com/2016/08/terms-of-service-asked-people-to-give-up-their-firstborn.html">https://www.thecut.com/2016/08/terms-of-service-asked-people-to-give-up-their-firstborn.html</a>
                         (accessed May 11, 2023).
                     </p>
                     <p>
-                        <b>[2]</b> S. Ashraf, “What Is Forensic Linguistics? (with pictures),” Language Humanities, Apr. 15,
+                        <b>[2]</b> S. Ashraf, “What Is Forensic Linguistics? (with pictures),” Language Humanities, Apr.
+                        15,
                         2023.
                         <a
                             href="https://www.languagehumanities.org/what-is-forensic-linguistics.htm">https://www.languagehumanities.org/what-is-forensic-linguistics.htm</a>
@@ -836,7 +862,8 @@
                         <a href="https://doi.org/10.9790/0837-2212025886">https://doi.org/10.9790/0837-2212025886</a>.
                     </p>
                     <p>
-                        <b>[4]</b> C. Melore, “Here’s why legal documents are so hard to read -- and how to easily fix it,”
+                        <b>[4]</b> C. Melore, “Here’s why legal documents are so hard to read -- and how to easily fix
+                        it,”
                         Study Finds, Mar. 08, 2022.
                         <a
                             href="https://studyfinds.org/legal-documents-so-hard-to-read/">https://studyfinds.org/legal-documents-so-hard-to-read/</a>
@@ -1055,15 +1082,15 @@
                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
                          xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <rect width="34" height="34" fill="url(#pattern0)" />
+                        <rect width="34" height="34" fill="url(#pattern0)"/>
                         <defs>
                             <pattern id="pattern0" patternContentUnits="objectBoundingBox"
                                      width="1" height="1">
                                 <use xlink:href="#image0_1040_266"
-                                     transform="scale(0.0078125)" />
+                                     transform="scale(0.0078125)"/>
                             </pattern>
                             <image id="image0_1040_266" width="128" height="128"
-                                   xlink:href="data:image/png;base64,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" />
+                                   xlink:href="data:image/png;base64,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"/>
                         </defs>
                     </svg>
 

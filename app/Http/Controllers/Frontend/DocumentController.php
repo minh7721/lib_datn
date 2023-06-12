@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Service\VNPayService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -47,6 +48,27 @@ class DocumentController extends Controller
         return view('frontend_v4.pages.search.search', compact('documents'));
     }
 
+    public function like(Request $request, $slug, $action){
+        $document = Document::where('slug', $slug)
+            ->first();
+        $currentTime = Carbon::now();
+        $lastHelpfulTime = Carbon::parse($document->updated_at);
+        $timeDiff = $currentTime->diffInMinutes($lastHelpfulTime);
+        if ($timeDiff >= 5){
+            if ($action == 'like'){
+                $document->helpful_count++;
+            }
+            if ($action == 'unlike'){
+                $document->helpful_count--;
+            }
+            $document->save();
+        }
+        return redirect()->back();
+    }
+
+    public function dislike(Request $request, $slug){
+
+    }
 
     public function VNPayRedirectPayment(){
         $vnpay_service = VNPayService::create();

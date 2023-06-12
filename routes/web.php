@@ -62,10 +62,6 @@ Route::get('auth/google', function () {
 
 Route::get('auth/google/callback', [LoginGoogleController::class, 'index']);
 
-Route::get('/document', function () {
-    return view('frontend_v4.pages.document.detail');
-});
-
 Route::get('/home', function () {
     return view('frontend_v4.pages.home.home');
 });
@@ -107,11 +103,14 @@ Route::prefix('/')
         Route::post('{id}/profile', [UserController::class, 'UpdateProfile'])->name('frontend_v4.users.postProfile');
         Route::post('{id}/profile/password', [UserController::class, 'changePass'])->name('frontend_v4.users.postChangePass');
 
-//Upload
+        //Upload
         Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
         Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
-    });
 
+        Route::get('/document/{slug}/like/{action}', [DocumentController::class, 'like'])->name('frontend_v4.document.like');
+        Route::get('/document/{slug}/dislike', [DocumentController::class, 'dislike'])->name('frontend_v4.document.dislike');
+
+    });
 
 
 Route::get('/vnpay/payment', [DocumentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
