@@ -61,7 +61,9 @@ class Document extends Model
             if ($model->price === null) {
                 $model->price = 0;
             }
+            if (!$model->user_id){
             $model->user_id = backpack_user()->id;
+            }
             $model->slug = Str::slug((new SeoSlugGenerator($model->title))->run());
 
 
