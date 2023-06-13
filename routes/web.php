@@ -47,31 +47,9 @@ Route::get('/home', function () {
     return view('frontend_v4.pages.home.home');
 });
 
-
 Route::get('/document/{slug}', [DocumentController::class, 'view'])->name('document.detail');
 
 Route::get('/search', [DocumentController::class, 'search'])->name('frontend.document.search');
-
-
-Route::get('/institution', function () {
-    return view('frontend_v4.pages.university.index');
-});
-
-Route::get('/institution/university_detail', function () {
-    return view('frontend_v4.pages.university.detail');
-});
-Route::get('/institution/university_detail/questions', function () {
-    return view('frontend_v4.pages.university.question');
-});
-Route::get('/institution/university_detail/students', function () {
-    return view('frontend_v4.pages.university.students');
-});
-Route::get('/institution/university_detail/subjects', function () {
-    return view('frontend_v4.pages.university.subjects');
-});
-Route::get('/institution/university_detail/major', function () {
-    return view('frontend_v4.pages.university.major');
-});
 
 Route::get('/course', function () {
     return "Course";
