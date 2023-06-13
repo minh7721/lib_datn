@@ -17,7 +17,7 @@ class TocBuilder
 
     protected Toc $toc;
 
-    protected int $type_detect = DetectPartsType::UNKNOWN;
+    protected int $type_detect = 0;
 
     public function __construct(
         protected Document $document
