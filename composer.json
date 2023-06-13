@@ -26,7 +26,8 @@
         "myclabs/php-enum": "^1.7",
         "patrickschur/language-detection": "^5.1",
         "php-science/textrank": "^1.2",
-        "voku/stop-words": "^2.0"
+        "voku/stop-words": "^2.0",
+        "vuthaihoc/vi_encoder": "^0.1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

@@ -3,7 +3,6 @@
 namespace App\Console\Commands\Test;
 
 use App\Models\Document;
-use App\Service\CountPages;
 use App\Service\MakePDF;
 use App\Service\MakeText;
 use GuzzleHttp\Client;
@@ -20,7 +19,7 @@ class GetDocumentFromOnelib extends Command
      * @var string
      */
     protected $signature = 'test:get_document
-    {--page= : page}
+    {--page=1 : page}
     {--per_page= : limit per page}
     {--token= : Token}
     {--sleep=5 : sleep}
@@ -60,6 +59,7 @@ class GetDocumentFromOnelib extends Command
         $sleep = $this->option('sleep');
         $client = new Client();
         $token = $this->option('token');
+        $this->page = $page;
         while (true){
             sleep($sleep);
             $url = $this->getPages($this->page);
@@ -79,6 +79,10 @@ class GetDocumentFromOnelib extends Command
 
             foreach ($datas as $data) {
                 try {
+                    if ($document = Document::where('title', $data['title'])->first()){
+                        $this->warn('Duplicate with id: '.$document->id);
+                        continue;
+                    }
                     $sourceUrl = $data['original_file'];
 
                     $client = new Client();
@@ -109,7 +113,7 @@ class GetDocumentFromOnelib extends Command
                             'language' => $data['language'],
                             'country' => 'GB',
                             'active' => true,
-                            'is_public' => true,
+                            'is_public' => false,
                             'is_approved' => 1,
                             'can_download' => true
                         ]);

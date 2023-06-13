@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Libssss;
+namespace App\Libs;
 
 
 use GuzzleHttp\Exception\RequestException;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6e0169cc847fd6f7dfde13a27fc3571",
+    "content-hash": "f2ead4181be61f58b07c9dd0a11b9695",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7418,6 +7418,51 @@
                 "source": "https://github.com/voku/stop-words/tree/master"
             },
             "time": "2018-11-23T01:37:27+00:00"
+        },
+        {
+            "name": "vuthaihoc/vi_encoder",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vuthaihoc/ViEncoder.git",
+                "reference": "483c3573b85ef51b8129b7521e856892082092e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vuthaihoc/ViEncoder/zipball/483c3573b85ef51b8129b7521e856892082092e8",
+                "reference": "483c3573b85ef51b8129b7521e856892082092e8",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "StupidDev\\ViEncoder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vũ Thái Học",
+                    "email": "vuthaihoc.ttud@gmail.com"
+                }
+            ],
+            "description": "Chuyển đổi qua lại giữa một số định dạng bảng mã Việt Nam",
+            "keywords": [
+                "encoder",
+                "laravel",
+                "tcvn3",
+                "unicode",
+                "viqr",
+                "vni-windows"
+            ],
+            "support": {
+                "issues": "https://github.com/vuthaihoc/ViEncoder/issues",
+                "source": "https://github.com/vuthaihoc/ViEncoder/tree/v0.1.2"
+            },
+            "time": "2021-10-01T02:46:25+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -3,10 +3,8 @@
 namespace App\DocumentProcess\Utilities;
 
 use App\DocumentProcess\TocBuilder\Bookmark;
-use App\DocumentProcess\TocBuilder\Toc;
 use App\Libs\RewriteSentenceClient;
 use App\Libs\StringUtils;
-use App\SmartResource\Entities\FigureData;
 use ThikDev\PdfParser\Objects\Document;
 use ThikDev\PdfParser\Objects\Document as DocumentParser;
 use ThikDev\PdfParser\Objects\Line;
@@ -188,7 +186,6 @@ class ContentExporter
     /**
      * Support Outline (new fulltext)
      * @param array $parts
-     * @param FigureData[] $figures
      * @return string
      */
     public static function exportOutlineHtml(array $parts, array $figures = []) {
