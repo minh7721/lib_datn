@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": ">=8.0",
+        "babenkoivan/elastic-client": "^2.1",
         "babenkoivan/elastic-scout-driver": "^3.1",
         "babenkoivan/elastic-scout-driver-plus": "^4.5",
         "backpack/crud": "4.1.*",
