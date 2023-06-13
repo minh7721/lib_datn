@@ -37,6 +37,15 @@
         }
     </style>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQQQSRDV4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SQQQSRDV4E');
+    </script>
 </head>
 
 <body x-data="globals" class="flex flex-col w-screen h-screen">
@@ -64,6 +73,7 @@
 @stack('after_scripts')
 
 <!-- Client IP {{ \Request::ip() }} -->
+
 
 </body>
 
