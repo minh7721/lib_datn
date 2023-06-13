@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": ">=8.0",
+        "babenkoivan/elastic-scout-driver": "^3.1",
+        "babenkoivan/elastic-scout-driver-plus": "^4.5",
         "backpack/crud": "4.1.*",
         "backpack/generators": "3.1",
         "backpack/logmanager": "^4.0",
@@ -16,6 +18,7 @@
         "hocvt/tika-simple": "^1.0",
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.11",
+        "laravel/scout": "9.4",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.0",
         "laravel/ui": "3.3.2",
@@ -77,7 +80,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
