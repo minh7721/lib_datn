@@ -21,7 +21,7 @@ class DocumentController extends Controller
         $top_documents = Document::with('categories')
             ->where('active', true)
             ->where('is_public', true)
-            ->orderByDesc('created_at')
+            ->orderByDesc('viewed_count')
             ->limit(20)
             ->get();
 

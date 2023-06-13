@@ -96,6 +96,21 @@ class DocumentCrudController extends CrudController
                 'label' => 'Total view'
             ],
         ]);
+
+        $this->crud->addFilter([
+            'name' => 'price',
+            'type' => 'range',
+            'label_from' => 'Min price',
+            'label_to' => 'Max price'
+        ], false, function ($value) {
+            $range = json_decode($value);
+            if ($range->from) {
+                $this->crud->addClause('where', 'price', '>=', (float)$range->from);
+            }
+            if ($range->to) {
+                $this->crud->addClause('where', 'price', '<=', (float)$range->to);
+            }
+        });
     }
 
     protected function setupCreateOperation()

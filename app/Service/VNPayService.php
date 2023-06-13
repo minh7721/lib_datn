@@ -10,9 +10,9 @@ class VNPayService
         $vnp_Url = config('paymnet_service.vnpay.vnp_Url');
         $vnp_Returnurl = route('frontend_v4.getVNPay');
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng
-        $vnp_OrderInfo = "Thanh toán hóa đơn";
+        $vnp_OrderInfo = "Long thanh toán nhé";
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = 100000*100;
+        $vnp_Amount = 900000000;
         $vnp_Locale = 'vn';
         $vnp_IpAddr = request()->ip();
 
@@ -88,7 +88,7 @@ class VNPayService
             if ($secureHash == $vnp_SecureHash){
 
             }else{
-                ///
+
             }
             dd($inputData);
         }

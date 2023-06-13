@@ -351,14 +351,14 @@
                 <div class="hidden md:flex lg:basis-1/3 md:justify-between  lg:justify-end gap-2 mt-3 md:mt-0">
                     <div class="flex gap-2">
                         <a
-                            href="{{ route('frontend_v4.document.like', ['slug' => $document->slug]) }}"
+                            href="{{ Auth::check() ? route('frontend_v4.document.like', ['slug' => $document->slug]) : '#' }}"
                             class="bg-primary-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-up"></i>
                             <p>{{ $document->helpful_count }}</p>
                             <p class="md:block hidden">Helpful</p>
                         </a>
                         <a
-                            href="{{ route('frontend_v4.document.dislike', ['slug' => $document->slug]) }}"
+                            href="{{ Auth::check() ? route('frontend_v4.document.dislike', ['slug' => $document->slug]) : '#' }}"
                             class="bg-primary-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                             <i class="fa fa-thumbs-down"></i>
                             <p class="md:block hidden">Unhelpful</p>
@@ -415,6 +415,10 @@
                         <div class="lg:ml-16 md:mt-0 w-full  lg:w-fit font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-book mt-1"></i>
                             <a href="#" class="hover:underline ml-2">{{ $document->categories->name }}</a>
+                        </div>
+                        <div class="lg:ml-16 md:mt-0 w-full lg:w-fit font-medium flex flex-row items-center text-default-lighter">
+                            <i class="fa-brands fa-cc-visa"></i>
+                            <a href="#" class="hover:underline ml-2">{{ $document->price }}</a>
                         </div>
                     </div>
                     <div class="hidden md:flex lg:flex-row flex-col mt-3 lg:mt-5 gap-3">
@@ -473,17 +477,17 @@
                             </div>
                         </div>
                         <div class="flex lg:basis-1/3 gap-2 lg:justify-end mt-3 md:mt-0 mb-4">
-                            <button
+                            <a href="{{ Auth::check() ? route('frontend_v4.document.like', ['slug' => $document->slug]) : '#' }}"
                                 class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-up"></i>
                                 <p>{{ $document->helpful_count }}</p>
                                 <p class="md:block hidden">Helpful</p>
-                            </button>
-                            <button
+                            </a>
+                            <a href="{{ Auth::check() ? route('frontend_v4.document.dislike', ['slug' => $document->slug]) : '#' }}"
                                 class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-down"></i>
                                 <p class="md:block hidden">Unhelpful</p>
-                            </button>
+                            </a>
                             <div x-data="{ open: false, hasCopy:false }" class="relative">
                                 <button @click="open=!open" id="shareLinkDropdownButton" type="button"
                                         data-dropdown-toggle="shareLinkDropdown"
@@ -624,8 +628,8 @@
                             /
                             <div id="total_page" class="ml-1"></div>
                         </div>
-                        <div class=" justify-center ">
-                            <a href="#" type="button"
+                        <div class="justify-center ">
+                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id]) }}" type="button"
                                class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
                                 <i class="fa-solid fa-cloud-arrow-down"></i>
                                 <span class="sm:block hidden ml-2">Download</span>

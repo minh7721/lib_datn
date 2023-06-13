@@ -3,33 +3,14 @@
 use App\Http\Controllers\Auth\LoginFacebookController;
 use App\Http\Controllers\Auth\LoginGoogleController;
 use App\Http\Controllers\Frontend\DocumentController;
+use App\Http\Controllers\Frontend\DownloadController;
 use App\Http\Controllers\Frontend\LoginController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\RegisterController;
 use App\Http\Controllers\Frontend\UploadController;
 use App\Http\Controllers\Frontend\UserController;
 use Laravel\Socialite\Facades\Socialite;
-
-//use App\Http\Controllers\ViewerController;
-//use Illuminate\Support\Facades\Route;
-//
-///*
-//|--------------------------------------------------------------------------
-//| Web Routes
-//|--------------------------------------------------------------------------
-//|
-//| Here is where you can register web routes for your application. These
-//| routes are loaded by the RouteServiceProvider within a group which
-//| contains the "web" middleware group. Now create something great!
-//|
-//*/
-//
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//
-//Route::get( '/viewer/{filename}', [ViewerController::class, 'view'])->name('viewer.index');
-//Route::get( '/document/{filename}', [DocumentController::class, 'view'])->name('document.detail');
-//
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DocumentController::class, 'index'])->name('document.home.index');
 
@@ -115,3 +96,7 @@ Route::prefix('/')
 
 Route::get('/vnpay/payment', [DocumentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
 Route::get('/vnpay/payment/response', [DocumentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');
+
+Route::get('/download/{id}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');
+Route::get('/payment', [PaymentController::class, 'getPayment'])->name('frontend_v4.payment.get');
+Route::post('/payment', [PaymentController::class, 'postPayment'])->name('frontend_v4.payment.post');
