@@ -48,10 +48,10 @@ Route::get('/course', function () {
 Route::prefix('/')
     ->middleware('auth')
     ->group(function () {
+        Route::get('{id}/setting', [UserController::class, 'setting'])->name('frontend_v4.users.setting');
+        Route::post('{id}/setting', [UserController::class, 'UpdateSetting'])->name('frontend_v4.users.postSetting');
+        Route::post('{id}/setting/password', [UserController::class, 'changePass'])->name('frontend_v4.users.postChangePass');
         Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
-        Route::post('{id}/profile', [UserController::class, 'UpdateProfile'])->name('frontend_v4.users.postProfile');
-        Route::post('{id}/profile/password', [UserController::class, 'changePass'])->name('frontend_v4.users.postChangePass');
-
         //Upload
         Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
         Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
@@ -60,9 +60,9 @@ Route::prefix('/')
         Route::get('/document/{slug}/dislike', [DocumentController::class, 'dislike'])->name('frontend_v4.document.dislike');
         Route::get('/payment', [PaymentController::class, 'getPayment'])->name('frontend_v4.payment.get');
         Route::post('/payment', [PaymentController::class, 'postPayment'])->name('frontend_v4.payment.post');
-        Route::post('/vnpay/payment', [DocumentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
-        Route::get('/vnpay/payment/response', [DocumentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');
+        Route::post('/vnpay/payment', [PaymentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
+        Route::get('/vnpay/payment/response', [PaymentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');
     });
 
 
-Route::get('/download/{id}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');
+Route::get('/download/{id}-{slug}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');

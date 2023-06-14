@@ -102,7 +102,7 @@ class GetDocumentFromOnelib extends Command
                             'user_id' => 1,
                             'title' => $data['title'],
                             'description' => $data['description'],
-                            'category_id' => random_int(1,30),
+                            'category_id' => random_int(1,37),
                             'price' => 0,
                             'type' => $extension,
                             'disks' => $this->disks,

@@ -114,6 +114,11 @@ class Document extends Model
         return $this->belongsToMany(Tag::class, 'document_tag', 'document_id', 'tag_id');
     }
 
+    public function user_bookmark(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_document', 'document_id', 'user_id');
+    }
+
     public function payments(): BelongsToMany
     {
         return $this->belongsToMany(Payment::class, 'payment_documents', 'document_id', 'payment_id');

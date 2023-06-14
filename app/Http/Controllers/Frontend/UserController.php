@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\UserRequest;
 use App\Libs\MakePath;
+use App\Models\Document;
+use App\Models\Download;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -14,13 +17,13 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function profile(Request $request, $id)
+    public function setting(Request $request, $id)
     {
         $user = User::where('id', $id)->first();
         return view('frontend_v4.pages.users.setting', compact('user'));
     }
 
-    public function UpdateProfile(Request $request, $id)
+    public function UpdateSetting(Request $request, $id)
     {
         try {
             $user = User::where('id', $id)->first();
@@ -67,4 +70,13 @@ class UserController extends Controller
         Session::flash('success', 'Update password success');
         return redirect()->back();
     }
+
+    public function profile(Request $request, $id)
+    {
+        $downloads = Download::with(['document', 'user'])->where('user_id', $id);
+        $total_document = $downloads->count();
+        $downloads = $downloads->paginate(20);
+        return view('frontend_v4.pages.users.profile', compact('downloads', 'total_document'));
+    }
+
 }

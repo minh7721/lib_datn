@@ -83,31 +83,4 @@ class DocumentController extends Controller
 //        }
         return redirect()->back();
     }
-
-    public function VNPayRedirectPayment(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'price' => 'required|numeric|min:10000|max:10000000',
-        ]);
-
-
-        if ($validator->fails()) {
-            Session::flash('error', 'Min price is 10000 and max is 10000000');
-            return redirect()->back();
-        }
-        $vnpay_service = VNPayService::create($request->price);
-        return redirect($vnpay_service);
-    }
-
-    public function VNPayGetResponse()
-    {
-        $vnpay_service = VNPayService::response();
-        if ($vnpay_service) {
-            Session::flash('success', 'Recharge successful');
-            return redirect()->route('document.home.index');
-        }
-        Session::flash('error', 'Minimum amount is 10.000 VND and maximum amount is 10.000.000 VND');
-        return redirect()->route('document.home.index');
-    }
-
 }

@@ -320,20 +320,6 @@
 
     </script>
 
-    {{-- Change bookmark icon--}}
-    <script>
-        const bookmarkIcon = document.getElementById('bookmarkIcon');
-
-        bookmarkIcon.addEventListener('mouseover', () => {
-            bookmarkIcon.classList.remove('fa-regular', 'text-lg', 'font-medium');
-            bookmarkIcon.classList.add('fa-solid', 'text-primary');
-        });
-
-        bookmarkIcon.addEventListener('mouseout', () => {
-            bookmarkIcon.classList.remove('fa-solid', 'text-primary');
-            bookmarkIcon.classList.add('fa-regular', 'text-lg', 'font-medium');
-        });
-    </script>
 @endpush
 
 @section('content')
@@ -452,14 +438,10 @@
                             </span>
                         </div>
                         <div>
-                            <span
+                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
                                 class="inline-flex h-10 w-10 rounded-full bg-primary justify-center items-center mr-2 hover:bg-primary-darker">
                                 <i class="fa-solid fa-cloud-arrow-down text-white"></i>
-                            </span>
-                            <span
-                                class="inline-flex h-10 w-10 rounded-full border border-slate-300  justify-center items-center hover:border-primary group">
-                                <i class="fa-regular fa-bookmark group-hover:text-primary"></i>
-                            </span>
+                            </a>
                         </div>
                     </div>
                     <div x-cloak x-show="open_comment_responsive" class="md:hidden mt-4 md:mt-0 w-full items-end">
@@ -629,16 +611,11 @@
                             <div id="total_page" class="ml-1"></div>
                         </div>
                         <div class="justify-center ">
-                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id]) }}" type="button"
+                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}" type="button"
                                class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
                                 <i class="fa-solid fa-cloud-arrow-down"></i>
                                 <span class="sm:block hidden ml-2">Download</span>
                             </a>
-                        </div>
-                        <div class="sm:block hidden pr-2">
-                            <i id="bookmarkIcon"
-                               class="fa-regular fa-bookmark text-lg font-medium hover:text-primary"></i>
-                            {{--                        <i class="fa-solid fa-bookmark text-primary"></i>--}}
                         </div>
                     </div>
                 </div>

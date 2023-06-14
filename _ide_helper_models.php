@@ -106,6 +106,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
  * @property-read int|null $tags_count
  * @property-read \App\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $user_bookmark
+ * @property-read int|null $user_bookmark_count
  * @method static \Illuminate\Database\Eloquent\Builder|Document idRange($id)
  * @method static \Illuminate\Database\Eloquent\Builder|Document newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Document newQuery()
@@ -151,7 +153,7 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $document_id
- * @property mixed|null $payload
+ * @property array|null $payload
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Document|null $document
@@ -297,6 +299,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
  * @property-read int|null $documents_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents_bookmark
+ * @property-read int|null $documents_bookmark_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Download> $downloads
  * @property-read int|null $downloads_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications

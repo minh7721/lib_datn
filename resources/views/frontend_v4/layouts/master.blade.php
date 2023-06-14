@@ -28,6 +28,7 @@
         {{ \Illuminate\Support\Facades\Route::is('document.detail') ? 'background-color: var(--color-main-background);' : 'background-color: white;'}}
 
 
+
         }
 
         [x-cloak] {
@@ -39,7 +40,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQQQSRDV4E"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-SQQQSRDV4E');
@@ -72,7 +77,15 @@
 
 <!-- Client IP {{ \Request::ip() }} -->
 
-
+<script>
+    var msg = '{{Session::get('jsAlert')}}';
+    var exist = '{{Session::has('jsAlert')}}';
+    if (exist) {
+        window.setTimeout(function() {
+            alert(msg);
+        }, 500);
+    }
+</script>
 </body>
 
 </html>

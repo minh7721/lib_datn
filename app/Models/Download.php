@@ -15,7 +15,9 @@ class Download extends Model
 
     protected $table = 'downloads';
     protected $guarded = ['id'];
-
+    protected $casts = [
+        'payload' => 'array'
+    ];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
