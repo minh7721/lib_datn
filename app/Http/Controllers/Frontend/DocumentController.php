@@ -36,8 +36,6 @@ class DocumentController extends Controller
 
     public function view(Request $request, $slug){
         $document = Document::where('slug', $slug)
-            ->where('active', true)
-            ->where('is_public', true)
             ->first();
         if (!$document){
             $document = Document::where('id', 1)

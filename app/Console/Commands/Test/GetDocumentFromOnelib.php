@@ -57,15 +57,17 @@ class GetDocumentFromOnelib extends Command
         $page = $this->option('page');
         $per_page = $this->option('per_page');
         $sleep = $this->option('sleep');
-        $client = new Client();
         $token = $this->option('token');
         $this->page = $page;
+        $mimeTypes = new MimeTypes();
+        $client = new Client();
+
         while (true){
             sleep($sleep);
             $url = $this->getPages($this->page);
             $this->info($url);
             // Tạo yêu cầu GET tới API với Bearer Token
-            $response = $client->request('GET', $url, [
+            $response_api = $client->request('GET', $url, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $token,
                     'Accept' => 'application/json',
@@ -73,26 +75,23 @@ class GetDocumentFromOnelib extends Command
             ]);
 
             // Lấy dữ liệu từ phản hồi
-            $response = json_decode($response->getBody(), true);
+            $response = json_decode($response_api->getBody(), true);
 
             $datas = $response['data'];
 
             foreach ($datas as $data) {
                 try {
-                    if ($document = Document::where('title', $data['title'])->first()){
-                        $this->warn('Duplicate with id: '.$document->id);
+                    if ($existed = Document::where('title', $data['title'])->first()){
+                        $this->warn('Duplicate with id: '.$existed->id);
                         continue;
                     }
                     $sourceUrl = $data['original_file'];
 
-                    $client = new Client();
-                    $response = $client->get($sourceUrl);
-                    $fileContent = $response->getBody();
+                    $response_document = $client->get($sourceUrl);
+                    $fileContent = $response_document->getBody();
+                    $destinationPath =  'public/pdftest'; // Đường dẫn đích để lưu tệp (được tạo trong thư mục "storage")
 
-                    $destinationPath = 'public/pdftest'; // Đường dẫn đích để lưu tệp (được tạo trong thư mục "storage")
-
-                    $mimeTypes = new MimeTypes();
-                    $extension = $mimeTypes->getExtensions($response->getHeaderLine('Content-Type'));
+                    $extension = $mimeTypes->getExtensions($response_document->getHeaderLine('Content-Type'));
 
                     if (!empty($extension)) {
                         $extension = $extension[0];
@@ -131,6 +130,7 @@ class GetDocumentFromOnelib extends Command
                         $document->save();
                         $this->info('Successful data collection: '.$document->id);
                     } else {
+
                         continue;
                     }
 
