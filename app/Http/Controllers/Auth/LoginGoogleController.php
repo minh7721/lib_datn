@@ -40,7 +40,7 @@ class LoginGoogleController extends Controller
             }
 
         } catch (\Exception $e) {
-            Session::flash('error', 'Login facabook failed!');
+            Session::flash('error', 'Login google failed!');
 
             return redirect()->route('frontend.auth.getLogin');
         }
