@@ -513,7 +513,7 @@
                 <a href="#categories"
                    class="flex justify-center items-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 md:mr-7 hover:text-white hover:bg-secondary">
                     <i class="fa-solid fa-book mr-2 md:mr-3"></i>
-                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Subjects</p>
+                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Categories</p>
                 </a>
 
                 <a href="#top_schools"
@@ -559,8 +559,7 @@
             <div class="flex flex-col justify-center items-center py-4 md:py-6 border-t border-slate-300">
                 <p class="text-default text-center text-base md:text-3xl font-medium mb-4">
                     Popular categories</p>
-                <h2 class="text-default-lighter text-center font-semibold text-xs md:text-2xl">Master your classes
-                    with homework help, exam study guides, past papers, and more</h2>
+                <h2 class="text-default-lighter text-center font-semibold text-xs md:text-2xl">Search your document for master</h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5 lg:gap-x-10 gap-y-4 md:gap-y-6">

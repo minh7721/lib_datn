@@ -61,11 +61,11 @@
                             <path d="M5.83331 3L5.83331 5.5" stroke="#99999A" stroke-width="2" stroke-linecap="round" />
                             <path d="M14.1667 3L14.1667 5.5" stroke="#99999A" stroke-width="2" stroke-linecap="round" />
                         </svg>
-                        <span class="inline-block translate-y-0.5 md:-translate-y-[1px] lg:translate-y-0">2020</span>
+                            <span class="inline-block translate-y-0.5 md:-translate-y-[1px] lg:translate-y-0">{{ $document->created_at->year }}</span>
                     </div>
                     <div class=" md:hidden items-baseline gap-1 text-secondary">
                         <i class="fa-solid fa-thumbs-up"></i>
-                        <span class="">100%</span>
+                        <span class="">{{ $document->helpful_count }}</span>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@
         </div>
         <div class="hidden md:flex items-baseline gap-2.5 text-secondary">
             <i class="fa-solid fa-thumbs-up"></i>
-            <span class="">100%</span>
+            <span class="">{{ $document->helpful_count }}</span>
         </div>
     </div>
 </div>

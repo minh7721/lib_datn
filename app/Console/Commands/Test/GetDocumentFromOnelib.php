@@ -112,7 +112,7 @@ class GetDocumentFromOnelib extends Command
                             'language' => $data['language'],
                             'country' => 'GB',
                             'active' => true,
-                            'is_public' => false,
+                            'is_public' => true,
                             'is_approved' => 1,
                             'can_download' => true
                         ]);

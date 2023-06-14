@@ -36,8 +36,8 @@ class RegisterRequest extends FormRequest
             'string' => 'You must type string',
             'max' => 'Characters too long',
             'name.required' => 'Name cannot be left blank',
-            'email.required' => 'Name cannot be left blank',
-            'password.required' => 'Name cannot be left blank',
+            'email.required' => 'Email cannot be left blank',
+            'password.required' => 'Password cannot be left blank',
             'password.min' => 'Password minimum 6 characters',
             'password.confirmed' => 'Password confirm is incorrect'
         ];

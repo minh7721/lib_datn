@@ -44,7 +44,7 @@ class RegisterController extends Controller
         $user->assignRole($role);
 
         Auth::login($user);
-        Session::flash('error', 'These credentials do not match our records.');
+//        Session::flash('error', 'These credentials do not match our records.');
         return redirect()->route('document.home.index');
     }
 }
