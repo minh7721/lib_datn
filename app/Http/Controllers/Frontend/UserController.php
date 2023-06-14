@@ -17,7 +17,7 @@ class UserController extends Controller
     public function profile(Request $request, $id)
     {
         $user = User::where('id', $id)->first();
-        return view('frontend_v4.pages.users.profile', compact('user'));
+        return view('frontend_v4.pages.users.setting', compact('user'));
     }
 
     public function UpdateProfile(Request $request, $id)

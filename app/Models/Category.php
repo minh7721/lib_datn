@@ -10,6 +10,11 @@ class Category extends Model
     use CrudTrait;
 
     protected $table = 'categories';
+    protected $fillable = [
+      'id',
+      'name',
+      'slug'
+    ];
     protected $guarded = ['id'];
 
     public function documents()

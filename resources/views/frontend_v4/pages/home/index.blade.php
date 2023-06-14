@@ -510,7 +510,7 @@
                     <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Document</p>
                 </a>
 
-                <a href="#popular_subjects"
+                <a href="#categories"
                    class="flex justify-center items-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 md:mr-7 hover:text-white hover:bg-secondary">
                     <i class="fa-solid fa-book mr-2 md:mr-3"></i>
                     <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Subjects</p>
@@ -552,74 +552,21 @@
 
         </div>
 
-        {{-- Popular Subjects --}}
-        <div class="container mx-auto px-3 mb-10" id="popular_subjects">
-            <div class="flex flex-col justify-center items-center">
-                <p class="mb-4 pt-12 lg:w-1/2 md:w-2/3 w-full border-t border-[#99999A] text-center font-medium text-3xl">
-                    Popular Subjects</p>
-                <h2 class="mb-4 text-default-lighter font-semibold text-2xl">Choose an option that you interest</h2>
+        {{-- Categories --}}
+        <div id="categories"
+             class="container mx-auto px-4 md:px-8 lg:px-10 2xl:pl-0 2xl:pr-10 mb-10">
+
+            <div class="flex flex-col justify-center items-center py-4 md:py-6 border-t border-slate-300">
+                <p class="text-default text-center text-base md:text-3xl font-medium mb-4">
+                    Popular categories</p>
+                <h2 class="text-default-lighter text-center font-semibold text-xs md:text-2xl">Master your classes
+                    with homework help, exam study guides, past papers, and more</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-10">
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/money_bag_dollar 1.png') }}"
-                         alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Business Economics</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/chemistry_test_tube.png') }}"
-                         alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Sociology of Sciences</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/ball_football.png') }}" alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Sport Studies</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/medical_history (1) 1.png') }}"
-                         alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Health psychology</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/book.png') }}" alt="">
-                    <p class="text-default text-center font-semibold text-2xl">History of Education</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3"
-                         src="{{ asset('assets_v4/images/subjects/acceleration_graphic (1) 1.png') }}"
-                         alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Development Economics</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/travel 1.png') }}" alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Transport economics</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/internet_connection 1.png') }}"
-                         alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Information Technology</p>
-                </div>
-
-                <div
-                    class="border border-[#99999A] rounded-1.5lg py-12 flex flex-col justify-center items-center cursor-pointer hover:bg-green-300 hover:bg-opacity-10">
-                    <img class="md:w-28 mb-3" src="{{ asset('assets_v4/images/subjects/biology.png') }}" alt="">
-                    <p class="text-default text-center font-semibold text-2xl">Cellular and Molecular Biology</p>
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5 lg:gap-x-10 gap-y-4 md:gap-y-6">
+                @foreach($categories as $category)
+                    @include('frontend_v4.pages.category.list')
+                @endforeach
             </div>
         </div>
 

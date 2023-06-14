@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Document;
 use App\Service\VNPayService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class DocumentController extends Controller
 {
@@ -14,6 +17,7 @@ class DocumentController extends Controller
         $documents = Document::with('categories')
             ->where('active', true)
             ->where('is_public', true)
+            ->where('page_number', "<=", 100)
             ->orderByDesc('created_at')
             ->limit(9)
             ->get();
@@ -25,7 +29,9 @@ class DocumentController extends Controller
             ->limit(20)
             ->get();
 
-        return view('frontend_v4.pages.home.index', compact('documents', 'top_documents'));
+        $categories = Category::all();
+
+        return view('frontend_v4.pages.home.index', compact('documents', 'top_documents', 'categories'));
     }
 
     public function view(Request $request, $slug){
@@ -74,15 +80,28 @@ class DocumentController extends Controller
         return redirect()->back();
     }
 
-    public function VNPayRedirectPayment(){
-        $vnpay_service = VNPayService::create();
+    public function VNPayRedirectPayment(Request $request){
+        $validator = Validator::make($request->all(), [
+            'price' => 'required|numeric|min:10000|max:10000000',
+        ]);
+
+
+        if ($validator->fails()) {
+            Session::flash('error', 'Min price is 10000 and max is 10000000');
+            return redirect()->back();
+        }
+        $vnpay_service = VNPayService::create($request->price);
         return redirect($vnpay_service);
-//        $response = VNPayService::response();
     }
 
     public function VNPayGetResponse(){
-        dump($_GET);
         $vnpay_service = VNPayService::response();
-        dd($vnpay_service);
+        if ($vnpay_service){
+            Session::flash('success', 'Recharge successful');
+            return redirect()->route('document.home.index');
+        }
+        Session::flash('error', 'Minimum amount is 10.000 VND and maximum amount is 10.000.000 VND');
+        return redirect()->route('document.home.index');
     }
+
 }

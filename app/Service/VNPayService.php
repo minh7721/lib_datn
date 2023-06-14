@@ -2,17 +2,22 @@
 
 namespace App\Service;
 
+use App\Models\Enums\SourcePayment;
+use App\Models\Payment;
+use App\Models\User;
+
 class VNPayService
 {
-    public static function create(){
+    public static function create($price)
+    {
         $vnp_TmnCode = config('paymnet_service.vnpay.vnp_TmnCode'); //Mã website tại VNPAY
         $vnp_HashSecret = config('paymnet_service.vnpay.vnp_HashSecret'); //Chuỗi bí mật
         $vnp_Url = config('paymnet_service.vnpay.vnp_Url');
         $vnp_Returnurl = route('frontend_v4.getVNPay');
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng
-        $vnp_OrderInfo = "Long thanh toán nhé";
+        $vnp_OrderInfo = "Thanh toan qua hoa don qua VNPay";
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = 900000000;
+        $vnp_Amount = $price * 100;
         $vnp_Locale = 'vn';
         $vnp_IpAddr = request()->ip();
 
@@ -54,15 +59,16 @@ class VNPayService
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         return $vnp_Url;
     }
 
-    public static function response(){
-        $vnp_SecureHash = config('paymnet_service.vnpay.vnp_HashSecret');
-        if (!empty($_GET)){
+    public static function response()
+    {
+        if (!empty($_GET)) {
+            $vnp_HashSecret = config('paymnet_service.vnpay.vnp_HashSecret');
             $vnp_SecureHash = $_GET['vnp_SecureHash'];
             $inputData = array();
             foreach ($_GET as $key => $value) {
@@ -83,21 +89,42 @@ class VNPayService
                     $i = 1;
                 }
             }
+            $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
 
-            $secureHash = hash_hmac('sha512', $hashData, $vnp_SecureHash);
-            if ($secureHash == $vnp_SecureHash){
-
-            }else{
-
+            if ($secureHash == $vnp_SecureHash) {
+                self::insert($inputData);
+                return true;
+            } else {
+                return false;
             }
-            dd($inputData);
         }
-        return true;
+        return false;
     }
 
-    public static function insert(){
-        if (!empty($_GET)){
-            //
-        }
+    protected static function insert($inputData)
+    {
+            if (!Payment::where('trading_code', $inputData['vnp_TransactionNo'])->first()){
+                if ($inputData['vnp_TransactionStatus'] == 0){
+                    $status = 1;
+                }else{
+                    $status = 0;
+                }
+                $price_output = ceil($inputData['vnp_Amount']/100);
+                Payment::create([
+                    'user_id' => \Auth::id() ?? 1,
+                    'status' => $status,
+                    'price' => $price_output,
+                    'trading_code' => $inputData['vnp_TransactionNo'],
+                    'transaction_id' => $inputData['vnp_TxnRef'],
+                    'message' => $inputData['vnp_OrderInfo'],
+                    'source' => SourcePayment::VNPAY
+                ]);
+
+                $user = User::where('id', \Auth::id())->first();
+                $money = $price_output + $user->money;
+                $user->update([
+                    'money' =>  $money
+                ]);
+            }
     }
 }
