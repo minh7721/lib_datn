@@ -127,7 +127,12 @@
             })
 
             function loadPage(pageNumber, callback = null) {
-
+{{--                @if($document->price > 0)--}}
+{{--                    const page_preview = pageNumber/pdf.numPages;--}}
+{{--                    if (page_preview > 0.3){--}}
+{{--                        return--}}
+{{--                    }--}}
+{{--                @endif--}}
                 // New div
                 const newDiv = document.createElement('div');
                 newDiv.classList.add('bg-white', 'rounded-1.5lg', 'mb-4');
