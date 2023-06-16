@@ -109,11 +109,13 @@ class VNPayService
                 }else{
                     $status = 0;
                 }
-                $price_output = ceil($inputData['vnp_Amount']/100);
+                $dollar_to_vnd = 23000;
+                $price_vnd = ceil($inputData['vnp_Amount']/100);
+                $price_dollar = round($price_vnd/$dollar_to_vnd, 2);
                 Payment::create([
                     'user_id' => \Auth::id() ?? 1,
                     'status' => $status,
-                    'price' => $price_output,
+                    'price' => $price_dollar,
                     'trading_code' => $inputData['vnp_TransactionNo'],
                     'transaction_id' => $inputData['vnp_TxnRef'],
                     'message' => $inputData['vnp_OrderInfo'],
@@ -121,7 +123,7 @@ class VNPayService
                 ]);
 
                 $user = User::where('id', \Auth::id())->first();
-                $money = $price_output + $user->money;
+                $money = $price_dollar   + $user->money;
                 $user->update([
                     'money' =>  $money
                 ]);
