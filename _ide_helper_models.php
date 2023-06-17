@@ -44,6 +44,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Document|null $documents
+ * @property-read \App\Models\User|null $users
  * @method static \Illuminate\Database\Eloquent\Builder|Comment idRange($id)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Comment newQuery()
@@ -179,7 +180,7 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $status
- * @property int $price
+ * @property float $price
  * @property string $source Source : VNPay, Paypal,...
  * @property string $trading_code Mã giao dịch
  * @property string $transaction_id Số hóa đơn
@@ -286,7 +287,7 @@ namespace App\Models{
  * @property string|null $birthday
  * @property string|null $phone
  * @property string|null $address
- * @property int $money
+ * @property float $money
  * @property string|null $country
  * @property string|null $language
  * @property string|null $social_id
@@ -297,6 +298,8 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comments
+ * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
  * @property-read int|null $documents_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents_bookmark
