@@ -19,8 +19,8 @@
                     <div>
                         <p class="font-medium text-3xl">{{ Auth::user()->name }}</p>
                         <div class="flex flex-row items-center gap-1">
-                            <p class="font-normal text-base text-default-lighter">Total Document: </p>
-                            <p class="font-semibold text-base text-primary">{{ $total_document }}</p>
+                            <p class="font-normal text-base text-default-lighter">Total document downloaded: </p>
+                            <p class="font-semibold text-base text-primary">{{ Auth::user()->total_downloaded }}</p>
                         </div>
                     </div>
                 </div>

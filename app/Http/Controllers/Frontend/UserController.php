@@ -73,10 +73,8 @@ class UserController extends Controller
 
     public function profile(Request $request, $id)
     {
-        $downloads = Download::with(['document', 'user'])->where('user_id', $id);
-        $total_document = $downloads->count();
-        $downloads = $downloads->paginate(20);
-        return view('frontend_v4.pages.users.profile', compact('downloads', 'total_document'));
+        $downloads = Download::with(['document', 'user'])->where('user_id', $id)->paginate(20);
+        return view('frontend_v4.pages.users.profile', compact('downloads'));
     }
 
 }
