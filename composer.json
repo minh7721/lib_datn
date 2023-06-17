@@ -25,6 +25,7 @@
         "laravel/ui": "3.3.2",
         "myclabs/php-enum": "^1.7",
         "patrickschur/language-detection": "^5.1",
+        "paypal/paypal-checkout-sdk": "^1.0",
         "php-science/textrank": "^1.2",
         "voku/portable-utf8": "^6.0",
         "voku/stop-words": "^2.0",
