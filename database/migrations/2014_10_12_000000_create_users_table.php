@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->bigInteger('money')->default(0)->index();
+            $table->double('money')->default(0)->index();
             $table->string('country')->nullable()->index();
             $table->string('language')->nullable()->index();
             $table->string('social_id')->nullable()->index();

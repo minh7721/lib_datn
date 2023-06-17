@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
             $table->integer('status')->default(0);
-            $table->integer('price')->default(0);
+            $table->double('price')->default(0);
             $table->string('source')->comment('Source : VNPay, Paypal,...');
             $table->string('trading_code')->comment('Mã giao dịch');
             $table->string('transaction_id')->comment('Số hóa đơn');
