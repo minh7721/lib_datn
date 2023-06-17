@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Enums\PaymentStatus;
 use App\Models\Enums\SourcePayment;
 use App\Models\Payment;
 use App\Models\User;
@@ -105,9 +106,9 @@ class VNPayService
     {
             if (!Payment::where('trading_code', $inputData['vnp_TransactionNo'])->first()){
                 if ($inputData['vnp_TransactionStatus'] == 0){
-                    $status = 1;
+                    $status = PaymentStatus::SUCCESS;
                 }else{
-                    $status = 0;
+                    $status = PaymentStatus::ERROR;
                 }
                 $dollar_to_vnd = 23000;
                 $price_vnd = ceil($inputData['vnp_Amount']/100);

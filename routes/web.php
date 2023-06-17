@@ -62,6 +62,9 @@ Route::prefix('/')
         Route::post('/payment', [PaymentController::class, 'postPayment'])->name('frontend_v4.payment.post');
         Route::post('/vnpay/payment', [PaymentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
         Route::get('/vnpay/payment/response', [PaymentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');
+        Route::post('/paypal/payment', [PaymentController::class, 'PaypalRedirectPayment'])->name('frontend_v4.redirectPaypal');
+        Route::get('/paypal/payment/response', [PaymentController::class, 'PaypalGetResponse'])->name('frontend_v4.responsePaypal');
+
     });
 
 

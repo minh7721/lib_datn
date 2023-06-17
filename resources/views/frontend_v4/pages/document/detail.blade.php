@@ -447,7 +447,7 @@
                                 class="inline-flex h-10 w-10 rounded-full bg-primary justify-center items-center mr-2 hover:bg-primary-darker">
                                 <i class="fa-solid fa-cloud-arrow-down text-white"></i>
                             </a>
-                        </div>download
+                        </div>
                     </div>
                     <div x-cloak x-show="open_comment_responsive" class="md:hidden mt-4 md:mt-0 w-full items-end">
                         <div class="flex lg:flex-row flex-col mt-5 gap-3">

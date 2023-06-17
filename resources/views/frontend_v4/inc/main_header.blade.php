@@ -87,7 +87,7 @@
                                             <p class="text-lg font-normal">Other payment option</p>
                                         </div>
                                         <div class="w-full">
-                                            <p class="text-default text-base font-medium mb-3">Select the amount you want to deposit</p>
+                                            <p class="text-default text-base font-medium mb-3">Select the amount you want to deposit (VND)</p>
                                             <input type="number" name="price" id="price" placeholder="Select the amount you want to deposit"
                                                    class="text-base font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
                                         </div>
@@ -100,7 +100,7 @@
 
                                 </div>
                                 <div x-cloak x-show="open_payment_paypal"  class="space-y-6 px-6 py-2">
-                                    <form method="post" action="#"
+                                    <form method="post" action="{{ route('frontend_v4.redirectPaypal') }}"
                                           class="space-y-6">
                                         {{ csrf_field()}}
                                         <div @click="open_payment_paypal=false;open_payment_body=true"
@@ -109,8 +109,8 @@
                                             <p class="text-lg font-normal">Other payment option</p>
                                         </div>
                                         <div class="w-full">
-                                            <p class="text-default text-base font-medium mb-3">Select the amount you want to deposit</p>
-                                            <input type="number" name="price" id="price" placeholder="Select the amount you want to deposit"
+                                            <p class="text-default text-base font-medium mb-3">Select the amount you want to deposit ($)</p>
+                                            <input type="number" name="price_paypal" id="price_paypal" placeholder="Select the amount you want to deposit"
                                                    class="text-base font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
                                         </div>
 
