@@ -14,7 +14,7 @@
 
             @include('frontend_v4.alert.alert')
 
-            <p class="font-semibold text-2xl py-6">Profile</p>
+            <p class="font-semibold text-2xl py-6">Setting</p>
             <form method="POST" action="{{ route('frontend_v4.users.postSetting', $user->id) }}" enctype="multipart/form-data" class="flex flex-col mb-8 gap-6 border-t border-main-background">
                 {{ csrf_field() }}
                 <p class="font-semibold text-xl py-6 text-default">Account</p>

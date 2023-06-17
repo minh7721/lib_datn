@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('document.home.index');
+        return redirect()->back();
     }
 
 

@@ -7,13 +7,9 @@
 @endpush
 
 @push('before_scripts')
-{{--    <script>--}}
-{{--        $.ajaxSetup({--}}
-{{--            headers: {--}}
-{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-{{--            }--}}
-{{--        });--}}
-{{--    </script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+            integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endpush
 
 @push('after_scripts')
@@ -127,12 +123,12 @@
             })
 
             function loadPage(pageNumber, callback = null) {
-{{--                @if($document->price > 0)--}}
-{{--                    const page_preview = pageNumber/pdf.numPages;--}}
-{{--                    if (page_preview > 0.3){--}}
-{{--                        return--}}
-{{--                    }--}}
-{{--                @endif--}}
+                {{--                @if($document->price > 0)--}}
+                {{--                    const page_preview = pageNumber/pdf.numPages;--}}
+                {{--                    if (page_preview > 0.3){--}}
+                {{--                        return--}}
+                {{--                    }--}}
+                {{--                @endif--}}
                 // New div
                 const newDiv = document.createElement('div');
                 newDiv.classList.add('bg-white', 'rounded-1.5lg', 'mb-4');
@@ -325,6 +321,38 @@
 
     </script>
 
+    {{-- Report --}}
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function () {
+            $('#submit_report').on('click', function () {
+                let report_radio = $('.report_radio:checked').val();
+                let message_other = "";
+                if (report_radio === 'other') {
+                    message_other = $('.message_other').val()
+                }
+                $.ajax({
+                    url: "{{ route('frontend_v4.document.report', ['slug' => $document->slug]) }}",
+                    method: "POST",
+                    data: {
+                        report_radio: report_radio,
+                        message_other: message_other
+                    },
+                    success: function (dt) {
+                        console.log(dt)
+                    },
+                    error: function (dt) {
+                        console.log('error')
+                    }
+                });
+            })
+        });
+    </script>
 @endpush
 
 @section('content')
@@ -407,7 +435,8 @@
                             <i class="fa-solid fa-book mt-1"></i>
                             <a href="#" class="hover:underline ml-2">{{ $document->categories->name }}</a>
                         </div>
-                        <div class="lg:ml-16 md:mt-0 w-full lg:w-fit font-medium flex flex-row items-center text-default-lighter">
+                        <div
+                            class="lg:ml-16 md:mt-0 w-full lg:w-fit font-medium flex flex-row items-center text-default-lighter">
                             <i class="fa-brands fa-cc-visa"></i>
                             <a href="#" class="hover:underline ml-2">{{ $document->price }}</a>
                         </div>
@@ -444,7 +473,7 @@
                         </div>
                         <div>
                             <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
-                                class="inline-flex h-10 w-10 rounded-full bg-primary justify-center items-center mr-2 hover:bg-primary-darker">
+                               class="inline-flex h-10 w-10 rounded-full bg-primary justify-center items-center mr-2 hover:bg-primary-darker">
                                 <i class="fa-solid fa-cloud-arrow-down text-white"></i>
                             </a>
                         </div>
@@ -465,13 +494,13 @@
                         </div>
                         <div class="flex lg:basis-1/3 gap-2 lg:justify-end mt-3 md:mt-0 mb-4">
                             <a href="{{ Auth::check() ? route('frontend_v4.document.like', ['slug' => $document->slug]) : '#' }}"
-                                class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
+                               class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-up"></i>
                                 <p>{{ $document->helpful_count }}</p>
                                 <p class="md:block hidden">Helpful</p>
                             </a>
                             <a href="{{ Auth::check() ? route('frontend_v4.document.dislike', ['slug' => $document->slug]) : '#' }}"
-                                class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
+                               class="bg-green-100 text-primary font-medium rounded-1.5lg px-5 py-1 h-12 inline-flex items-center justify-center gap-2">
                                 <i class="fa fa-thumbs-down"></i>
                                 <p class="md:block hidden">Unhelpful</p>
                             </a>
@@ -526,18 +555,35 @@
                         </div>
                         <div class="bg-white rounded-1.5lg p-5 border border-slate-300">
                             <p class="font-medium text-center">Comments</p>
-                            <form action="#">
+                            @if(Auth::check())
+                                <form method="POST" action="{{ route('frontend_v4.document.comment', ['slug' => $document->slug]) }}">
+                                    {{ csrf_field() }}
+                                    <div x-data="{disableSubmit: true, message_comment: null}">
+                                        <input type="text" x-model='message_comment' name="message_comment"
+                                               x-on:input="[(message_comment.length != 0) ? disableSubmit = false : disableSubmit = true]"
+                                               class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
+                                               placeholder="Comments or ask a question">
+                                        <div class="flex justify-end">
+                                            <button x-bind:disabled="disableSubmit"
+                                                    class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                                Post
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            @endif
+                                {{ csrf_field() }}
                                 <input type="text"
                                        class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
                                        placeholder="Comments or ask a question">
                                 <div class="flex justify-end">
-                                    <button
-                                        class="w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                                    <a href="{{ route('frontend.auth.getLogin') }}"
+                                        class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
                                         <i class="fa-solid fa-paper-plane"></i>
-                                        Post
-                                    </button>
+                                        Login to comment
+                                    </a>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -616,7 +662,8 @@
                             <div id="total_page" class="ml-1"></div>
                         </div>
                         <div class="justify-center ">
-                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}" type="button"
+                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
+                               type="button"
                                class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
                                 <i class="fa-solid fa-cloud-arrow-down"></i>
                                 <span class="sm:block hidden ml-2">Download</span>
@@ -630,16 +677,20 @@
                 <!-- Comment -->
                 <div class="hidden lg:block bg-white rounded-1.5lg p-5">
                     <p class="font-medium text-center">Comments</p>
-                    <form action="#">
-                        <input type="text"
-                               class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
-                               placeholder="Comments or ask a question">
-                        <div class="flex justify-end">
-                            <button
-                                class="w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                Post
-                            </button>
+                    <form method="POST" action="{{ route('frontend_v4.document.comment', ['slug' => $document->slug]) }}">
+                        {{ csrf_field() }}
+                        <div x-data="{disableSubmit: true, message_comment: null}">
+                            <input type="text" x-model='message_comment' name="message_comment"
+                                   x-on:input="[(message_comment.length != 0) ? disableSubmit = false : disableSubmit = true]"
+                                   class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
+                                   placeholder="Comments or ask a question">
+                            <div class="flex justify-end">
+                                <button x-bind:disabled="disableSubmit"
+                                        class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    Post
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -904,74 +955,19 @@
         </div>
         <div class="container mx-auto shadow-around mt-4 rounded-1.5lg pb-4">
             <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">
-                <p class="font-semibold text-xl">Students also viewed</p>
-                <div class="mt-4">
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">Homework Questions with Solutions - Theory of
-                            Probability</a>
+                <p class="font-semibold text-xl">Comments</p>
+                @foreach($comments as $comment)
+                    <div class="px-4 md:px-8 py-4 m-4 border border-gray-300 rounded-4.5xl flex flex-col gap-3">
+                        <div class="flex flex-row gap-4 justify-between">
+                            <p class="w-8/12 lg:w-10/12 font-normal text-sm md:text-base text-primary">{{ $comment->users->name }}</p>
+                            <p class="w-4/12 lg:w-2/12 text-end text-xs md:text-base font-light text-default-lighter mr-5">
+                                {{ $comment->created_at->toDateString() }}</p>
+                        </div>
+                        <div class="text-xs md:text-base font-light line-clamp-4 md:line-clamp-3">
+                            {{ $comment->content }}
+                        </div>
                     </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">Probability Theory - Assignment 1 with
-                            Solutions</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">KHO Ý TƯỞNG Writing TASK 2 (FULL Version)</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">Problems Solutions - Introduction to the
-                            Theory
-                            of
-                            Probability</a>
-                    </div>
-
-                    <div class="py-2 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">KHO Ý TƯỞNG Writing TASK 2 (FULL Version)</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">Homework Questions with Solutions - Theory of
-                            Probability</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">Probability Theory - Assignment 1 with
-                            Solutions</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">KHO Ý TƯỞNG Writing TASK 2 (FULL Version)</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">Problems Solutions - Introduction to the
-                            Theory
-                            of
-                            Probability</a>
-                    </div>
-
-                    <div class="py-3 border-t border-opacity-60 text-primary flex flex-row">
-                        <i class="fa-solid fa-file-lines pt-1"></i>
-                        <a href="#" class="ml-2 text-base font-normal">KHO Ý TƯỞNG Writing TASK 2 (FULL Version)</a>
-                    </div>
-
-                    <button
-                        class="py-3 w-full mt-4 text-base font-medium text-primary rounded-full border-2 border-primary hover:bg-primary hover:text-white">
-                        Show more
-                        <i class="fa-solid fa-angle-down ml-3"></i>
-                    </button>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -981,84 +977,113 @@
         <div @click.outside="open_report=false; open_report_content=true"
              x-data="{ message: '', report: ''}" class="relative max-w-2xl max-h-full mx-auto mt-48">
             <!-- Modal content -->
-            <div x-cloak x-show='open_report_content' class="relative bg-white rounded-lg shadow">
-                <!-- Modal header -->
-                <div class="flex items-start justify-between p-4 rounded-t">
-                    <h3 class="font-bold text-text-default-darker text-xl mx-auto my-2">
-                        Why do you want to report this document?
-                    </h3>
-                </div>
-                <!-- Modal body -->
-                <div class="space-y-6 px-6 py-2">
-                    <ul class="list-none">
-                        <li class="flex flex-row mb-3 items-center">
-                            <input type="radio" name="report_radio" id="report_radio_1"
-                                   value="infringement" x-model='report'
-                                   class="accent-primary min-w-[20px] w-5 h-5">
-                            <label class="ml-2 text-text-default-darker font-light text-base "
-                                   for="report_radio_1">This
-                                document contains copyright infringement</label>
-                        </li>
-                        <li class="flex flex-row mb-3 items-center">
-                            <input type="radio" name="report_radio" id="report_radio_2"
-                                   value="noconsistent" x-model="report"
-                                   class="accent-primary min-w-[20px] w-5 h-5">
-                            <label class="ml-2 text-text-default-darker font-light text-base"
-                                   for="report_radio_2">The
-                                content is not consistent with the description</label>
-                        </li>
-                        <li class="flex flex-row mb-3 items-center">
-                            <input type="radio" name="report_radio" id="report_radio_3"
-                                   value="duplicated" x-model="report"
-                                   class="accent-primary min-w-5 w-5 h-5">
-                            <label class="ml-2 text-text-default-darker font-light text-base"
-                                   for="report_radio_3">This
-                                document has been duplicated</label>
-                        </li>
-                        <li class="flex flex-row mb-3 items-center">
-                            <input type="radio" name="report_radio" id="report_radio_4"
-                                   value="belongme" x-model="report"
-                                   class="accent-primary min-w-[20px] w-5 h-5">
-                            <label class="ml-2 text-text-default-darker font-light text-base"
-                                   for="report_radio_4">User
-                                has uploaded a document that belongs to me</label>
-                        </li>
+            @if(Auth::check())
+                <div x-cloak x-show='open_report_content' class="relative bg-white rounded-lg shadow">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 rounded-t">
+                        <h3 class="font-bold text-text-default-darker text-xl mx-auto my-2">
+                            Why do you want to report this document?
+                        </h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="space-y-6 px-6 py-2">
+                        <ul class="list-none">
+                            <li class="flex flex-row mb-3 items-center">
+                                <input type="radio" name="report_radio" id="report_radio_1"
+                                       value="infringement" x-model='report'
+                                       class="report_radio accent-primary min-w-[20px] w-5 h-5">
+                                <label class="ml-2 text-text-default-darker font-light text-base "
+                                       for="report_radio_1">This
+                                    document contains copyright infringement</label>
+                            </li>
+                            <li class="flex flex-row mb-3 items-center">
+                                <input type="radio" name="report_radio" id="report_radio_2"
+                                       value="noconsistent" x-model="report"
+                                       class="report_radio accent-primary min-w-[20px] w-5 h-5">
+                                <label class="ml-2 text-text-default-darker font-light text-base"
+                                       for="report_radio_2">The
+                                    content is not consistent with the description</label>
+                            </li>
+                            <li class="flex flex-row mb-3 items-center">
+                                <input type="radio" name="report_radio" id="report_radio_3"
+                                       value="duplicated" x-model="report"
+                                       class="report_radio accent-primary min-w-5 w-5 h-5">
+                                <label class="ml-2 text-text-default-darker font-light text-base"
+                                       for="report_radio_3">This
+                                    document has been duplicated</label>
+                            </li>
+                            <li class="flex flex-row mb-3 items-center">
+                                <input type="radio" name="report_radio" id="report_radio_4"
+                                       value="belongme" x-model="report"
+                                       class="report_radio accent-primary min-w-[20px] w-5 h-5">
+                                <label class="ml-2 text-text-default-darker font-light text-base"
+                                       for="report_radio_4">User
+                                    has uploaded a document that belongs to me</label>
+                            </li>
 
-                        <li class="flex flex-row mb-3" @click="open_textarea=true">
-                            <input type="radio" name="report_radio" id="report_radio_other"
-                                   value="other" x-model="report"
-                                   class="accent-primary min-w-[20px] w-5 h-5">
-                            <label class="ml-2 text-text-default-darker font-light text-base"
-                                   for="report_radio_other">Other
-                                reason</label>
-                        </li>
-                    </ul>
-                    <div x-cloak x-show="report==='other'" class="mt-6 "
-                         id="report_other_input">
-                        <p class="text-text-default text-base font-medium">Please inform us
-                            about your
-                            reason to report
-                            this question:</p>
-                        <textarea rows="4" x-model="message"
-                                  class="block mt-3 p-2.5 w-full text-base text-gray-900 rounded-lg border-2 border-text-tag"
-                                  placeholder="Write your thoughts here..."></textarea>
+                            <li class="flex flex-row mb-3" @click="open_textarea=true">
+                                <input type="radio" name="report_radio" id="report_radio_other"
+                                       value="other" x-model="report"
+                                       class="report_radio accent-primary min-w-[20px] w-5 h-5">
+                                <label class="ml-2 text-text-default-darker font-light text-base"
+                                       for="report_radio_other">Other
+                                    reason</label>
+                            </li>
+                        </ul>
+                        <div x-cloak x-show="report==='other'" class="mt-6 "
+                             id="report_other_input">
+                            <p class="text-text-default text-base font-medium">Please inform us
+                                about your
+                                reason to report
+                                this question:</p>
+                            <textarea rows="4" x-model="message" name="message_other"
+                                      class="message_other block mt-3 p-2.5 w-full text-base text-gray-900 rounded-lg border-2 border-text-tag"
+                                      placeholder="Write your thoughts here..."></textarea>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex justify-end items-center p-6 space-x-2">
+                        <button @click="open_report=false" data-modal-hide="modal_report" type="button"
+                                class="text-primary bg-gray-100 font-medium rounded-full text-base px-5 py-2.5 text-center">
+                            Cancel
+                        </button>
+                        <button
+                            :disabled="(!message.length && report === 'other') || !report.length"
+                            @click="open_report_content=false"
+                            data-modal-hide="modal_report" type="submit"
+                            id="submit_report"
+                            class="text-white bg-primary disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
+                            Send
+                        </button>
                     </div>
                 </div>
-                <!-- Modal footer -->
-                <div class="flex justify-end items-center p-6 space-x-2">
-                    <button @click="open_report=false" data-modal-hide="modal_report" type="button"
-                            class="text-primary bg-gray-100 font-medium rounded-full text-base px-5 py-2.5 text-center">
-                        Cancel
-                    </button>
-                    <button
-                        :disabled="(!message.length && report === 'other') || !report.length"
-                        @click="open_report_content=false"
-                        data-modal-hide="modal_report" type="button"
-                        class="text-white bg-primary disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
-                        Send
-                    </button>
+            @else
+                <div x-cloak x-show='open_report_content' class="relative bg-white rounded-lg shadow">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 rounded-t">
+                        <h3 class="font-bold text-text-default-darker text-xl mx-auto my-2">
+                            You need to be logged in to perform this function
+                        </h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="space-y-6 px-6 py-2">
+
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex justify-end items-center p-6 space-x-2">
+                        <button @click="open_report=false" data-modal-hide="modal_report" type="button"
+                                class="text-primary bg-gray-100 font-medium rounded-full text-base px-5 py-2.5 text-center">
+                            Cancel
+                        </button>
+                        <a href="{{ route('frontend.auth.getLogin') }}"
+                           data-modal-hide="modal_report" type="submit"
+                           class="text-white bg-primary disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10">
+                            Login now
+                        </a>
+                    </div>
                 </div>
-            </div>
+
+            @endif
             <div x-cloak x-show="!open_report_content"
                  class="relative bg-white rounded-lg shadow p-5 max-w-lg">
                 <div class="text-right mb-2">
