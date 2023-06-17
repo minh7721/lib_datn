@@ -15,6 +15,10 @@ class Comment extends Model
     protected $table = 'comments';
     protected $guarded = ['id'];
 
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function documents() {
         return $this->belongsTo(Document::class, 'document_id');
     }
