@@ -45,8 +45,8 @@ class DocumentController extends Controller
                 ->where('is_public', true)
                 ->first();
         }
-    //        $document->viewed_count++;
-    //        $document->save();
+            $document->viewed_count++;
+            $document->save();
 
         $comments = Comment::with('users')->paginate('20');
         return view('frontend_v4.pages.document.detail', compact('document', 'comments'));
