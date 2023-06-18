@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="w-2/12 flex items-center">
-                                <a href="#" class="w-full bg-primary text-white px-4 py-2 text-center rounded-4.5xl cursor-pointer hover:bg-primary-darker">
+                                <a href="{{ route('frontend_v4.users.edit_document', ['id' => $document->id]) }}" class="w-full bg-primary text-white px-4 py-2 text-center rounded-4.5xl cursor-pointer hover:bg-primary-darker">
                                     Update
                                 </a>
                             </div>

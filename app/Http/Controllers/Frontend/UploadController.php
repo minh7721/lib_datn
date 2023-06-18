@@ -39,8 +39,8 @@ class UploadController extends Controller
                     'path' => $last_path,
                     'language' => $request->language,
                     'country' => $request->country,
-                    'active' => true,
-                    'is_public' => true,
+                    'active' => false,
+                    'is_public' => false,
                     'is_approved' => 1,
                     'can_download' => true
                 ]);
@@ -61,6 +61,8 @@ class UploadController extends Controller
                 $document->full_text = $full_text;
                 $document->description = $description;
                 $document->page_number = $total_page;
+                $document->active = true;
+                $document->is_public = true;
                 $document->save();
                 Session::flash('success', 'Upload success');
                 return redirect()->back();

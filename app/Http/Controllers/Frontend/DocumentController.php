@@ -9,6 +9,7 @@ use App\Models\Document;
 use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DocumentController extends Controller
 {
@@ -56,6 +57,48 @@ class DocumentController extends Controller
     {
         $documents = Document::where('active', true)->limit(10)->get();
         return view('frontend_v4.pages.search.search', compact('documents'));
+    }
+
+    public function edit(Request $request, $id){
+        $document = Document::where('user_id', \Auth::id())->where('id', $id)->first();
+        return view('frontend_v4.pages.upload.update', compact('document'));
+    }
+
+    public function update(Request $request, $id){
+        $this->validate($request, [
+            'title' => 'required|min:5|max:255',
+            'price' => 'required|min:0',
+        ]);
+        try {
+            $document = Document::where('user_id', \Auth::id())->where('id', $id)->first();
+            $document->title = $request->title;
+            $document->category_id = $request->category;
+            $document->price = $request->price;
+            $document->language = $request->language;
+            $document->country = $request->country;
+            $document->save();
+            Session::flash('success', 'Update document success');
+            return redirect()->back();
+        }
+        catch (\Exception $err){
+            Session::flash('error', 'Update document failed!!!');
+            return redirect()->back();
+        }
+    }
+
+    public function delete($id){
+        try {
+            $document = Document::where('user_id', \Auth::id())->where('id', $id)->first();
+            $document->active = false;
+            $document->is_public = false;
+            $document->save();
+//            Session::flash('success', 'Delete document success');
+            return redirect()->route('frontend_v4.users.document_upload', ['id' => \Auth::id()]);
+        }
+        catch (\Exception $err){
+//            Session::flash('error', 'Delete document failed!!!');
+            return redirect()->route('frontend_v4.users.document_upload', ['id' => \Auth::id()]);
+        }
     }
 
     public function like(Request $request, $slug)

@@ -14,7 +14,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DocumentController::class, 'index'])->name('document.home.index');
-Route::get('category/{slug}',[ CategoryController::class, 'listDocument'])->name('document.category.list');
+Route::get('category/{slug}', [CategoryController::class, 'listDocument'])->name('document.category.list');
 
 Route::get('auth/login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
 Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
@@ -52,21 +52,29 @@ Route::prefix('/')
         Route::post('{id}/setting', [UserController::class, 'UpdateSetting'])->name('frontend_v4.users.postSetting');
         Route::post('{id}/setting/password', [UserController::class, 'changePass'])->name('frontend_v4.users.postChangePass');
         Route::get('{id}/profile', [UserController::class, 'profile'])->name('frontend_v4.users.profile');
-        //Upload
-        Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
-        Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
 
         Route::get('/document/{slug}/like', [DocumentController::class, 'like'])->name('frontend_v4.document.like');
         Route::get('/document/{slug}/dislike', [DocumentController::class, 'dislike'])->name('frontend_v4.document.dislike');
+
+        // Payment
         Route::get('/payment', [PaymentController::class, 'getPayment'])->name('frontend_v4.payment.get');
         Route::post('/payment', [PaymentController::class, 'postPayment'])->name('frontend_v4.payment.post');
         Route::post('/vnpay/payment', [PaymentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
         Route::get('/vnpay/payment/response', [PaymentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');
         Route::post('/paypal/payment', [PaymentController::class, 'PaypalRedirectPayment'])->name('frontend_v4.redirectPaypal');
         Route::get('/paypal/payment/response', [PaymentController::class, 'PaypalGetResponse'])->name('frontend_v4.responsePaypal');
-        Route::post('/document/{slug}/report',[DocumentController::class, 'report'])->name('frontend_v4.document.report');
-        Route::post('/document/{slug}/comment',[DocumentController::class, 'comment'])->name('frontend_v4.document.comment');
+
+        // Report
+        Route::post('/document/{slug}/report', [DocumentController::class, 'report'])->name('frontend_v4.document.report');
+        Route::post('/document/{slug}/comment', [DocumentController::class, 'comment'])->name('frontend_v4.document.comment');
+
+        // Document upload
+        Route::get('upload', [UploadController::class, 'getUpload'])->name('frontend_v4.users.getUpload');
+        Route::post('upload', [UploadController::class, 'postUpload'])->name('frontend_v4.users.postUpload');
         Route::get('{id}/document_upload', [UserController::class, 'documentUpload'])->name('frontend_v4.users.document_upload');
+        Route::get('/document_upload/{id}/update', [DocumentController::class, 'edit'])->name('frontend_v4.users.edit_document');
+        Route::post('/document_upload/{id}/update', [DocumentController::class, 'update'])->name('frontend_v4.users.update_document');
+        Route::get('/document_upload/{id}/delete', [DocumentController::class, 'delete'])->name('frontend_v4.users.delete_document');
     });
 
 

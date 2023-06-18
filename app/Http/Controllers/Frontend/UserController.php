@@ -83,7 +83,10 @@ class UserController extends Controller
 
     public function documentUpload(Request $request, $id){
         $user = \Auth::user();
-        $documents = Document::where('user_id', $user->id)->paginate(20);
+        $documents = Document::where('user_id', $user->id)
+            ->where('active', true)
+            ->where('is_public', true)
+            ->paginate(20);
         $comments = Comment::with('documents')->where('user_id', $user->id)->paginate(20);
         return view('frontend_v4.pages.users.document_upload', compact('documents', 'comments'));
     }
