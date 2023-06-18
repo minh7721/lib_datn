@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-8 py-4 text-white w-1/2 mx-auto my-4">UPLOAD FILES</button>
+                    <button type="submit" class="bg-primary rounded-4.5xl hover:bg-primary-darker px-8 py-4 text-white w-1/2 mx-auto my-4">UPDATE</button>
                 </div>
             </form>
             <div x-data="{delete_account:false}">
