@@ -15,7 +15,6 @@ Route::group([
             (array)config('backpack.base.web_middleware', 'web'),
             (array)config('backpack.base.middleware_key', 'admin'),
             array('super_admin'),
-//            array('web')
         ),
 
     'namespace' => 'App\Http\Controllers\Admin',

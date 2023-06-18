@@ -48,7 +48,7 @@ class DocumentController extends Controller
             $document->viewed_count++;
             $document->save();
 
-        $comments = Comment::with('users')->paginate('20');
+        $comments = Comment::with('users')->where('document_id', $document->id)->paginate('20');
         return view('frontend_v4.pages.document.detail', compact('document', 'comments'));
     }
 

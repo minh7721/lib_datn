@@ -66,6 +66,7 @@ Route::prefix('/')
         Route::get('/paypal/payment/response', [PaymentController::class, 'PaypalGetResponse'])->name('frontend_v4.responsePaypal');
         Route::post('/document/{slug}/report',[DocumentController::class, 'report'])->name('frontend_v4.document.report');
         Route::post('/document/{slug}/comment',[DocumentController::class, 'comment'])->name('frontend_v4.document.comment');
+        Route::get('{id}/document_upload', [UserController::class, 'documentUpload'])->name('frontend_v4.users.document_upload');
     });
 
 

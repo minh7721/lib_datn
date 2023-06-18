@@ -516,21 +516,21 @@
                     <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Categories</p>
                 </a>
 
-                <a href="#top_schools"
+                <a href="#top_documents"
                    class="flex justify-center items-center text-secondary border border-gray-300 rounded-4.5xl flex flex-row px-4 py-3 hover:text-white hover:bg-secondary">
                     <i class="fa-solid fa-graduation-cap mr-2 md:mr-3"></i>
-                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Schools</p>
+                    <p class="text-[#503500] font-light md:font-semibold text-xs lg:text-2xl">Top document</p>
                 </a>
             </div>
 
-            <a href="#newly_uploaded" class="text-center">
-                <i class="fa-solid fa-chevron-down text-[#99999A] text-2xl cursor-pointer"></i>
+            <a href="#newly_uploaded" class="text-center relative">
+                <i class="fa-solid fa-chevron-down text-[#99999A] text-2xl cursor-pointer absolute animate-bounce"></i>
             </a>
         </div>
 
         {{-- Newly Uploaded Documents --}}
 
-        <div class="px-3 border-t border-main-background mb-10">
+        <div class="px-3 border-t border-main-background mb-10 mt-10">
             <div class="container mx-auto ">
                 <div class="flex flex-col mt-6">
                     <div class="text-center mb-6">
@@ -571,7 +571,7 @@
 
 
         {{-- Explore Top Schools --}}
-        <div class="container mx-auto px-3 mb-10" id="top_schools">
+        <div class="container mx-auto px-3 mb-10" id="top_documents">
             <div class="flex flex-col justify-center items-center">
                 <p class="mb-4 pt-12 lg:w-1/2 md:w-2/3 w-full border-t border-[#99999A] text-center font-medium text-3xl">
                     Top document</p>

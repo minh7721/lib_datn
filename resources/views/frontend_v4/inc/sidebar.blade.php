@@ -48,20 +48,9 @@
                     class=" flex flex-col gap-4 px-4 max-w-full py-2  h-max">
                     <li>
                         <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary	">To
-                            build a fire - Jack London. The wild call </a>
+                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary">You
+                            don't have any document download yet</a>
                     </li>
-                    <li>
-                        <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary	">To
-                            build a fire - Jack London. The wild call </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary	">To
-                            build a fire - Jack London. The wild call </a>
-                    </li>
-
                 </ul>
             </div>
             <div x-data="{ open_dropdown: false }">
@@ -79,20 +68,9 @@
                     class=" flex flex-col gap-4 px-4 max-w-full py-2  h-max">
                     <li>
                         <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary	">To
-                            build a fire - Jack London. The wild call </a>
+                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary">You
+                            don't have any document recent yet</a>
                     </li>
-                    <li>
-                        <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary	">To
-                            build a fire - Jack London. The wild call </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary	">To
-                            build a fire - Jack London. The wild call </a>
-                    </li>
-
                 </ul>
             </div>
             <a href="#" class="flex items-center gap-4 rounded-xl p-3 mt-1 hover:text-primary hover:bg-green-100">
