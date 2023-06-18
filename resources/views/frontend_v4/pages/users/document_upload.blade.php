@@ -61,8 +61,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-2/12 flex flex-col gap-2">
-                                <a href="#" class="bg-primary text-white px-4 py-2 text-center rounded-4.5xl cursor-pointer hover:bg-primary-darker">
+                            <div class="w-2/12 flex items-center">
+                                <a href="#" class="w-full bg-primary text-white px-4 py-2 text-center rounded-4.5xl cursor-pointer hover:bg-primary-darker">
                                     Update
                                 </a>
                             </div>
