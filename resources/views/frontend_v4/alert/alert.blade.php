@@ -2,9 +2,9 @@
     {{--@if ($errors->any())--}}
     {{--    <div class="text-white text-xl font-medium bg-red-600 px-4 py-2 rounded-1.5lg text-center mx-auto">--}}
     {{--        <ul>--}}
-    {{--            @foreach ($errors->all() as $error)--}}
-    {{--                <li>{{ $error }}</li>--}}
-    {{--            @endforeach--}}
+{{--                @foreach ($errors->all() as $error)--}}
+{{--                    <li>{{ $error }}</li>--}}
+{{--                @endforeach--}}
     {{--        </ul>--}}
     {{--    </div>--}}
     {{--@endif--}}

@@ -16,7 +16,7 @@
             {{ csrf_field()}}
             <div class="content">
                 <div class="welcome-text">
-                    <a href="/">
+                    <a href="{{ route('document.home.index') }}">
                         <img src="{{ asset('assets_v4/images/libshare-png-2.png') }}" class="logo">
                     </a>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="register-container">
                     <a class="forgot-password"
                        rel="nofollow"
-                       href="#">Forgot password</a>
+                       href="{{ route('frontend.auth.password.request') }}">Forgot password</a>
                     <a class="register" href="{{ route('frontend.auth.getRegister') }}">Register</a>
                 </div>
 

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginFacebookController;
 use App\Http\Controllers\Auth\LoginGoogleController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\DocumentController;
 use App\Http\Controllers\Frontend\DownloadController;
@@ -16,12 +18,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DocumentController::class, 'index'])->name('document.home.index');
 Route::get('category/{slug}', [CategoryController::class, 'listDocument'])->name('document.category.list');
 
-Route::get('auth/login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
-Route::post('auth/login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
-Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
 
-Route::get('auth/register', [RegisterController::class, 'getRegister'])->name('frontend.auth.getRegister');
-Route::post('auth/register/post', [RegisterController::class, 'postRegister'])->name('frontend.auth.postRegister');
+Route::prefix('auth')->group(function (){
+    Route::get('login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
+    Route::post('login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
+    Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
+
+    Route::get('register', [RegisterController::class, 'getRegister'])->name('frontend.auth.getRegister');
+    Route::post('register/post', [RegisterController::class, 'postRegister'])->name('frontend.auth.postRegister');
+
+    Route::get('/password/reset', [ForgotPasswordController::class, 'showResetForm'])
+        ->name('frontend.auth.password.request');
+    Route::post('/password/reset', [ForgotPasswordController::class, 'sendEmail'])
+        ->name('frontend.auth.password.send_mail');
+    Route::get('/password/reset/changepass/{token}', [PasswordController::class, 'showResetForm'])
+        ->name('frontend.auth.password.get.change_pass');
+    Route::post('/password/reset/changepass', [PasswordController::class, 'reset'])
+        ->name('frontend.auth.password.post.change_pass');
+});
+
 
 // Login Facebook
 Route::get('auth/facebook', function () {
