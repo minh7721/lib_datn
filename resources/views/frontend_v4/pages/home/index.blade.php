@@ -475,30 +475,17 @@
                 </p>
             </div>
 
-            <div x-data="searchs"
+            <form method="GET" action="{{ route('frontend_v4.document.search') }}"
                  class="w-10/12 md:w-9/12 h-12 flex items-center container_search mx-4 mb-6 lg:max-w-full lg:ml-10 relative border border-slate-300 rounded-4xl hover:border-primary grow group">
                 <div class="grow flex items-center justify-between md:mr-3">
-                    <input x-model="search" id="search_global"
+                    <input id="search_global" name="search"
                            class="text-xs md:text-base search rounded-4xl md:pl-6 w-full px-4 outline-none placeholder:text-base placeholder:font-thin placeholder:text-search  peer "
                            type="text" placeholder="Search for documents, universities and other resources">
-                    {{--                        <ul id="relative_search_result"--}}
-                    {{--                            class="hidden absolute border shadow border-slate-300 rounded bg-white  w-full peer-focus:block top-[calc(100%+10px)]  max-h-[50vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 z-50">--}}
-                    {{--                            <li class="p-2.5 text-primary" x-show="!noResults"># Relative search result</li>--}}
-                    {{--                            <template x-for="item in filterSearchs">--}}
-                    {{--                                <li class="hover:bg-slate-100 px-2.5">--}}
-                    {{--                                    <a href=""--}}
-                    {{--                                       class="text-base text-text-default-darker inline-block p-2 font-medium"--}}
-                    {{--                                       x-text="item.name">--}}
-                    {{--                                    </a>--}}
-                    {{--                                </li>--}}
-                    {{--                            </template>--}}
-                    {{--                            <li class="text-red-400 p-2.5" x-show="noResults"> No result!</li>--}}
-                    {{--                        </ul>--}}
                 </div>
-                <button class="mr-4 text-gray-500 group-hover:text-primary">
+                <button class="mr-4 text-gray-500 group-hover:text-primary" type="submit">
                     <i class=" fa-solid fa-magnifying-glass"></i>
                 </button>
-            </div>
+            </form>
 
             <div class="text-center mb-6 lg:w-2/3 w-full">
                 <p class="font-normal text-default-lighter text-base md:text-xl">OR EXPLORE</p>

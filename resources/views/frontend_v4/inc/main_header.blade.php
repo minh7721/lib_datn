@@ -6,30 +6,17 @@
                 <img src="{{ asset('assets_v4/images/libshare-png-2.png') }}" alt=""
                      class="max-h-6 w-12 object-cover">
             </a>
-            <div x-data="searchs"
-                 class="hidden h-10 md:flex items-center container_search mx-4 lg:max-w-3xl lg:ml-10 relative border border-slate-300 rounded-4xl hover:border-primary grow group">
-                <div class=" grow flex items-center justify-between md:mr-3">
-                    <input x-model="search" id="search_global"
-                           class="search rounded-4xl  md:pl-6 w-full  px-4 outline-none placeholder:text-base placeholder:font-thin placeholder:text-search  peer "
-                           type="text" placeholder="Search for documents, universities and other resources">
-                    <ul id="relative_search_result"
-                        class="hidden absolute border shadow border-slate-300 rounded bg-white  w-full peer-focus:block top-[calc(100%+10px)]  max-h-[50vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 z-50">
-                        <li class="p-2.5 text-primary" x-show="!noResults"># Relative search result</li>
-                        <template x-for="item in filterSearchs">
-                            <li class="hover:bg-slate-100 px-2.5">
-                                <a href=""
-                                   class="text-base text-text-default-darker inline-block p-2 font-medium"
-                                   x-text="item.name">
-                                </a>
-                            </li>
-                        </template>
-                        <li class="text-red-400 p-2.5" x-show="noResults"> No result!</li>
-                    </ul>
+            <form id="search_form" method="GET" action="{{ route('frontend_v4.document.search') }}"
+                  class="hidden h-10 md:flex items-center container_search mx-4 lg:max-w-3xl lg:ml-10 relative border border-slate-300 rounded-4xl hover:border-primary grow group">
+                <div class="grow flex items-center justify-between md:mr-3">
+                    <input id="search_global" name="search"
+                           class="search_global search rounded-4xl md:pl-6 w-full px-4 outline-none placeholder:text-base placeholder:font-thin placeholder:text-search peer"
+                           type="text" placeholder="Search for documents, categories and other resources">
                 </div>
-                <button class="mr-4 text-gray-500 group-hover:text-primary">
+                <button id="search_button" class="mr-4 text-gray-500 group-hover:text-primary" type="submit">
                     <i class=" fa-solid fa-magnifying-glass"></i>
                 </button>
-            </div>
+            </form>
         </div>
 
 
@@ -45,7 +32,8 @@
                         <i class="fa fa-globe"></i>
                         Payment
                     </button>
-                    <div x-data="{open_payment_body:true,open_payment_vnpay:false,open_payment_paypal:false}" x-cloak x-show="open_payment_content" tabindex="-1" aria-hidden="true"
+                    <div x-data="{open_payment_body:true,open_payment_vnpay:false,open_payment_paypal:false}" x-cloak
+                         x-show="open_payment_content" tabindex="-1" aria-hidden="true"
                          class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
                          aria-modal="true" role="dialog">
                         <div @click.outside="open_payment_content = false;"
@@ -77,7 +65,7 @@
                                     </div>
 
                                 </div>
-                                <div x-cloak x-show="open_payment_vnpay"  class="space-y-6 px-6 py-2">
+                                <div x-cloak x-show="open_payment_vnpay" class="space-y-6 px-6 py-2">
                                     <form method="post" action="{{ route('frontend_v4.postVNPay') }}"
                                           class="space-y-6">
                                         {{ csrf_field()}}
@@ -87,8 +75,10 @@
                                             <p class="text-lg font-normal">Other payment option</p>
                                         </div>
                                         <div class="w-full">
-                                            <p class="text-default text-base font-medium mb-3">Select the amount you want to deposit (VND)</p>
-                                            <input type="number" name="price" id="price" placeholder="Select the amount you want to deposit"
+                                            <p class="text-default text-base font-medium mb-3">Select the amount you
+                                                want to deposit (VND)</p>
+                                            <input type="number" name="price" id="price"
+                                                   placeholder="Select the amount you want to deposit"
                                                    class="text-base font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
                                         </div>
 
@@ -99,7 +89,7 @@
                                     </form>
 
                                 </div>
-                                <div x-cloak x-show="open_payment_paypal"  class="space-y-6 px-6 py-2">
+                                <div x-cloak x-show="open_payment_paypal" class="space-y-6 px-6 py-2">
                                     <form method="post" action="{{ route('frontend_v4.redirectPaypal') }}"
                                           class="space-y-6">
                                         {{ csrf_field()}}
@@ -109,8 +99,10 @@
                                             <p class="text-lg font-normal">Other payment option</p>
                                         </div>
                                         <div class="w-full">
-                                            <p class="text-default text-base font-medium mb-3">Select the amount you want to deposit ($)</p>
-                                            <input type="number" name="price_paypal" id="price_paypal" placeholder="Select the amount you want to deposit"
+                                            <p class="text-default text-base font-medium mb-3">Select the amount you
+                                                want to deposit ($)</p>
+                                            <input type="number" name="price_paypal" id="price_paypal"
+                                                   placeholder="Select the amount you want to deposit"
                                                    class="text-base font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
                                         </div>
 
@@ -123,11 +115,13 @@
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="flex justify-end items-center p-6 space-x-2">
-                                    <button @click="open_payment_content=false" data-modal-hide="modal_content" type="button"
+                                    <button @click="open_payment_content=false" data-modal-hide="modal_content"
+                                            type="button"
                                             class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
                                         Cancel
                                     </button>
-                                    <button @click="open_report_content=false" data-modal-hide="modal_report" type="button"
+                                    <button @click="open_report_content=false" data-modal-hide="modal_report"
+                                            type="button"
                                             class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
                                         Send
                                     </button>
@@ -210,28 +204,16 @@
 </header>
 
 {{-- search bar responsive --}}
-<div x-cloak x-show="open_search_responsive" class=" p-4 md:hidden bg-white md:px-10">
-    <div x-data="searchs" @click.outside="open_search_responsive = false"
+<div x-cloak x-show="open_search_responsive" class="p-4 md:hidden bg-white md:px-10">
+    <form @click.outside="open_search_responsive = false" id="search_form_mobile" method="GET" action="{{ route('frontend_v4.document.search') }}"
          class="container mx-auto h-10  flex items-center container_search lg:ml-10 relative border border-slate-300 rounded-4xl hover:border-primary grow group">
-        <div class=" grow flex items-center justify-between md:mr-3">
-            <input x-model="search" id="search_global"
-                   class="search rounded-4xl  md:pl-6 w-full  px-4   outline-none placeholder:text-base   md:placeholder:text-lg placeholder:font-thin placeholder:text-search  peer "
-                   type="text" placeholder="Search for documents, universities and other resources">
-            <ul id="relative_search_result"
-                class="hidden absolute border shadow border-slate-300 rounded bg-white  w-full peer-focus:block top-[calc(100%+10px)] lg:top-[calc(100%+20px)] max-h-[75vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-gray-200 hover:scrollbar-thumb-gray-700 z-50">
-                <li class="p-2.5 text-primary" x-show="!noResults"># Relative search result</li>
-                <template x-for="item in filterSearchs">
-                    <li class="hover:bg-slate-100 px-2.5">
-                        <a href="" class="text-base text-text-default-darker inline-block p-2 font-medium"
-                           x-text="item.name">
-                        </a>
-                    </li>
-                </template>
-                <li class="text-red-400 p-2.5" x-show="noResults"> No result!</li>
-            </ul>
+        <div class="grow flex items-center justify-between md:mr-3">
+            <input id="search_global_mobile" name="search"
+                   class="search_global rounded-4xl md:pl-6 w-full px-4 outline-none placeholder:text-base md:placeholder:text-lg placeholder:font-thin placeholder:text-search peer"
+                   type="text" placeholder="Search for documents, categories and other resources">
         </div>
-        <button class="mr-4 group-hover:text-primary">
+        <button id="search_button_mobile" class="mr-4 group-hover:text-primary" type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-    </div>
+    </form>
 </div>

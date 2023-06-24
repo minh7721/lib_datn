@@ -55,10 +55,6 @@ Route::get('auth/google', function () {
 })->name('frontend.login.google');
 Route::get('auth/google/callback', [LoginGoogleController::class, 'index']);
 Route::get('/document/{slug}', [DocumentController::class, 'view'])->name('document.detail');
-Route::get('/search', [DocumentController::class, 'search'])->name('frontend.document.search');
-Route::get('/course', function () {
-    return "Course";
-});
 
 Route::prefix('/')
     ->middleware('auth')
@@ -91,6 +87,9 @@ Route::prefix('/')
         Route::post('/document_upload/{id}/update', [DocumentController::class, 'update'])->name('frontend_v4.users.update_document');
         Route::get('/document_upload/{id}/delete', [DocumentController::class, 'delete'])->name('frontend_v4.users.delete_document');
     });
+
+// Search
+Route::get('/search}', [DocumentController::class, 'search'])->name('frontend_v4.document.search');
 
 
 Route::get('/download/{id}-{slug}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');
