@@ -47,7 +47,7 @@
                     } else {
                         toPreviousPage.disabled = false;
                     }
-                    if (currentPageInView === totalPageCount) {
+                    if (currentPageInView === totalPageCount || currentPageInView >= 20) {
                         toNextPage.disabled = true;
                     } else {
                         toNextPage.disabled = false;
@@ -100,6 +100,10 @@
             currentPageElement.addEventListener('keyup', (e) => {
                 if (e.keyCode !== 13) return;
                 let page = parseInt(currentPageElement.value);
+                if (page >= 20){
+                    page = 20;
+                    alert("You need download to view all document")
+                }
                 if (page > totalPageCount || page <= 0) return;
                 if (page <= pageArray[pageArray.length - 1]) {
                     document.getElementById('page-' + page).scrollIntoView({
@@ -174,6 +178,9 @@
                             behavior: 'smooth'
                         });
                     });
+                }
+                if (parseInt(currentPage) >= 20){
+                    alert("You need download to view all document")
                 }
             });
 
