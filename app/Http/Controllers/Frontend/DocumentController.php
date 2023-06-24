@@ -46,8 +46,8 @@ class DocumentController extends Controller
                 ->where('is_public', true)
                 ->first();
         }
-            $document->viewed_count++;
-            $document->save();
+        $document->viewed_count++;
+        $document->save();
 
         $comments = Comment::with('users')->where('document_id', $document->id)->paginate('20');
         return view('frontend_v4.pages.document.detail', compact('document', 'comments'));
@@ -55,16 +55,22 @@ class DocumentController extends Controller
 
     public function search(Request $request)
     {
-        $documents = Document::where('active', true)->limit(10)->get();
+        $searchQuery = $request->input('search');
+        $documents = Document::where('active', true)
+            ->where('is_public', true)
+            ->where('title', 'like', '%' . $searchQuery . '%')
+            ->limit(10)->get();
         return view('frontend_v4.pages.search.search', compact('documents'));
     }
 
-    public function edit(Request $request, $id){
+    public function edit(Request $request, $id)
+    {
         $document = Document::where('user_id', \Auth::id())->where('id', $id)->first();
         return view('frontend_v4.pages.upload.update', compact('document'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $this->validate($request, [
             'title' => 'required|min:5|max:255',
             'price' => 'required|min:0',
@@ -79,14 +85,14 @@ class DocumentController extends Controller
             $document->save();
             Session::flash('success', 'Update document success');
             return redirect()->back();
-        }
-        catch (\Exception $err){
+        } catch (\Exception $err) {
             Session::flash('error', 'Update document failed!!!');
             return redirect()->back();
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         try {
             $document = Document::where('user_id', \Auth::id())->where('id', $id)->first();
             $document->active = false;
@@ -94,8 +100,7 @@ class DocumentController extends Controller
             $document->save();
 //            Session::flash('success', 'Delete document success');
             return redirect()->route('frontend_v4.users.document_upload', ['id' => \Auth::id()]);
-        }
-        catch (\Exception $err){
+        } catch (\Exception $err) {
 //            Session::flash('error', 'Delete document failed!!!');
             return redirect()->route('frontend_v4.users.document_upload', ['id' => \Auth::id()]);
         }
