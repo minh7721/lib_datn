@@ -100,7 +100,7 @@
             currentPageElement.addEventListener('keyup', (e) => {
                 if (e.keyCode !== 13) return;
                 let page = parseInt(currentPageElement.value);
-                if (page >= 20){
+                if (page >= 20) {
                     page = 20;
                     alert("You need download to view all document")
                 }
@@ -179,7 +179,7 @@
                         });
                     });
                 }
-                if (parseInt(currentPage) >= 20){
+                if (parseInt(currentPage) >= 20) {
                     alert("You need download to view all document")
                 }
             });
@@ -563,7 +563,8 @@
                         <div class="bg-white rounded-1.5lg p-5 border border-slate-300">
                             <p class="font-medium text-center">Comments</p>
                             @if(Auth::check())
-                                <form method="POST" action="{{ route('frontend_v4.document.comment', ['slug' => $document->slug]) }}">
+                                <form method="POST"
+                                      action="{{ route('frontend_v4.document.comment', ['slug' => $document->slug]) }}">
                                     {{ csrf_field() }}
                                     <div x-data="{disableSubmit: true, message_comment: null}">
                                         <input type="text" x-model='message_comment' name="message_comment"
@@ -580,17 +581,17 @@
                                     </div>
                                 </form>
                             @endif
-                                {{ csrf_field() }}
-                                <input type="text"
-                                       class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
-                                       placeholder="Comments or ask a question">
-                                <div class="flex justify-end">
-                                    <a href="{{ route('frontend.auth.getLogin') }}"
-                                        class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
-                                        <i class="fa-solid fa-paper-plane"></i>
-                                        Login to comment
-                                    </a>
-                                </div>
+                            {{ csrf_field() }}
+                            <input type="text"
+                                   class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
+                                   placeholder="Comments or ask a question">
+                            <div class="flex justify-end">
+                                <a href="{{ route('frontend.auth.getLogin') }}"
+                                   class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    Login to comment
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -668,13 +669,138 @@
                             /
                             <div id="total_page" class="ml-1"></div>
                         </div>
-                        <div class="justify-center ">
-                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
-                               type="button"
-                               class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
-                                <i class="fa-solid fa-cloud-arrow-down"></i>
-                                <span class="sm:block hidden ml-2">Download</span>
-                            </a>
+                        <div class="justify-center">
+                            @if($document->price > 0)
+                                @if(Auth::check())
+
+                                @else
+                                    <div x-data="{open_payment_document: false}">
+                                        <button @click="open_payment_document=!open_payment_document"
+                                                type="button"
+                                                class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
+                                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                                            <span class="sm:block hidden ml-2">Download</span>
+                                        </button>
+                                        <div
+                                            x-data="{open_payment_document_body:true,open_payment_document_vnpay:false,open_payment_document_paypal:false}"
+                                            x-cloak
+                                            x-show="open_payment_document" tabindex="-1" aria-hidden="true"
+                                            class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
+                                            aria-modal="true" role="dialog">
+                                            <div @click.outside="open_payment_document = false;"
+                                                 class="relative max-w-2xl max-h-full mx-auto mt-48">
+                                                <!-- Modal content -->
+                                                <div class="relative bg-white rounded-lg shadow">
+                                                    <!-- Modal header -->
+                                                    <div class="flex items-start justify-between p-4 rounded-t">
+                                                        <h3 class="font-bold text-default text-xl mx-auto my-2">
+                                                            Please choose payment method
+                                                        </h3>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div x-show="open_payment_document_body" class="space-y-6 px-6 py-2">
+                                                        <div
+                                                            @click="open_payment_document_vnpay=true;open_payment_document_body=false;"
+                                                            class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
+                                                            <img
+                                                                src="{{ asset('assets_v4/images/logo/vnpay-logo-inkythuatso-01.png') }}"
+                                                                class="h-8 object-fill">
+                                                            <p class="text-default font-normal text-lg">Continue with
+                                                                VNPay</p>
+                                                        </div>
+
+                                                        <div
+                                                            @click="open_payment_document_paypal=true;open_payment_document_body=false;"
+                                                            class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
+                                                            <img src="{{ asset('assets_v4/images/logo/paypal_icon.png') }}"
+                                                                 class="h-8 object-fill">
+                                                            <p class="text-default font-normal text-lg">Continue with
+                                                                Paypal</p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div x-cloak x-show="open_payment_document_vnpay" class="space-y-6 px-6 py-2">
+                                                        <form method="post" target="_blank" action="{{ route('frontend_v4.document.postVNPay', ['id' => $document->id,'slug' => $document->slug]) }}"
+                                                              class="space-y-6">
+                                                            {{ csrf_field()}}
+                                                            <div @click="open_payment_document_vnpay=false;open_payment_document_body=true"
+                                                                 class="flex flex-row items-center text-primary gap-3 cursor-pointer">
+                                                                <i class="fa-solid fa-arrow-left"></i>
+                                                                <p class="text-lg font-normal">Other payment option</p>
+                                                            </div>
+                                                            <div class="w-full">
+                                                                <p class="text-default text-base font-medium mb-3">This is the amount you need to pay to download this document (VND)</p>
+                                                                <input type="text" id="price"
+                                                                       placeholder="Select the amount you want to deposit"
+                                                                       disabled
+                                                                       value="{{ $document->price * 23000 }}"
+                                                                       class="text-default text-base font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
+                                                                <input type="hidden" name="price" value="{{ $document->price * 23000 }}">
+                                                            </div>
+
+                                                            <button type="submit" id="sign_in"
+                                                                    class="w-full text-white font-normal text-lg mb-6 flex flex-row gap-2 justify-center items-center rounded-4.5xl px-4 py-2 bg-primary hover:bg-primary-darker">
+                                                                Continue
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                    <div x-cloak x-show="open_payment_document_paypal" class="space-y-6 px-6 py-2">
+                                                        <form method="post" target="_blank"
+                                                              action="{{ route('frontend_v4.document.redirectPaypal', ['id' => $document->id,'slug' => $document->slug]) }}"
+                                                              class="space-y-6">
+                                                            {{ csrf_field()}}
+                                                            <div @click="open_payment_document_paypal=false;open_payment_document_body=true"
+                                                                 class="flex flex-row items-center text-primary gap-3 cursor-pointer">
+                                                                <i class="fa-solid fa-arrow-left"></i>
+                                                                <p class="text-lg font-normal">Other payment option</p>
+                                                            </div>
+                                                            <div class="w-full">
+                                                                <p class="text-default text-base font-medium mb-3">This is the amount you need to pay to download this document ($)</p>
+                                                                <input type="text" id="price_paypal"
+                                                                       placeholder="Select the amount you want to deposit"
+                                                                       disabled
+                                                                       value="{{ $document->price }}"
+                                                                       class="text-base text-default font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
+                                                                <input type="hidden" name="price_paypal" value="{{ $document->price }}">
+                                                            </div>
+
+                                                            <button type="submit" id="sign_in"
+                                                                    class="w-full text-white font-normal text-lg mb-6 flex flex-row gap-2 justify-center items-center rounded-4.5xl px-4 py-2 bg-primary hover:bg-primary-darker">
+                                                                Continue
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="flex justify-end items-center p-6 space-x-2">
+                                                        {{--                                                    <button @click="open_payment_document=false"--}}
+                                                        {{--                                                            data-modal-hide="modal_content"--}}
+                                                        {{--                                                            type="button"--}}
+                                                        {{--                                                            class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">--}}
+                                                        {{--                                                        Cancel--}}
+                                                        {{--                                                    </button>--}}
+                                                        {{--                                                    <button--}}
+                                                        {{--                                                            data-modal-hide="modal_report"--}}
+                                                        {{--                                                            type="button"--}}
+                                                        {{--                                                            class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">--}}
+                                                        {{--                                                        Send--}}
+                                                        {{--                                                    </button>--}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                @endif
+                            @else
+                                <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
+                                   type="button"
+                                   class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
+                                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                                    <span class="sm:block hidden ml-2">Download</span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -684,7 +810,8 @@
                 <!-- Comment -->
                 <div class="hidden lg:block bg-white rounded-1.5lg p-5">
                     <p class="font-medium text-center">Comments</p>
-                    <form method="POST" action="{{ route('frontend_v4.document.comment', ['slug' => $document->slug]) }}">
+                    <form method="POST"
+                          action="{{ route('frontend_v4.document.comment', ['slug' => $document->slug]) }}">
                         {{ csrf_field() }}
                         <div x-data="{disableSubmit: true, message_comment: null}">
                             <input type="text" x-model='message_comment' name="message_comment"

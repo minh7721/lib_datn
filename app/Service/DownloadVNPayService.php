@@ -7,16 +7,16 @@ use App\Models\Enums\SourcePayment;
 use App\Models\Payment;
 use App\Models\User;
 
-class VNPayService
+class DownloadVNPayService
 {
-    public static function create($price)
+    public static function create($price, $document)
     {
         $vnp_TmnCode = config('paymnet_service.vnpay.vnp_TmnCode'); //Mã website tại VNPAY
         $vnp_HashSecret = config('paymnet_service.vnpay.vnp_HashSecret'); //Chuỗi bí mật
         $vnp_Url = config('paymnet_service.vnpay.vnp_Url');
-        $vnp_Returnurl = route('frontend_v4.getVNPay');
+        $vnp_Returnurl = route('frontend_v4.document.getVNPay', ['id' => $document->id,'slug' => $document->slug]);
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng
-        $vnp_OrderInfo = "Thanh toan qua hoa don qua VNPay";
+        $vnp_OrderInfo = "Mua tai lieu qua VNPay voi id: {$document->id}";
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = $price * 100;
         $vnp_Locale = 'vn';
@@ -104,32 +104,26 @@ class VNPayService
 
     protected static function insert($inputData)
     {
-            if (!Payment::where('trading_code', $inputData['vnp_TransactionNo'])->first()){
-                if ($inputData['vnp_TransactionStatus'] == 0){
-                    $status = PaymentStatus::SUCCESS;
-                }else{
-                    $status = PaymentStatus::ERROR;
-                }
-                $dollar_to_vnd = 23000;
-                $price_vnd = ceil($inputData['vnp_Amount']/100);
-                $price_dollar = round($price_vnd/$dollar_to_vnd, 2);
-                $user_id = \Auth::id() ?? 1;
-
-                Payment::create([
-                    'user_id' => $user_id,
-                    'status' => $status,
-                    'price' => $price_dollar,
-                    'trading_code' => $inputData['vnp_TransactionNo'],
-                    'transaction_id' => $inputData['vnp_TxnRef'],
-                    'message' => $inputData['vnp_OrderInfo'],
-                    'source' => SourcePayment::VNPAY
-                ]);
-
-                $user = User::where('id', $user_id)->first();
-                $money = $price_dollar + $user->money;
-                $user->update([
-                    'money' =>  $money
-                ]);
+        if (!Payment::where('trading_code', $inputData['vnp_TransactionNo'])->first()){
+            if ($inputData['vnp_TransactionStatus'] == 0){
+                $status = PaymentStatus::SUCCESS;
+            }else{
+                $status = PaymentStatus::ERROR;
             }
+            $dollar_to_vnd = 23000;
+            $price_vnd = ceil($inputData['vnp_Amount']/100);
+            $price_dollar = round($price_vnd/$dollar_to_vnd, 2);
+            $user_id = \Auth::id() ?? 1;
+            Payment::create([
+                'user_id' => $user_id,
+                'status' => $status,
+                'price' => $price_dollar,
+                'trading_code' => $inputData['vnp_TransactionNo'],
+                'transaction_id' => $inputData['vnp_TxnRef'],
+                'message' => $inputData['vnp_OrderInfo'],
+                'source' => SourcePayment::VNPAY
+            ]);
+
+        }
     }
 }

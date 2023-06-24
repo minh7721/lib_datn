@@ -19,7 +19,7 @@ Route::get('/', [DocumentController::class, 'index'])->name('document.home.index
 Route::get('category/{slug}', [CategoryController::class, 'listDocument'])->name('document.category.list');
 
 
-Route::prefix('auth')->group(function (){
+Route::prefix('auth')->group(function () {
     Route::get('login', [LoginController::class, 'getLogin'])->name('frontend.auth.getLogin');
     Route::post('login/post', [LoginController::class, 'postLogin'])->name('frontend.auth.postLogin');
     Route::get('logout', [LoginController::class, 'logout'])->name('frontend.auth.logout');
@@ -68,8 +68,8 @@ Route::prefix('/')
         Route::get('/document/{slug}/dislike', [DocumentController::class, 'dislike'])->name('frontend_v4.document.dislike');
 
         // Payment
-        Route::get('/payment', [PaymentController::class, 'getPayment'])->name('frontend_v4.payment.get');
-        Route::post('/payment', [PaymentController::class, 'postPayment'])->name('frontend_v4.payment.post');
+        Route::get('/payment/{id}-{slug}', [PaymentController::class, 'getPayment'])->name('frontend_v4.payment.get');
+        Route::post('/payment/{id}-{slug}', [PaymentController::class, 'postPayment'])->name('frontend_v4.payment.post');
         Route::post('/vnpay/payment', [PaymentController::class, 'VNPayRedirectPayment'])->name('frontend_v4.postVNPay');
         Route::get('/vnpay/payment/response', [PaymentController::class, 'VNPayGetResponse'])->name('frontend_v4.getVNPay');
         Route::post('/paypal/payment', [PaymentController::class, 'PaypalRedirectPayment'])->name('frontend_v4.redirectPaypal');
@@ -88,8 +88,14 @@ Route::prefix('/')
         Route::get('/document_upload/{id}/delete', [DocumentController::class, 'delete'])->name('frontend_v4.users.delete_document');
     });
 
-// Search
-Route::get('/search}', [DocumentController::class, 'search'])->name('frontend_v4.document.search');
+Route::prefix('document')->group(function () {
+    // Search
+    Route::get('/search}', [DocumentController::class, 'search'])->name('frontend_v4.document.search');
 
-
-Route::get('/download/{id}-{slug}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');
+    // Download
+    Route::get('/download/{id}-{slug}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');
+    Route::post('/vnpay/payment/{id}-{slug}', [DownloadController::class, 'VNPayRedirectPayment'])->name('frontend_v4.document.postVNPay');
+    Route::get('/vnpay/payment/response/{id}-{slug}', [DownloadController::class, 'VNPayGetResponse'])->name('frontend_v4.document.getVNPay');
+    Route::post('/paypal/payment/{id}-{slug}', [DownloadController::class, 'PaypalRedirectPayment'])->name('frontend_v4.document.redirectPaypal');
+    Route::get('/paypal/payment/response/{id}-{slug}', [DownloadController::class, 'PaypalGetResponse'])->name('frontend_v4.document.responsePaypal');
+});

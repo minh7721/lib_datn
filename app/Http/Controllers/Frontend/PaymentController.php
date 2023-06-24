@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
 use App\Models\Enums\PaymentStatus;
 use App\Models\Enums\SourcePayment;
 use App\Models\Payment;
@@ -25,14 +26,16 @@ class PaymentController extends Controller
         $environment = new SandboxEnvironment(config('paymnet_service.paypal.paypal_client_id'), config('paymnet_service.paypal.paypal_client_secret'));
         $this->client_paypal = new PayPalHttpClient($environment);
     }
-    public function getPayment(){
-
-        return view('frontend_v4.pages.payment.payment');
-    }
-
-    public function postPayment(){
-        dd(1);
-    }
+//    public function getPayment(Request $request, $id, $slug){
+//        $document = Document::where('id', $id)
+//            ->where('slug', $slug)
+//            ->first();
+//        return view('frontend_v4.pages.payment.payment');
+//    }
+//
+//    public function postPayment(){
+//        dd(1);
+//    }
 
     public function VNPayRedirectPayment(Request $request)
     {
@@ -40,11 +43,10 @@ class PaymentController extends Controller
             'price' => 'required|numeric|min:10000|max:10000000',
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()->with('jsAlert', 'Minimum amount is 10.000 VND and maximum amount is 10.000.000 VND');
         }
-        $vnpay_service = VNPayService::create($request->price);
+        $vnpay_service = VNPayService::create($request->price, route('frontend_v4.getVNPay'));
         return redirect($vnpay_service);
     }
 

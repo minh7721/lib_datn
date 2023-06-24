@@ -42,7 +42,7 @@
                             <div class="relative bg-white rounded-lg shadow">
                                 <!-- Modal header -->
                                 <div class="flex items-start justify-between p-4 rounded-t">
-                                    <h3 class="font-bold text-text-default-darker text-xl mx-auto my-2">
+                                    <h3 class="font-bold text-default text-xl mx-auto my-2">
                                         Please choose payment method
                                     </h3>
                                 </div>
