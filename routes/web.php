@@ -90,7 +90,7 @@ Route::prefix('/')
 
 Route::prefix('document')->group(function () {
     // Search
-    Route::get('/search}', [DocumentController::class, 'search'])->name('frontend_v4.document.search');
+    Route::get('/search/list', [DocumentController::class, 'search'])->name('frontend_v4.document.search');
 
     // Download
     Route::get('/download/{id}-{slug}', [DownloadController::class, 'download'])->name('frontend_v4.document.download');
