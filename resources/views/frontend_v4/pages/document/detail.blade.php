@@ -672,6 +672,108 @@
                         <div class="justify-center">
                             @if($document->price > 0)
                                 @if(Auth::check())
+                                    <div x-data="{open_buy_document: false}">
+                                        <button @click="open_buy_document = !open_buy_document"
+                                                type="button"
+                                                class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
+                                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                                            <span class="sm:block hidden ml-2">Download</span>
+                                        </button>
+                                        @if(Auth::user()->money >= $document->price)
+                                            <div
+                                                x-cloak
+                                                x-show="open_buy_document" tabindex="-1" aria-hidden="true"
+                                                class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
+                                                aria-modal="true" role="dialog">
+                                                <div @click.outside="open_buy_document = false;"
+                                                     class="relative max-w-2xl max-h-full mx-auto mt-48">
+                                                    <!-- Modal content -->
+                                                    <form method="GET" action="{{ route('frontend_v4.document.download', ['id' => $document->id, 'slug' => $document->slug]) }}" class="relative bg-white rounded-lg shadow">
+                                                        <!-- Modal header -->
+                                                        <div class="flex items-start justify-between p-4 rounded-t">
+                                                            <h3 class="font-bold text-default text-xl mx-auto my-2">
+                                                                Buy document
+                                                            </h3>
+                                                        </div>
+                                                        <!-- Modal body -->
+                                                        <div
+                                                            class="space-y-6 px-6 py-2">
+                                                            <div
+                                                                @click=""
+                                                                class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
+                                                                <div class="text-default font-normal text-lg flex flex-row">
+                                                                    Are you sure you want to buy this brochure for <p class="text-primary font-bold mx-1">${{ $document->price }}</p>?
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal footer -->
+                                                        <div class="flex justify-end items-center p-6 space-x-2">
+                                                            <button @click="open_buy_document=false"
+                                                                    data-modal-hide="modal_content"
+                                                                    type="button"
+                                                                    class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
+                                                                Cancel
+                                                            </button>
+                                                            <button
+                                                                @click="open_buy_document=false"
+                                                                data-modal-hide="modal_report"
+                                                                type="submit"
+                                                                class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
+                                                                Buy
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div
+                                                x-cloak
+                                                x-show="open_buy_document" tabindex="-1" aria-hidden="true"
+                                                class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
+                                                aria-modal="true" role="dialog">
+                                                <div @click.outside="open_buy_document = false;"
+                                                     class="relative max-w-2xl max-h-full mx-auto mt-48">
+                                                    <!-- Modal content -->
+                                                    <div class="relative bg-white rounded-lg shadow">
+                                                        <!-- Modal header -->
+                                                        <div class="flex items-start justify-between p-4 rounded-t">
+                                                            <h3 class="font-bold text-default text-xl mx-auto my-2">
+                                                                Buy document
+                                                            </h3>
+                                                        </div>
+                                                        <!-- Modal body -->
+                                                        <div
+                                                            class="space-y-6 px-6 py-2">
+                                                            <div
+                                                                @click=""
+                                                                class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
+                                                                <div class="text-default font-normal text-lg flex flex-row">
+                                                                    Your account balance is not enough, please recharge and try again
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal footer -->
+                                                        <div class="flex justify-end items-center p-6 space-x-2">
+                                                            <button @click="open_buy_document=false"
+                                                                    data-modal-hide="modal_content"
+                                                                    type="button"
+                                                                    class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
+                                                                Cancel
+                                                            </button>
+                                                            <button
+                                                                @click="open_buy_document=false"
+                                                                data-modal-hide="modal_report"
+                                                                type="button"
+                                                                class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
+                                                                OK
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                    </div>
 
                                 @else
                                     <div x-data="{open_payment_document: false}">
@@ -698,7 +800,8 @@
                                                         </h3>
                                                     </div>
                                                     <!-- Modal body -->
-                                                    <div x-show="open_payment_document_body" class="space-y-6 px-6 py-2">
+                                                    <div x-show="open_payment_document_body"
+                                                         class="space-y-6 px-6 py-2">
                                                         <div
                                                             @click="open_payment_document_vnpay=true;open_payment_document_body=false;"
                                                             class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
@@ -712,30 +815,37 @@
                                                         <div
                                                             @click="open_payment_document_paypal=true;open_payment_document_body=false;"
                                                             class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
-                                                            <img src="{{ asset('assets_v4/images/logo/paypal_icon.png') }}"
-                                                                 class="h-8 object-fill">
+                                                            <img
+                                                                src="{{ asset('assets_v4/images/logo/paypal_icon.png') }}"
+                                                                class="h-8 object-fill">
                                                             <p class="text-default font-normal text-lg">Continue with
                                                                 Paypal</p>
                                                         </div>
 
                                                     </div>
-                                                    <div x-cloak x-show="open_payment_document_vnpay" class="space-y-6 px-6 py-2">
-                                                        <form method="post" target="_blank" action="{{ route('frontend_v4.document.postVNPay', ['id' => $document->id,'slug' => $document->slug]) }}"
+                                                    <div x-cloak x-show="open_payment_document_vnpay"
+                                                         class="space-y-6 px-6 py-2">
+                                                        <form method="post" target="_blank"
+                                                              action="{{ route('frontend_v4.document.postVNPay', ['id' => $document->id,'slug' => $document->slug]) }}"
                                                               class="space-y-6">
                                                             {{ csrf_field()}}
-                                                            <div @click="open_payment_document_vnpay=false;open_payment_document_body=true"
-                                                                 class="flex flex-row items-center text-primary gap-3 cursor-pointer">
+                                                            <div
+                                                                @click="open_payment_document_vnpay=false;open_payment_document_body=true"
+                                                                class="flex flex-row items-center text-primary gap-3 cursor-pointer">
                                                                 <i class="fa-solid fa-arrow-left"></i>
                                                                 <p class="text-lg font-normal">Other payment option</p>
                                                             </div>
                                                             <div class="w-full">
-                                                                <p class="text-default text-base font-medium mb-3">This is the amount you need to pay to download this document (VND)</p>
+                                                                <p class="text-default text-base font-medium mb-3">This
+                                                                    is the amount you need to pay to download this
+                                                                    document (VND)</p>
                                                                 <input type="text" id="price"
                                                                        placeholder="Select the amount you want to deposit"
                                                                        disabled
                                                                        value="{{ $document->price * 23000 }}"
                                                                        class="text-default text-base font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
-                                                                <input type="hidden" name="price" value="{{ $document->price * 23000 }}">
+                                                                <input type="hidden" name="price"
+                                                                       value="{{ $document->price * 23000 }}">
                                                             </div>
 
                                                             <button type="submit" id="sign_in"
@@ -745,24 +855,29 @@
                                                         </form>
 
                                                     </div>
-                                                    <div x-cloak x-show="open_payment_document_paypal" class="space-y-6 px-6 py-2">
+                                                    <div x-cloak x-show="open_payment_document_paypal"
+                                                         class="space-y-6 px-6 py-2">
                                                         <form method="post" target="_blank"
                                                               action="{{ route('frontend_v4.document.redirectPaypal', ['id' => $document->id,'slug' => $document->slug]) }}"
                                                               class="space-y-6">
                                                             {{ csrf_field()}}
-                                                            <div @click="open_payment_document_paypal=false;open_payment_document_body=true"
-                                                                 class="flex flex-row items-center text-primary gap-3 cursor-pointer">
+                                                            <div
+                                                                @click="open_payment_document_paypal=false;open_payment_document_body=true"
+                                                                class="flex flex-row items-center text-primary gap-3 cursor-pointer">
                                                                 <i class="fa-solid fa-arrow-left"></i>
                                                                 <p class="text-lg font-normal">Other payment option</p>
                                                             </div>
                                                             <div class="w-full">
-                                                                <p class="text-default text-base font-medium mb-3">This is the amount you need to pay to download this document ($)</p>
+                                                                <p class="text-default text-base font-medium mb-3">This
+                                                                    is the amount you need to pay to download this
+                                                                    document ($)</p>
                                                                 <input type="text" id="price_paypal"
                                                                        placeholder="Select the amount you want to deposit"
                                                                        disabled
                                                                        value="{{ $document->price }}"
                                                                        class="text-base text-default font-medium rounded-1.5lg px-3 py-4 border border-main-background w-full hover:border-primary outline-primary">
-                                                                <input type="hidden" name="price_paypal" value="{{ $document->price }}">
+                                                                <input type="hidden" name="price_paypal"
+                                                                       value="{{ $document->price }}">
                                                             </div>
 
                                                             <button type="submit" id="sign_in"

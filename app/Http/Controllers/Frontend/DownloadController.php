@@ -31,6 +31,17 @@ class DownloadController extends Controller
             ->where('slug', $slug)
             ->first();
         $this->document = $document;
+        if (\Auth::check()){
+            $user =\Auth::user();
+            if ($user->money >= $document->price){
+                $user->money = round(($user->money - $document->price),2);
+                $user->save();
+                return DownloadService::download($document);
+            }
+            else{
+                return redirect()->back()->with('jsAlert', 'Your account balance is not enough, please recharge and try again');
+            }
+        }
         return DownloadService::download($document);
     }
 
