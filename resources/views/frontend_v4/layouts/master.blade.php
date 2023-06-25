@@ -67,7 +67,7 @@
     @include('frontend_v4.inc.footer')
 </div>
 <div id="back-to-top" @click="backToTop"
-     class="cursor-pointer fixed bottom-10 right-10 h-12 w-12 rounded-full border border-solid border-slate-300 bg-primary hidden items-center justify-center hover:bg-primary-darker shadow-around">
+     class="hidden md:flex cursor-pointer fixed bottom-10 right-10 h-12 w-12 rounded-full border border-solid border-slate-300 bg-primary items-center justify-center hover:bg-primary-darker shadow-around">
     <i class="fa-solid fa-up-long text-white"></i>
 </div>
 

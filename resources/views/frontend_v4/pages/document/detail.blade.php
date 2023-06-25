@@ -478,12 +478,12 @@
                                    class="fa-solid fa-chevron-down group-hover:text-primary"></i>
                             </span>
                         </div>
-                        <div>
-                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
-                               class="inline-flex h-10 w-10 rounded-full bg-primary justify-center items-center mr-2 hover:bg-primary-darker">
-                                <i class="fa-solid fa-cloud-arrow-down text-white"></i>
-                            </a>
-                        </div>
+    {{--                        <div>--}}
+    {{--                            <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"--}}
+    {{--                               class="inline-flex h-10 w-10 rounded-full bg-primary justify-center items-center mr-2 hover:bg-primary-darker">--}}
+    {{--                                <i class="fa-solid fa-cloud-arrow-down text-white"></i>--}}
+    {{--                            </a>--}}
+    {{--                        </div>--}}
                     </div>
                     <div x-cloak x-show="open_comment_responsive" class="md:hidden mt-4 md:mt-0 w-full items-end">
                         <div class="flex lg:flex-row flex-col mt-5 gap-3">
@@ -964,49 +964,49 @@
                 <div class="hidden lg:block bg-white rounded-1.5lg p-5 pb-0 shadow-around lg:shadow-none">
                     <h2 class="lg:font-medium lg:text-center font-semibold text-xl">Other related documents</h2>
                     <div class="flex flex-wrap mt-4 xl:px-6">
-                        @for ($i = 0; $i < 6; $i++)
+                        @foreach($top_documents as $top_document)
                             <div class="w-full md:w-1/2 lg:w-full flex flex-col px-1 pb-3">
                                 <div class="flex lg:block p-1 border border-gray-200 rounded-1.5lg hover:shadow-hover">
-                                    <a href="#"
+                                    <a href="{{ route('document.detail', ['slug' => $top_document->slug]) }}"
                                        class="block rounded h-28 lg:h-32 xl:h-40 w-2/5 lg:w-full py-3 lg:py-0 overflow-hidden">
                                         <img class=""
                                              src="https://data03.123doks.com/thumbv2/123dok/000/068/68235/cover.webp"
                                              alt="">
                                     </a>
                                     <div class="p-3 text-default-lighter">
-                                        <a href="#" class="text-primary font-medium line-clamp-2">
-                                            <h3>HOW TO WRITE IELTS REPORTS Ielts-Writing</h3>
+                                        <a href="{{ route('document.detail', ['slug' => $top_document->slug]) }}" class="text-primary font-medium line-clamp-2">
+                                            <h3>{{ $top_document->title }}</h3>
                                         </a>
                                         <div class="flex mt-2 justify-between">
                                             <div class=" text-sm font-light">
                                                 <i class="fa-solid fa-book lg:hidden"></i>
-                                                <span>Course E123</span>
+                                                <span>{{ $top_document->categories->name }}</span>
                                             </div>
                                             <div class="flex lg:hidden items-baseline gap-2.5">
                                                 <i class="fa-solid fa-thumbs-up text-secondary"></i>
-                                                <span class="text-secondary">100%</span>
+                                                <span class="text-secondary">{{ $top_document->helpful_count }}</span>
                                             </div>
                                         </div>
                                         <div class="mt-5 hidden lg:block">
                                             <div class="flex justify-around">
                                                 <div class="inline-flex items-center justify-center gap-2">
                                                     <i class="fa-solid fa-file"></i>
-                                                    <span>12</span>
+                                                    <span>{{ $top_document->page_number }}</span>
                                                 </div>
                                                 <div class="inline-flex items-center justify-center gap-2">
                                                     <i class="fa-solid fa-cloud-arrow-down"></i>
-                                                    <span>20</span>
+                                                    <span>{{ $top_document->downloaded_count }}</span>
                                                 </div>
                                                 <div class="inline-flex items-center justify-center gap-2">
                                                     <i class="fa-solid fa-eye"></i>
-                                                    <span>70</span>
+                                                    <span>{{ $top_document->viewed_count }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -1019,49 +1019,49 @@
             class="container mx-auto mb-4 block lg:hidden bg-white rounded-1.5lg p-5 pb-0 shadow-around lg:shadow-none">
             <h2 class="lg:font-medium lg:text-center font-semibold text-xl">Other related documents</h2>
             <div class="flex flex-wrap mt-4 xl:px-6">
-                @for ($i = 0; $i < 6; $i++)
+                @foreach($top_documents as $top_document)
                     <div class="w-full md:w-1/2 lg:w-full flex flex-col px-1 pb-3">
                         <div class="flex lg:block p-1 border border-gray-200 rounded-1.5lg hover:shadow-hover">
-                            <a href="#"
-                               class="block rounded h-28 lg:h-32 xl:h-40 w-2/5 lg:w-full py-3 lg:py-0 overflow-hidden">
+                            <a href="{{ route('document.detail', ['slug' => $top_document->slug]) }}"
+                               class="block rounded h-28 lg:h-32 xl:h-40 w-2/5 lg:w-full py-3 lg:py-0 overflow-hidden w-3/12">
                                 <img class=""
                                      src="https://data03.123doks.com/thumbv2/123dok/000/068/68235/cover.webp"
                                      alt="">
                             </a>
-                            <div class="p-3 text-default-lighter">
-                                <a href="#" class="text-primary font-medium line-clamp-2">
-                                    <h3>HOW TO WRITE IELTS REPORTS Ielts-Writing</h3>
+                            <div class="p-3 text-default-lighter w-9/12">
+                                <a href="{{ route('document.detail', ['slug' => $top_document->slug]) }}" class="text-primary font-medium line-clamp-2">
+                                    <h3>{{ $top_document->title }}</h3>
                                 </a>
                                 <div class="flex mt-2 justify-between">
                                     <div class=" text-sm font-light">
                                         <i class="fa-solid fa-book lg:hidden"></i>
-                                        <span>Course E123</span>
+                                        <span>{{ $top_document->categories->name }}</span>
                                     </div>
                                     <div class="flex lg:hidden items-baseline gap-2.5">
                                         <i class="fa-solid fa-thumbs-up text-secondary"></i>
-                                        <span class="text-secondary">100%</span>
+                                        <span class="text-secondary">{{ $top_document->helpful_count }}</span>
                                     </div>
                                 </div>
                                 <div class="mt-5 hidden lg:block">
                                     <div class="flex justify-around">
                                         <div class="inline-flex items-center justify-center gap-2">
                                             <i class="fa-solid fa-file"></i>
-                                            <span>12</span>
+                                            <span>{{ $top_document->page_number }}</span>
                                         </div>
                                         <div class="inline-flex items-center justify-center gap-2">
                                             <i class="fa-solid fa-cloud-arrow-down"></i>
-                                            <span>20</span>
+                                            <span>{{ $top_document->downloaded_count }}</span>
                                         </div>
                                         <div class="inline-flex items-center justify-center gap-2">
                                             <i class="fa-solid fa-eye"></i>
-                                            <span>70</span>
+                                            <span>{{ $top_document->viewed_count }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
         <div class="container mx-auto shadow-around mb-4 rounded-1.5lg">

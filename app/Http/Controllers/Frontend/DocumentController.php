@@ -49,8 +49,17 @@ class DocumentController extends Controller
         $document->viewed_count++;
         $document->save();
 
+        $top_documents = Document::with('categories')
+            ->where('active', true)
+            ->where('is_public', true)
+            ->where('category_id', $document->category_id)
+            ->where('id', '!=',$document->id)
+            ->orderByDesc('viewed_count')
+            ->limit(6)
+            ->get();
+
         $comments = Comment::with('users')->where('document_id', $document->id)->paginate('20');
-        return view('frontend_v4.pages.document.detail', compact('document', 'comments'));
+        return view('frontend_v4.pages.document.detail', compact('document', 'comments', 'top_documents'));
     }
 
     public function search(Request $request)

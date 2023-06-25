@@ -9,6 +9,7 @@ document.addEventListener("alpine:init", () => {
                     this.open_comment_responsive = false;
                 }
             });
+            if (window.innerWidth >= 768) {
             document
                 .getElementById("content")
                 .addEventListener("scroll", (e) => {
@@ -21,6 +22,7 @@ document.addEventListener("alpine:init", () => {
                         backToTop.classList.add("hidden");
                     }
                 });
+            }
         },
         open_sidebar: false,
         open_search_responsive: false,
