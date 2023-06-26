@@ -27,6 +27,7 @@
         "patrickschur/language-detection": "^5.1",
         "paypal/paypal-checkout-sdk": "^1.0",
         "php-science/textrank": "^1.2",
+        "spatie/laravel-data": "^2.9",
         "voku/portable-utf8": "^6.0",
         "voku/stop-words": "^2.0",
         "vuthaihoc/vi_encoder": "^0.1.2"
