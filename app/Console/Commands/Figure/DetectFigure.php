@@ -41,6 +41,8 @@ class DetectFigure extends Command
      */
     public function handle()
     {
+        $document = Document::whereDate('created_at', '<=', today()->subDays(7))->sum('viewed_count');
+        dd($document);
 //        $id = $this->option('id');
 //        $documents = Document::idRange($id)->get();
         $this->testFigure();

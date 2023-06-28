@@ -32,4 +32,7 @@ Route::group([
     Route::get('ajax-user-options', ['App\Http\Controllers\Admin\DownloadCrudController', 'userOptions']);
     Route::get('comment/ajax-user-options', ['App\Http\Controllers\Admin\CommentCrudController', 'userOptions']);
     Route::get('ajax-document-options', ['App\Http\Controllers\Admin\CommentCrudController', 'documentOptions']);
+    Route::get('charts/datatable-document', 'Charts\DatatableDocumentChartController@response')->name('charts.datatable-document.index');
+    Route::get('charts/total-document', 'Charts\TotalDocumentChartController@response')->name('charts.total-document.index');
+    Route::get('charts/payment', 'Charts\PaymentChartController@response')->name('charts.payment.index');
 }); // this should be the absolute last line of this file
