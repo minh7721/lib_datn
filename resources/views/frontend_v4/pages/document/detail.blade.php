@@ -580,18 +580,20 @@
                                         </div>
                                     </div>
                                 </form>
+                            @else
+                                {{ csrf_field() }}
+                                <input type="text"
+                                       class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
+                                       placeholder="Comments or ask a question">
+                                <div class="flex justify-end">
+                                    <a href="{{ route('frontend.auth.getLogin') }}"
+                                       class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                        Login to comment
+                                    </a>
+                                </div>
                             @endif
-                            {{ csrf_field() }}
-                            <input type="text"
-                                   class="block rounded-1.5lg border border-slate-300 placeholder:text-gray-400 placeholder:font-light outline-none w-full px-3 py-4 mt-4 hover:border-primary"
-                                   placeholder="Comments or ask a question">
-                            <div class="flex justify-end">
-                                <a href="{{ route('frontend.auth.getLogin') }}"
-                                   class="disabled:opacity-50 w-fit bg-primary text-white font-medium rounded-full mt-3 px-5 py-2 inline-flex items-center justify-center gap-2 hover:bg-primary-darker">
-                                    <i class="fa-solid fa-paper-plane"></i>
-                                    Login to comment
-                                </a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
