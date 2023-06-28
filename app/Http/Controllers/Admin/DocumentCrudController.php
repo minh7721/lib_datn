@@ -67,6 +67,9 @@ class DocumentCrudController extends CrudController
                 'type' => 'text',
                 'limit' => 20,
                 'wrapper' => ['class' => 'text-truncate'],
+                'searchLogic' => function ($query, $column, $searchTerm) {
+                    $query->orWhere('title', 'like', '%' . $searchTerm . '%');
+                }
             ],
             [
                 'name' => 'page_number',
@@ -75,8 +78,8 @@ class DocumentCrudController extends CrudController
             [
                 'name' => 'price',
                 'label' => 'Price',
-                'attributes' => ["step" => "any"], // allow decimals
-                'suffix' => ".00",
+//                'attributes' => ["step" => "any"], // allow decimals
+//                'suffix' => ".00",
             ],
             [
                 'name' => 'type',

@@ -19,9 +19,6 @@ use Illuminate\Http\Request;
 class DownloadCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     public function setup()
@@ -84,19 +81,6 @@ class DownloadCrudController extends CrudController
                     });
                 }
             });
-    }
-
-    protected function setupCreateOperation()
-    {
-        $this->crud->setValidation(DownloadRequest::class);
-
-        // TODO: remove setFromDb() and manually define Fields
-        $this->crud->setFromDb();
-    }
-
-    protected function setupUpdateOperation()
-    {
-        $this->setupCreateOperation();
     }
 
     public function userOptions(Request $request)

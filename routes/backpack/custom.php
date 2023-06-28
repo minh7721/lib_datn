@@ -28,4 +28,8 @@ Route::group([
     Route::crud('comment', 'CommentCrudController');
     Route::crud('payment', 'PaymentCrudController');
     Route::crud('report', 'ReportCrudController');
+
+    Route::get('ajax-user-options', ['App\Http\Controllers\Admin\DownloadCrudController', 'userOptions']);
+    Route::get('comment/ajax-user-options', ['App\Http\Controllers\Admin\CommentCrudController', 'userOptions']);
+    Route::get('ajax-document-options', ['App\Http\Controllers\Admin\CommentCrudController', 'documentOptions']);
 }); // this should be the absolute last line of this file
