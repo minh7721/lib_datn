@@ -1052,8 +1052,8 @@
                                         <span class="text-secondary">{{ $top_document->helpful_count }}</span>
                                     </div>
                                 </div>
-                                <div class="mt-5 hidden lg:block">
-                                    <div class="flex justify-around">
+                                <div class="mt-5 block">
+                                    <div class="flex justify-start gap-6">
                                         <div class="inline-flex items-center justify-center gap-2">
                                             <i class="fa-solid fa-file"></i>
                                             <span>{{ $top_document->page_number }}</span>
@@ -1086,132 +1086,136 @@
             </div>
         </div>
 
-        <div class="container mx-auto shadow-around mb-4 rounded-1.5lg">
-            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">
-                <p class="font-semibold text-xl">Figure</p>
-                <div class="mt-4 p-3 border rounded-1.5lg">
-                    <div class="flex max-w-full overflow-auto h-52 gap-4">
-                        <a href="#" target="_blank"
-                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
-                           style="aspect-ratio: 1">
-                            <img
-                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/70.595.115.514.205.448/gambar-perbabandingan-pretest-posttest-kelompok-kontrolrol.webp"
-                                class="w-full h-full object-cover">
-                        </a>
-                        <a href="#" target="_blank"
-                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
-                           style="aspect-ratio: 1">
-                            <img
-                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/72.595.113.514.237.351/grafik-perbandingan-gambar-kemampuan-berpikir-kreatif-berdasarkan-kategorisasi.webp"
-                                class="w-full h-full object-cover">
-                        </a>
-                        <a href="#" target="_blank"
-                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
-                           style="aspect-ratio: 1">
-                            <img
-                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/78.595.131.494.277.693/tabel-data-hasil-angket.webp"
-                                class="w-full h-full object-cover">
-                        </a>
-                        <a href="#" target="_blank"
-                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"
-                           style="aspect-ratio: 1">
-                            <img
-                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/94.595.144.479.109.753/tabel-data-hasil-observasi-pertemuan-iii.webp"
-                                class="w-full h-full object-cover">
-                            <div
-                                class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">
-                                <span class="text-3.25xl text-white font-medium">+18</span>
-                            </div>
-                        </a>
+{{--        // Figure--}}
+{{--        <div class="container mx-auto shadow-around mb-4 rounded-1.5lg">--}}
+{{--            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">--}}
+{{--                <p class="font-semibold text-xl">Figure</p>--}}
+{{--                <div class="mt-4 p-3 border rounded-1.5lg">--}}
+{{--                    <div class="flex max-w-full overflow-auto h-52 gap-4">--}}
+{{--                        <a href="#" target="_blank"--}}
+{{--                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"--}}
+{{--                           style="aspect-ratio: 1">--}}
+{{--                            <img--}}
+{{--                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/70.595.115.514.205.448/gambar-perbabandingan-pretest-posttest-kelompok-kontrolrol.webp"--}}
+{{--                                class="w-full h-full object-cover">--}}
+{{--                        </a>--}}
+{{--                        <a href="#" target="_blank"--}}
+{{--                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"--}}
+{{--                           style="aspect-ratio: 1">--}}
+{{--                            <img--}}
+{{--                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/72.595.113.514.237.351/grafik-perbandingan-gambar-kemampuan-berpikir-kreatif-berdasarkan-kategorisasi.webp"--}}
+{{--                                class="w-full h-full object-cover">--}}
+{{--                        </a>--}}
+{{--                        <a href="#" target="_blank"--}}
+{{--                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"--}}
+{{--                           style="aspect-ratio: 1">--}}
+{{--                            <img--}}
+{{--                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/78.595.131.494.277.693/tabel-data-hasil-angket.webp"--}}
+{{--                                class="w-full h-full object-cover">--}}
+{{--                        </a>--}}
+{{--                        <a href="#" target="_blank"--}}
+{{--                           class="relative h-full grow bg-gray-400 cursor-pointer border border-gray-500 border-solid"--}}
+{{--                           style="aspect-ratio: 1">--}}
+{{--                            <img--}}
+{{--                                src="https://data03.123doks.com/thumbv2/123dok/000/413/413960/94.595.144.479.109.753/tabel-data-hasil-observasi-pertemuan-iii.webp"--}}
+{{--                                class="w-full h-full object-cover">--}}
+{{--                            <div--}}
+{{--                                class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center">--}}
+{{--                                <span class="text-3.25xl text-white font-medium">+18</span>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
 
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="container mx-auto shadow-around mb-4 rounded-1.5lg">
-            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">
-                <p class="font-semibold text-xl">Reference</p>
-                <div class="mt-4 p-3 border rounded-1.5lg prose break-all">
-                    <p>
-                        <b>[1]</b> M. Dahl, “A (Fake) Terms-of-Service Contract Asked People to Give Up Their
-                        Firstborn,”
-                        The Cut, Aug. 23, 2016.
-                        <a
-                            href="https://www.thecut.com/2016/08/terms-of-service-asked-people-to-give-up-their-firstborn.html">https://www.thecut.com/2016/08/terms-of-service-asked-people-to-give-up-their-firstborn.html</a>
-                        (accessed May 11, 2023).
-                    </p>
-                    <p>
-                        <b>[2]</b> S. Ashraf, “What Is Forensic Linguistics? (with pictures),” Language Humanities, Apr.
-                        15,
-                        2023.
-                        <a
-                            href="https://www.languagehumanities.org/what-is-forensic-linguistics.htm">https://www.languagehumanities.org/what-is-forensic-linguistics.htm</a>
-                    </p>
-                    <p>
-                        <b>[3]</b> M. Komnenic , “Legalese: Definition & Meaning,” Termly, Apr. 22, 2022. <a
-                            href="https://termly.io/resources/articles/legalese/">https://termly.io/resources/articles/legalese/</a>
-                        (accessed May 11, 2023)
-                    </p>
-                    <p>
-                        <b>[4]</b> R. Sosas, “The Language of Agreement: A Content Analysis of Employment Contracts,”
-                        Journal Of Humanities And Social Science, vol. 22, no. 12, pp. 58–86, Dec. 2017, doi:
-                        <a href="https://doi.org/10.9790/0837-2212025886">https://doi.org/10.9790/0837-2212025886</a>.
-                    </p>
-                    <p>
-                        <b>[4]</b> C. Melore, “Here’s why legal documents are so hard to read -- and how to easily fix
-                        it,”
-                        Study Finds, Mar. 08, 2022.
-                        <a
-                            href="https://studyfinds.org/legal-documents-so-hard-to-read/">https://studyfinds.org/legal-documents-so-hard-to-read/</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+{{--        // References--}}
+{{--        <div class="container mx-auto shadow-around mb-4 rounded-1.5lg">--}}
+{{--            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">--}}
+{{--                <p class="font-semibold text-xl">Reference</p>--}}
+{{--                <div class="mt-4 p-3 border rounded-1.5lg prose break-all">--}}
+{{--                    <p>--}}
+{{--                        <b>[1]</b> M. Dahl, “A (Fake) Terms-of-Service Contract Asked People to Give Up Their--}}
+{{--                        Firstborn,”--}}
+{{--                        The Cut, Aug. 23, 2016.--}}
+{{--                        <a--}}
+{{--                            href="https://www.thecut.com/2016/08/terms-of-service-asked-people-to-give-up-their-firstborn.html">https://www.thecut.com/2016/08/terms-of-service-asked-people-to-give-up-their-firstborn.html</a>--}}
+{{--                        (accessed May 11, 2023).--}}
+{{--                    </p>--}}
+{{--                    <p>--}}
+{{--                        <b>[2]</b> S. Ashraf, “What Is Forensic Linguistics? (with pictures),” Language Humanities, Apr.--}}
+{{--                        15,--}}
+{{--                        2023.--}}
+{{--                        <a--}}
+{{--                            href="https://www.languagehumanities.org/what-is-forensic-linguistics.htm">https://www.languagehumanities.org/what-is-forensic-linguistics.htm</a>--}}
+{{--                    </p>--}}
+{{--                    <p>--}}
+{{--                        <b>[3]</b> M. Komnenic , “Legalese: Definition & Meaning,” Termly, Apr. 22, 2022. <a--}}
+{{--                            href="https://termly.io/resources/articles/legalese/">https://termly.io/resources/articles/legalese/</a>--}}
+{{--                        (accessed May 11, 2023)--}}
+{{--                    </p>--}}
+{{--                    <p>--}}
+{{--                        <b>[4]</b> R. Sosas, “The Language of Agreement: A Content Analysis of Employment Contracts,”--}}
+{{--                        Journal Of Humanities And Social Science, vol. 22, no. 12, pp. 58–86, Dec. 2017, doi:--}}
+{{--                        <a href="https://doi.org/10.9790/0837-2212025886">https://doi.org/10.9790/0837-2212025886</a>.--}}
+{{--                    </p>--}}
+{{--                    <p>--}}
+{{--                        <b>[4]</b> C. Melore, “Here’s why legal documents are so hard to read -- and how to easily fix--}}
+{{--                        it,”--}}
+{{--                        Study Finds, Mar. 08, 2022.--}}
+{{--                        <a--}}
+{{--                            href="https://studyfinds.org/legal-documents-so-hard-to-read/">https://studyfinds.org/legal-documents-so-hard-to-read/</a>--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="container mx-auto shadow-around rounded-1.5lg">
-            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">
-                <p class="font-semibold text-xl">Related Keywords</p>
-                <div class="mt-4">
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Bahasa
-                        Inggris Kelas XI</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">The
-                        pros and cons of plea bargains</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Understand
-                        the pros and cons of dynamic</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the
-                        pros and cons</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the
-                        pros and cons</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">7
-                        a controversial period the pros and cons of a standard series</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the
-                        pros and cons of automation for immunohistochemistry</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the
-                        pros and cons</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">weigh
-                        the pros and cons of each alternative</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the
-                        pros and cons</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">SOAL
-                        BAHASA INGGRIS KELAS XI SEMESTER 2</a>
-                    <a href="#"
-                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Bahasa
-                        Inggris Kelas XI</a>
-                </div>
-            </div>
-        </div>
+{{--        // Related Keywords--}}
+{{--        <div class="container mx-auto shadow-around rounded-1.5lg">--}}
+{{--            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">--}}
+{{--                <p class="font-semibold text-xl">Related Keywords</p>--}}
+{{--                <div class="mt-4">--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Bahasa--}}
+{{--                        Inggris Kelas XI</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">The--}}
+{{--                        pros and cons of plea bargains</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Understand--}}
+{{--                        the pros and cons of dynamic</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
+{{--                        pros and cons</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
+{{--                        pros and cons</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">7--}}
+{{--                        a controversial period the pros and cons of a standard series</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
+{{--                        pros and cons of automation for immunohistochemistry</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
+{{--                        pros and cons</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">weigh--}}
+{{--                        the pros and cons of each alternative</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
+{{--                        pros and cons</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">SOAL--}}
+{{--                        BAHASA INGGRIS KELAS XI SEMESTER 2</a>--}}
+{{--                    <a href="#"--}}
+{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Bahasa--}}
+{{--                        Inggris Kelas XI</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
         <div class="container mx-auto shadow-around mt-4 rounded-1.5lg pb-4">
             <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">
                 <p class="font-semibold text-xl">Comments</p>
