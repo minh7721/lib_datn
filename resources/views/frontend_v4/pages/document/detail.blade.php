@@ -672,109 +672,117 @@
                         <div class="justify-center">
                             @if($document->price > 0)
                                 @if(Auth::check())
-                                    <div x-data="{open_buy_document: false}">
-                                        <button @click="open_buy_document = !open_buy_document"
-                                                type="button"
-                                                class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
+                                    @if(Auth::id() == $document->user_id)
+                                        <a href="{{ route('frontend_v4.document.download', ['id' => $document->id,'slug' => $document->slug]) }}"
+                                           type="button"
+                                           class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
                                             <i class="fa-solid fa-cloud-arrow-down"></i>
                                             <span class="sm:block hidden ml-2">Download</span>
-                                        </button>
-                                        @if(Auth::user()->money >= $document->price)
-                                            <div
-                                                x-cloak
-                                                x-show="open_buy_document" tabindex="-1" aria-hidden="true"
-                                                class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
-                                                aria-modal="true" role="dialog">
-                                                <div @click.outside="open_buy_document = false;"
-                                                     class="relative max-w-2xl max-h-full mx-auto mt-48">
-                                                    <!-- Modal content -->
-                                                    <form method="GET" action="{{ route('frontend_v4.document.download', ['id' => $document->id, 'slug' => $document->slug]) }}" class="relative bg-white rounded-lg shadow">
-                                                        <!-- Modal header -->
-                                                        <div class="flex items-start justify-between p-4 rounded-t">
-                                                            <h3 class="font-bold text-default text-xl mx-auto my-2">
-                                                                Buy document
-                                                            </h3>
-                                                        </div>
-                                                        <!-- Modal body -->
-                                                        <div
-                                                            class="space-y-6 px-6 py-2">
+                                        </a>
+                                    @else
+                                        <div x-data="{open_buy_document: false}">
+                                            <button @click="open_buy_document = !open_buy_document"
+                                                    type="button"
+                                                    class="w-full bg-transparent sm:bg-primary text-white font-medium rounded-full sm:px-5 py-2 inline-flex items-center justify-center gap-2 sm:hover:bg-primary-darker">
+                                                <i class="fa-solid fa-cloud-arrow-down"></i>
+                                                <span class="sm:block hidden ml-2">Download</span>
+                                            </button>
+                                            @if(Auth::user()->money >= $document->price)
+                                                <div
+                                                    x-cloak
+                                                    x-show="open_buy_document" tabindex="-1" aria-hidden="true"
+                                                    class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
+                                                    aria-modal="true" role="dialog">
+                                                    <div @click.outside="open_buy_document = false;"
+                                                         class="relative max-w-2xl max-h-full mx-auto mt-48">
+                                                        <!-- Modal content -->
+                                                        <form method="GET" action="{{ route('frontend_v4.document.download', ['id' => $document->id, 'slug' => $document->slug]) }}" class="relative bg-white rounded-lg shadow">
+                                                            <!-- Modal header -->
+                                                            <div class="flex items-start justify-between p-4 rounded-t">
+                                                                <h3 class="font-bold text-default text-xl mx-auto my-2">
+                                                                    Buy document
+                                                                </h3>
+                                                            </div>
+                                                            <!-- Modal body -->
                                                             <div
-                                                                @click=""
-                                                                class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
-                                                                <div class="text-default font-normal text-lg flex flex-row">
-                                                                    Are you sure you want to buy this brochure for <p class="text-primary font-bold mx-1">${{ $document->price }}</p>?
+                                                                class="space-y-6 px-6 py-2">
+                                                                <div
+                                                                    @click=""
+                                                                    class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
+                                                                    <div class="text-default font-normal text-lg flex flex-row">
+                                                                        Are you sure you want to buy this brochure for <p class="text-primary font-bold mx-1">${{ $document->price }}</p>?
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Modal footer -->
-                                                        <div class="flex justify-end items-center p-6 space-x-2">
-                                                            <button @click="open_buy_document=false"
-                                                                    data-modal-hide="modal_content"
-                                                                    type="button"
-                                                                    class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
-                                                                Cancel
-                                                            </button>
-                                                            <button
-                                                                @click="open_buy_document=false"
-                                                                data-modal-hide="modal_report"
-                                                                type="submit"
-                                                                class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
-                                                                Buy
-                                                            </button>
-                                                        </div>
-                                                    </form>
+                                                            <!-- Modal footer -->
+                                                            <div class="flex justify-end items-center p-6 space-x-2">
+                                                                <button @click="open_buy_document=false"
+                                                                        data-modal-hide="modal_content"
+                                                                        type="button"
+                                                                        class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
+                                                                    Cancel
+                                                                </button>
+                                                                <button
+                                                                    @click="open_buy_document=false"
+                                                                    data-modal-hide="modal_report"
+                                                                    type="submit"
+                                                                    class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
+                                                                    Buy
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @else
-                                            <div
-                                                x-cloak
-                                                x-show="open_buy_document" tabindex="-1" aria-hidden="true"
-                                                class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
-                                                aria-modal="true" role="dialog">
-                                                <div @click.outside="open_buy_document = false;"
-                                                     class="relative max-w-2xl max-h-full mx-auto mt-48">
-                                                    <!-- Modal content -->
-                                                    <div class="relative bg-white rounded-lg shadow">
-                                                        <!-- Modal header -->
-                                                        <div class="flex items-start justify-between p-4 rounded-t">
-                                                            <h3 class="font-bold text-default text-xl mx-auto my-2">
-                                                                Buy document
-                                                            </h3>
-                                                        </div>
-                                                        <!-- Modal body -->
-                                                        <div
-                                                            class="space-y-6 px-6 py-2">
+                                            @else
+                                                <div
+                                                    x-cloak
+                                                    x-show="open_buy_document" tabindex="-1" aria-hidden="true"
+                                                    class="fixed top-0 left-0 right-0 h-screen bg-gray-400 bg-opacity-50  z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0"
+                                                    aria-modal="true" role="dialog">
+                                                    <div @click.outside="open_buy_document = false;"
+                                                         class="relative max-w-2xl max-h-full mx-auto mt-48">
+                                                        <!-- Modal content -->
+                                                        <div class="relative bg-white rounded-lg shadow">
+                                                            <!-- Modal header -->
+                                                            <div class="flex items-start justify-between p-4 rounded-t">
+                                                                <h3 class="font-bold text-default text-xl mx-auto my-2">
+                                                                    Buy document
+                                                                </h3>
+                                                            </div>
+                                                            <!-- Modal body -->
                                                             <div
-                                                                @click=""
-                                                                class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
-                                                                <div class="text-default font-normal text-lg flex flex-row">
-                                                                    Your account balance is not enough, please recharge and try again
+                                                                class="space-y-6 px-6 py-2">
+                                                                <div
+                                                                    @click=""
+                                                                    class="flex flex-row gap-2 justify-center items-center rounded-4.5xl border border-[#AFAFAF] px-4 py-4 hover:bg-main-background cursor-pointer">
+                                                                    <div class="text-default font-normal text-lg flex flex-row">
+                                                                        Your account balance is not enough, please recharge and try again
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Modal footer -->
-                                                        <div class="flex justify-end items-center p-6 space-x-2">
-                                                            <button @click="open_buy_document=false"
-                                                                    data-modal-hide="modal_content"
+                                                            <!-- Modal footer -->
+                                                            <div class="flex justify-end items-center p-6 space-x-2">
+                                                                <button @click="open_buy_document=false"
+                                                                        data-modal-hide="modal_content"
+                                                                        type="button"
+                                                                        class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
+                                                                    Cancel
+                                                                </button>
+                                                                <button
+                                                                    @click="open_buy_document=false"
+                                                                    data-modal-hide="modal_report"
                                                                     type="button"
-                                                                    class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
-                                                                Cancel
-                                                            </button>
-                                                            <button
-                                                                @click="open_buy_document=false"
-                                                                data-modal-hide="modal_report"
-                                                                type="button"
-                                                                class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
-                                                                OK
-                                                            </button>
+                                                                    class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
+                                                                    OK
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endif
+                                            @endif
 
-                                    </div>
-
+                                        </div>
+                                    @endif
                                 @else
                                     <div x-data="{open_payment_document: false}">
                                         <button @click="open_payment_document=!open_payment_document"

@@ -32,7 +32,7 @@ class DownloadController extends Controller
             ->where('slug', $slug)
             ->first();
         $this->document = $document;
-        if (\Auth::check()){
+        if (\Auth::check() && \Auth::id() != $document->user_id){
             $user =\Auth::user();
             if ($user->money >= $document->price){
                 $user->money = round(($user->money - $document->price),2);
