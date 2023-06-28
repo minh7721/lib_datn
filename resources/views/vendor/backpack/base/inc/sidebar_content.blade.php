@@ -19,12 +19,11 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon la la-file-pdf'></i> Documents</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('download') }}'><i class='nav-icon la la-download'></i> Downloads</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('tag') }}'><i class='nav-icon la la-tags'></i> Tags</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('rating') }}'><i class='nav-icon la la-star'></i> Ratings</a></li>
+{{--        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('rating') }}'><i class='nav-icon la la-star'></i> Ratings</a></li>--}}
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('comment') }}'><i class='nav-icon la la-comment'></i> Comments</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('payment') }}'><i class='nav-icon la la-dollar'></i> Payments</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('report') }}'><i class='nav-icon la la-react'></i> Reports</a></li>
     </ul>
 </li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> Logs</a></li>
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('comment') }}'><i class='nav-icon la la-question'></i> Comments</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('payment') }}'><i class='nav-icon la la-question'></i> Payments</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('report') }}'><i class='nav-icon la la-question'></i> Reports</a></li>
