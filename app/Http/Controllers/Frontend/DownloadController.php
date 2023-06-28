@@ -7,6 +7,7 @@ use App\Models\Document;
 use App\Models\Enums\PaymentStatus;
 use App\Models\Enums\SourcePayment;
 use App\Models\Payment;
+use App\Models\User;
 use App\Service\DownloadService;
 use App\Service\DownloadVNPayService;
 use Illuminate\Http\Request;
@@ -36,6 +37,9 @@ class DownloadController extends Controller
             if ($user->money >= $document->price){
                 $user->money = round(($user->money - $document->price),2);
                 $user->save();
+                $author = User::where('id', $document->user_id)->first();
+                $author->money = round(($author->money + $document->price*config('paymnet_service.percent_received')),2);
+                $author->save();
                 return DownloadService::download($document);
             }
             else{

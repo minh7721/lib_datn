@@ -10,5 +10,6 @@ return [
         'paypal_client_id' => env('PAYPAL_CLIENT_ID'),
         'paypal_client_secret' => env('PAYPAL_CLIENT_SECRET'),
         'paypal_mode' => env('PAYPAL_MODE', 'sandbox'),
-    ]
+    ],
+    'percent_received' => env('PERCENT_RECEIVED', 0.8)
 ];

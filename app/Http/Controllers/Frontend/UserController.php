@@ -86,6 +86,7 @@ class UserController extends Controller
         $documents = Document::where('user_id', $user->id)
             ->where('active', true)
             ->where('is_public', true)
+            ->orderByDesc('id')
             ->paginate(20);
         $comments = Comment::with('documents')->where('user_id', $user->id)->paginate(20);
         return view('frontend_v4.pages.users.document_upload', compact('documents', 'comments'));
