@@ -8,6 +8,7 @@ use App\Libs\CountriesHelper\Languages;
 use App\Libs\MimeHelper;
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\Enums\TaskStatus;
 use App\Models\Enums\TypeDocument;
 use App\Service\CountPages;
 use App\Service\MakePDF;
@@ -101,6 +102,50 @@ class DocumentCrudController extends CrudController
         ]);
 
         $this->crud->addFilter([
+            'name' => 'category',
+            'type' => 'select2',
+            'label' => 'Category'
+        ], function () {
+            return Category::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) {
+            $this->crud->addClause('where', 'category_id', json_decode($value));
+        });
+
+        $this->crud->addFilter([
+            'name' => 'public',
+            'type' => 'dropdown',
+            'label' => 'Public'
+        ], [
+            1 => "PUBLIC",
+            0 => "PRIVATE"
+        ], function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'is_public', $value);
+        });
+
+        $this->crud->addFilter([
+            'name' => 'type',
+            'type' => 'dropdown',
+            'label' => 'Type'
+        ], TypeDocument::toOptions(), function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'type', $value);
+        });
+
+        $this->crud->addFilter([
+            'name' => 'page_number_range',
+            'type' => 'range',
+            'label_from' => 'Min page',
+            'label_to' => 'Max page'
+        ], false, function ($value) {
+            $range = json_decode($value);
+            if ($range->from) {
+                $this->crud->addClause('where', 'page_number', '>=', (float)$range->from);
+            }
+            if ($range->to) {
+                $this->crud->addClause('where', 'page_number', '<=', (float)$range->to);
+            }
+        });
+
+        $this->crud->addFilter([
             'name' => 'price',
             'type' => 'range',
             'label_from' => 'Min price',
@@ -114,6 +159,33 @@ class DocumentCrudController extends CrudController
                 $this->crud->addClause('where', 'price', '<=', (float)$range->to);
             }
         });
+
+        $this->crud->addFilter([
+            'name' => 'filter_language',
+            'type' => 'select2',
+            'label' => 'Language',
+            'placeholder' => 'Pic a language'
+        ],
+            function () {
+                return Languages::getOptions();
+            }, // the ajax route
+            function ($value) {
+                if ($value) { //Bug's backpack
+                    $this->crud->addClause('where', 'language', $value);
+                }
+            });
+
+        $this->crud->addFilter([
+            'type' => 'date_range',
+            'name' => 'updated_at',
+            'label' => 'Updated at'
+        ], false,
+            function ($value) {
+                $dates = json_decode($value);
+                $this->crud->addClause('where', 'updated_at', '>=', $dates->from);
+                $this->crud->addClause('where', 'updated_at', '<=', $dates->to . ' 23:59:59');
+            });
+
     }
 
     protected function setupCreateOperation()
