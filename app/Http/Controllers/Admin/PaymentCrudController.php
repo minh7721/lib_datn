@@ -72,7 +72,7 @@ class PaymentCrudController extends CrudController
                 'label' => "Trading code"
             ],
             [
-                'name' => 'transaction_id ',
+                'name' => 'transaction_id',
                 'label' => "Transaction id"
             ]
         ]);
