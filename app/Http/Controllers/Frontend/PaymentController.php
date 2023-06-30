@@ -44,7 +44,7 @@ class PaymentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('jsAlert', 'Minimum amount is 10.000 VND and maximum amount is 10.000.000 VND');
+            return redirect()->back()->with('common_error', 'Minimum amount is 10.000 VND and maximum amount is 10.000.000 VND');
         }
         $vnpay_service = VNPayService::create($request->price, route('frontend_v4.getVNPay'));
         return redirect($vnpay_service);
@@ -54,9 +54,9 @@ class PaymentController extends Controller
     {
         $vnpay_service = VNPayService::response();
         if ($vnpay_service) {
-            return redirect()->route('document.home.index')->with('jsAlert', 'Payment success');
+            return redirect()->route('document.home.index')->with('common_success', 'Payment success');
         }
-        return redirect()->route('document.home.index')->with('jsAlert', 'Transaction failed, please try again');
+        return redirect()->route('document.home.index')->with('common_error', 'Transaction failed, please try again');
     }
 
     /**
@@ -68,7 +68,7 @@ class PaymentController extends Controller
             'price_paypal' => 'required|numeric|digits_between:1,7|min:1.00|max:1000.00',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('jsAlert', 'Minimum amount is 1.00$ and maximum amount is 1000.00$Dwo');
+            return redirect()->back()->with('common_error', 'Minimum amount is 1.00$ and maximum amount is 1000.00$');
         }
 
         // Tạo yêu cầu tạo đơn hàng PayPal
@@ -134,11 +134,11 @@ class PaymentController extends Controller
                 $user->update([
                     'money' => $money
                 ]);
-                return redirect()->route('document.home.index')->with('jsAlert', 'Payment success');
+                return redirect()->route('document.home.index')->with('common_success', 'Payment success');
             }
-            return redirect()->route('document.home.index')->with('jsAlert', 'Transaction failed, please try again');
+            return redirect()->route('document.home.index')->with('common_error', 'Transaction failed, please try again');
         } catch (\Exception $e) {
-            return redirect()->route('document.home.index')->with('jsAlert', 'Transaction failed, please try again');
+            return redirect()->route('document.home.index')->with('common_error', 'Transaction failed, please try again');
         }
     }
 }

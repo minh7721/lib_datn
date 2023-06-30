@@ -480,7 +480,7 @@
                 <div class="grow flex items-center justify-between md:mr-3">
                     <input id="search_global" name="search"
                            class="text-xs md:text-base search rounded-4xl md:pl-6 w-full px-4 outline-none placeholder:text-base placeholder:font-thin placeholder:text-search  peer "
-                           type="text" placeholder="Search for documents, universities and other resources">
+                           type="text" placeholder="Search for documents, categories and other resources">
                 </div>
                 <button class="mr-4 text-gray-500 group-hover:text-primary" type="submit">
                     <i class=" fa-solid fa-magnifying-glass"></i>

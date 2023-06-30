@@ -55,6 +55,18 @@
 
 @include('frontend_v4.inc.main_header')
 
+@if(session()->has('common_success'))
+    <div class="text-sm md:text-base font-normal bg-primary-100 text-primary-darker px-4 py-2 text-center container mx-auto my-3 rounded-1.5lg" onclick="this.remove()">
+        {{ session()->get('common_success') }}
+    </div>
+@endif
+
+@if(session()->has('common_error'))
+    <div class="text-sm md:text-base font-normal bg-red-100 text-red-500 px-4 py-2 text-center container mx-auto my-3 rounded-1.5lg" onclick="this.remove()">
+        {{ session()->get('common_error') }}
+    </div>
+@endif
+
 @include('frontend_v4.inc.sidebar')
 
 
@@ -77,15 +89,15 @@
 
 <!-- Client IP {{ \Request::ip() }} -->
 
-<script>
-    var msg = '{{Session::get('jsAlert')}}';
-    var exist = '{{Session::has('jsAlert')}}';
-    if (exist) {
-        window.setTimeout(function() {
-            alert(msg);
-        }, 500);
-    }
-</script>
+{{--<script>--}}
+{{--    var msg = '{{Session::get('common_error')}}';--}}
+{{--    var exist = '{{Session::has('common_error')}}';--}}
+{{--    if (exist) {--}}
+{{--        window.setTimeout(function() {--}}
+{{--            alert(msg);--}}
+{{--        }, 500);--}}
+{{--    }--}}
+{{--</script>--}}
 </body>
 
 </html>

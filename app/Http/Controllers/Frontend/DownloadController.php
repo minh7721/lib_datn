@@ -43,7 +43,7 @@ class DownloadController extends Controller
                 return DownloadService::download($document);
             }
             else{
-                return redirect()->back()->with('jsAlert', 'Your account balance is not enough, please recharge and try again');
+                return redirect()->back()->with('common_error', 'Your account balance is not enough, please recharge and try again');
             }
         }
         return DownloadService::download($document);
@@ -66,7 +66,7 @@ class DownloadController extends Controller
 //            session(['download_file' => ['id' => $document->id, 'slug' => $document->slug]]);
 //            return redirect()->route('document.detail', ['slug' => $document->slug]);
         }
-        return redirect()->route('document.detail', ['slug' => $slug])->with('jsAlert', 'Transaction failed, please try again');
+        return redirect()->route('document.detail', ['slug' => $slug])->with('common_error', 'Transaction failed, please try again');
     }
 
     /**
@@ -134,9 +134,9 @@ class DownloadController extends Controller
                 return $this->download($id, $slug);
 //             return redirect()->route('document.detail', ['slug' => $document->slug]);
             }
-            return redirect()->route('document.detail', ['slug' => $slug])->with('jsAlert', 'Transaction failed, please try again');
+            return redirect()->route('document.detail', ['slug' => $slug])->with('common_error', 'Transaction failed, please try again');
         } catch (\Exception $e) {
-            return redirect()->route('document.detail', ['slug' => $slug])->with('jsAlert', 'Transaction failed, please try again');
+            return redirect()->route('document.detail', ['slug' => $slug])->with('common_error', 'Transaction failed, please try again');
         }
     }
 }

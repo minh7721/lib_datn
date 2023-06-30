@@ -120,11 +120,11 @@
                                             class="text-primary bg-gray-100 hover:bg-gray-300 font-medium rounded-full text-base px-5 py-2.5 text-center">
                                         Cancel
                                     </button>
-                                    <button @click="open_report_content=false" data-modal-hide="modal_report"
-                                            type="button"
-                                            class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">
-                                        Send
-                                    </button>
+{{--                                    <button @click="open_report_content=false" data-modal-hide="modal_report"--}}
+{{--                                            type="button"--}}
+{{--                                            class="w-24 text-white bg-primary hover:bg-primary-darker disabled:opacity-40 hover:bg-opacity-70 rounded-full border border-gray-200 text-base font-medium px-5 py-2.5 focus:z-10">--}}
+{{--                                        Send--}}
+{{--                                    </button>--}}
                                 </div>
                             </div>
                         </div>
