@@ -53,7 +53,9 @@
                     </li>
                 </ul>
             </div>
-            <div x-data="{ open_dropdown: false }">
+            <div x-data="{recentlyDocuments: [], open_dropdown: false }"
+                 x-init="recentlyDocuments = JSON.parse(localStorage.getItem('v4_viewed_documents'))"
+            >
                 <div @click="open_dropdown= !open_dropdown" :class="open_dropdown && 'text-primary bg-green-100'"
                      class=" flex items-center justify-between rounded-xl p-3 mt-1 hover:text-primary hover:bg-green-100 cursor-default select-none">
                     <div class="flex items-center gap-4">
@@ -65,12 +67,14 @@
                     <i x-show="open_dropdown" class="fa-solid fa-chevron-up"></i>
                 </div>
                 <ul x-cloak x-show="open_dropdown" @click.outside="open_dropdown=false"
-                    class=" flex flex-col gap-4 px-4 max-w-full py-2  h-max">
-                    <li>
-                        <a href="#"
-                           class="font-thin text-text-default hover:text-primary hover:underline hover:decoration-1 decoration-primary">You
-                            don't have any document recent yet</a>
-                    </li>
+                    class="px-4 max-w-full py-2 h-max">
+                    <template x-for="document in recentlyDocuments">
+                        <a :href="document.url"
+                           class="mb-4 last-of-type:mb-0 font-light  hover:text-primary hover:underline hover:decoration-1 decoration-primary line-clamp-2" x-text="document.title"></a>
+                    </template>
+                    <p x-cloak x-show="!recentlyDocuments" class="font-light">
+                        You don’t have any documents yet
+                    </p>
                 </ul>
             </div>
             <a href="#" class="flex items-center gap-4 rounded-xl p-3 mt-1 hover:text-primary hover:bg-green-100">

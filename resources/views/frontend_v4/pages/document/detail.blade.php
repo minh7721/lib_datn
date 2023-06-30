@@ -10,6 +10,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
             integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        function addDocumentToLocalStorage(document) {
+            if (localStorage.getItem('v4_viewed_documents')) {
+                let viewed_document = JSON.parse(localStorage.getItem('v4_viewed_documents'));
+                viewed_document.unshift(document);
+                viewed_document = [...new Map(viewed_document.map(item => [item['id'], item])).values()];
+                viewed_document = viewed_document.slice(0,5);
+                localStorage.setItem('v4_viewed_documents', JSON.stringify(viewed_document));
+            } else {
+                localStorage.setItem('v4_viewed_documents', JSON.stringify([document]));
+            }
+        }
+
+        setTimeout(function () {
+            addDocumentToLocalStorage({id: '{{$document->id}}', title: '{{$document->title}}', url: "{{route('document.detail', ['slug' => $document->slug]) }}"});
+        }, 5000);
+    </script>
 @endpush
 
 @push('after_scripts')
