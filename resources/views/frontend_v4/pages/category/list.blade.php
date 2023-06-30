@@ -4,5 +4,5 @@
         <i class="fa-solid fa-graduation-cap mt-1 text-secondary mr-2"></i>
         <p class="font-medium text-base text-default line-clamp-2">{{ $category->name }}</p>
     </a>
-    <p class="text-base text-default ml-6">466 documents</p>
+    <p class="text-base text-default ml-6">{{ rand(1,500) }} documents</p>
 </div>
