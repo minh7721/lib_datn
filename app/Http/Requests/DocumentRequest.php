@@ -26,7 +26,7 @@ class DocumentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:255',
+            'title' => 'required|min:5|max:255|regex:/[a-zA-Z]/i',
             'source_url' => 'mimes:pdf,doc,docx,ppt,pptx,txt',
 //            'page_number' => 'required|min:1',
         ];
@@ -53,7 +53,8 @@ class DocumentRequest extends FormRequest
     {
         return [
             'required' => 'This field can not empty',
-            'source_url.mimes' => 'Formats accepted: doc, docx, odt, pdf, ppt, pptx, txt'
+            'source_url.mimes' => 'Formats accepted: doc, docx, odt, pdf, ppt, pptx, txt',
+            'regex' => 'Title must be at least 5 letters'
         ];
     }
 }
