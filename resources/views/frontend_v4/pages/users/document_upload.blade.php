@@ -76,7 +76,7 @@
                         <div class="flex flex-row gap-4 justify-between">
                             <a href="{{ route('document.detail', ['slug' => $comment->documents->slug]) }}" class="w-8/12 lg:w-10/12 font-normal text-sm md:text-base text-primary-darker">{{ $comment->documents->title }}</a>
                             <p class="w-4/12 lg:w-2/12 text-end text-xs md:text-base font-light text-default-lighter mr-5">
-                                {{ $document->created_at->toDateString() }}</p>
+                                {{ $comment->created_at->toDateString() }}</p>
                         </div>
                         <div class="flex flex-row gap-2">
                             <img class="mt-3 mr-2 h-12 w-12 rounded-full"
