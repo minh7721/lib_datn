@@ -16,7 +16,7 @@ class LoginGoogleController extends Controller
         try {
 
             $user = Socialite::driver('google')->user();
-            $existed = User::where('social_id', $user->id)->first();
+            $existed = User::where('email', $user->email)->first();
 
             if($existed){
 

@@ -19,7 +19,7 @@ class LoginFacebookController extends Controller
         try {
             $user = Socialite::driver('facebook')->user();
 
-            $existed = User::where('social_id', $user->id)->first();
+            $existed = User::where('email', $user->email)->first();
 
             if($existed){
 
