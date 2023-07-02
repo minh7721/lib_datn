@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'password' => bcrypt('password'),
             'active_status' => true,
-            'price' => 9999999
+            'money' => 9999999
         ]);
 
         $user = \App\Models\User::firstOrCreate([
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Hoang Nhat Minh',
             'password' => bcrypt('password'),
             'active_status' => true,
-            'price' => 9999999
+            'money' => 9999999
         ]);
 
         $admin->assignRole($superAdminRole);
