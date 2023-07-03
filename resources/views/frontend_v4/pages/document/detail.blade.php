@@ -1189,50 +1189,18 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
-{{--        // Related Keywords--}}
-{{--        <div class="container mx-auto shadow-around rounded-1.5lg">--}}
-{{--            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">--}}
-{{--                <p class="font-semibold text-xl">Related Keywords</p>--}}
-{{--                <div class="mt-4">--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Bahasa--}}
-{{--                        Inggris Kelas XI</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">The--}}
-{{--                        pros and cons of plea bargains</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Understand--}}
-{{--                        the pros and cons of dynamic</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
-{{--                        pros and cons</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
-{{--                        pros and cons</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">7--}}
-{{--                        a controversial period the pros and cons of a standard series</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
-{{--                        pros and cons of automation for immunohistochemistry</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
-{{--                        pros and cons</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">weigh--}}
-{{--                        the pros and cons of each alternative</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">the--}}
-{{--                        pros and cons</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">SOAL--}}
-{{--                        BAHASA INGGRIS KELAS XI SEMESTER 2</a>--}}
-{{--                    <a href="#"--}}
-{{--                       class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">Bahasa--}}
-{{--                        Inggris Kelas XI</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{-- Related Keywords--}}
+        <div class="container mx-auto shadow-around rounded-1.5lg">
+            <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">
+                <p class="font-semibold text-xl">Hashtag</p>
+                <div class="mt-4">
+                    @foreach($tags as $tag)
+                        <a href="#"
+                           class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">{{ $tag->name }}</a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
         <div class="container mx-auto shadow-around mt-4 rounded-1.5lg pb-4">
             <div class="bg-white rounded-1.5lg p-5 mx-4 md:mx-0">

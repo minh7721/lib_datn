@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Document;
 use App\Models\Report;
+use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -58,8 +59,12 @@ class DocumentController extends Controller
             ->limit(6)
             ->get();
 
+        $tags = Tag::whereHas('documents', function ($query) use ($document){
+            $query->where('document_id', $document->id);
+        })->get();
+
         $comments = Comment::with('users')->where('document_id', $document->id)->paginate('20');
-        return view('frontend_v4.pages.document.detail', compact('document', 'comments', 'top_documents'));
+        return view('frontend_v4.pages.document.detail', compact('document', 'comments', 'top_documents', 'tags'));
     }
 
     public function search(Request $request)

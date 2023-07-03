@@ -64,6 +64,17 @@ class UploadController extends Controller
                 $document->active = true;
                 $document->is_public = true;
                 $document->save();
+
+                if ($tags = $request->tag) {
+                    foreach ($tags as $tag) {
+                        \DB::table('document_tag')->insert([
+                            'document_id' => $document->id,
+                            'tag_id' => $tag,
+                        ]);
+                    }
+                }
+
+
                 Session::flash('success', 'Upload success');
                 return redirect()->back();
             } else {
