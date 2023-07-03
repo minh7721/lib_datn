@@ -81,6 +81,23 @@ class DownloadCrudController extends CrudController
                     });
                 }
             });
+
+        $this->crud->addFilter([
+            'name' => 'filter_document_id',
+            'type' => 'select2_ajax',
+            'label' => 'Document',
+            'placeholder' => 'Pick a document'
+        ],
+            url('admin/ajax-document-options'), // the ajax route
+            function ($value) {
+                if ($value) { //Bug's backpack
+                    $this->crud->with('document')->when($value, function (Builder $query, $value) {
+                        return $query->whereHas('document', function (Builder $query) use ($value) {
+                            $query->where('document_id', $value);
+                        });
+                    });
+                }
+            });
     }
 
     public function userOptions(Request $request)

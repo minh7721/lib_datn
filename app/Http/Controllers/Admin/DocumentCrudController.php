@@ -92,12 +92,28 @@ class DocumentCrudController extends CrudController
                 }
             ],
             [
-                'name' => 'rating_count',
-                'label' => 'Total rating'
+                'name' => 'downloaded_count',
+                'label' => 'Total download'
             ],
             [
                 'name' => 'viewed_count',
                 'label' => 'Total view'
+            ],
+            [
+                'name' => 'revenue',
+                'label' => 'Revenue',
+                'type' => 'closure',
+                'function' => function ($entry) {
+                    $downloaded_count = $entry->downloaded_count;
+                    $price = $entry->price;
+                    $result = $downloaded_count*$price;
+                    return $result . " $";
+                },
+                'orderable'  => true,
+                'select' => '(SELECT downloaded_count * price FROM your_table WHERE your_table.id = your_entity_table.id) AS revenue',
+                'orderLogic' => function ($query, $column, $columnDirection) {
+                    $query->orderByRaw('(downloaded_count * price) ' . $columnDirection);
+                },
             ],
         ]);
 
