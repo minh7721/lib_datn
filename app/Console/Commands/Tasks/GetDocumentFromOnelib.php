@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Test;
+namespace App\Console\Commands\Tasks;
 
 use App\Models\Document;
 use App\Service\MakePDF;
@@ -30,7 +30,7 @@ class GetDocumentFromOnelib extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Command get document from onelib';
 
     /**
      * Create a new command instance.
