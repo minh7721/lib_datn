@@ -989,7 +989,7 @@
                 </div>
 
                 <!-- Related documents -->
-                <div class="hidden lg:block bg-white rounded-1.5lg p-5 pb-0 shadow-around lg:shadow-none">
+                <div class="hidden lg:block bg-white rounded-1.5lg p-5 pb-0 shadow-around lg:shadow-none mb-3">
                     <h2 class="lg:font-medium lg:text-center font-semibold text-xl">Other related documents</h2>
                     <div class="flex flex-wrap mt-4 xl:px-6">
                         @foreach($top_documents as $top_document)
