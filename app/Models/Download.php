@@ -16,7 +16,7 @@ class Download extends Model
     protected $table = 'downloads';
     protected $guarded = ['id'];
     protected $casts = [
-        'payload' => 'array'
+        'payload' => 'json'
     ];
     public function user(): BelongsTo
     {

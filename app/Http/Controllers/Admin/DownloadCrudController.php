@@ -98,6 +98,21 @@ class DownloadCrudController extends CrudController
                     });
                 }
             });
+
+        $this->crud->addFilter([
+            'name' => 'price',
+            'type' => 'range',
+            'label_from' => 'Min price',
+            'label_to' => 'Max price'
+        ], false, function ($value) {
+            $range = json_decode($value);
+            if ($range->from) {
+                $this->crud->addClause('where', "payload->price", '>=', (float)$range->from);
+            }
+            if ($range->to) {
+                $this->crud->addClause('where', "payload->price", '<=', (float)$range->to);
+            }
+        });
     }
 
     public function userOptions(Request $request)

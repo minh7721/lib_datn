@@ -8,6 +8,7 @@ use App\Models\Enums\SourcePayment;
 use App\Models\Payment;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PaymentCrudController
@@ -107,6 +108,23 @@ class PaymentCrudController extends CrudController
                 $this->crud->addClause('where', 'price', '<=', (float)$range->to);
             }
         });
+
+        $this->crud->addFilter([
+            'name' => 'filter_user_id',
+            'type' => 'select2_ajax',
+            'label' => 'User',
+            'placeholder' => 'Pick a user'
+        ],
+            url('admin/ajax-user-options'), // the ajax route
+            function ($value) {
+                if ($value) { //Bug's backpack
+                    $this->crud->with('user')->when($value, function (Builder $query, $value) {
+                        return $query->whereHas('user', function (Builder $query) use ($value) {
+                            $query->where('user_id', $value);
+                        });
+                    });
+                }
+            });
     }
 
     protected function setupUpdateOperation()
