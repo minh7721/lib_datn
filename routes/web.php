@@ -10,13 +10,15 @@ use App\Http\Controllers\Frontend\DownloadController;
 use App\Http\Controllers\Frontend\LoginController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\RegisterController;
+use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\Frontend\UploadController;
 use App\Http\Controllers\Frontend\UserController;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [DocumentController::class, 'index'])->name('document.home.index');
 Route::get('category/{slug}', [CategoryController::class, 'listDocument'])->name('document.category.list');
+Route::get('tag/{slug}', [TagController::class, 'listDocument'])->name('document.tag.list');
 
 
 Route::prefix('auth')->group(function () {

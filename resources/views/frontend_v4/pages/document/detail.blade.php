@@ -1195,7 +1195,7 @@
                 <p class="font-semibold text-xl">Hashtag</p>
                 <div class="mt-4">
                     @foreach($tags as $tag)
-                        <a href="#"
+                        <a href="{{ route('document.tag.list', ['slug' => $tag->slug]) }}"
                            class="font-light break-all hover:text-primary border border-gray-400 hover:border-primary inline-block rounded-1.5lg my-1 mx-1 px-2 py-1">{{ $tag->name }}</a>
                     @endforeach
                 </div>
