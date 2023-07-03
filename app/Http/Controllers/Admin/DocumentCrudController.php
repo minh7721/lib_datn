@@ -276,6 +276,24 @@ class DocumentCrudController extends CrudController
         ]);
 
         $this->crud->addField([
+            'label'     => "Tags",
+            'type'      => 'select2_multiple',
+            'name'      => 'tags', // the method that defines the relationship in your Model
+
+            // optional
+            'entity'    => 'tags', // the method that defines the relationship in your Model
+            'model'     => "App\Models\Tag", // foreign key model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+            // 'select_all' => true, // show Select All and Clear buttons?
+
+            // optional
+            'options'   => (function ($query) {
+                return $query->orderBy('name', 'ASC')->get();
+            }),
+        ]);
+
+        $this->crud->addField([
             'name' => 'language',
             'label' => "Language",
             'type' => 'select2_from_array',

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Libs\SeoSlugGenerator;
+use App\Libs\StringUtils;
 use App\Models\Traits\HasIdRangeScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Tag extends Model
 {
@@ -15,6 +18,21 @@ class Tag extends Model
     protected $table = 'tags';
     protected $guarded = ['id'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->slug = Str::slug((new SeoSlugGenerator($model->name))->run());
+            $model->normalized = StringUtils::normalize($model->name);
+        });
+
+        static::updating(function ($model) {
+            $model->slug = Str::slug((new SeoSlugGenerator($model->name))->run());
+            $model->normalized = StringUtils::normalize($model->name);
+        });
+
+    }
     public function documents(): BelongsToMany
     {
         return $this->belongsToMany(Document::class, 'document_tag',  'tag_id', 'document_id');
