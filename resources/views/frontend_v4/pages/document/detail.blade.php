@@ -452,13 +452,13 @@
                     <div class="flex lg:flex-row flex-col gap-3">
                         <div class="w-full md:mt-0 lg:w-fit font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-language mt-1"></i>
-                            <a href="#" class="hover:underline ml-1 block">
+                            <p class=" ml-1 block">
                                 {{ \App\Libs\CountriesHelper\Languages::getFullName($document->language) }}
-                            </a>
+                            </p>
                         </div>
                         <div class="lg:ml-16 md:mt-0 w-full  lg:w-fit font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-book mt-1"></i>
-                            <a href="#" class="hover:underline ml-2">{{ $document->categories->name }}</a>
+                            <a href="{{ route('document.category.list', ['slug' => $document->categories->slug]) }}" class="hover:underline ml-2">{{ $document->categories->name }}</a>
                         </div>
                         <div
                             class="lg:ml-16 md:mt-0 w-full lg:w-fit font-medium flex flex-row items-center text-default-lighter">
@@ -469,13 +469,13 @@
                     <div class="hidden md:flex lg:flex-row flex-col mt-3 lg:mt-5 gap-3">
                         <div class=" font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-user mt-1"></i>
-                            <a href="#" class="hover:underline ml-2">{{ $document->user->name }}</a>
+                            <p class="ml-2">{{ $document->user->name }}</p>
                         </div>
                         <div class="lg:ml-16 md:mt-0 font-medium flex flex-row text-default-lighter">
                             <i class="fa-solid fa-calendar-days mt-1"></i>
                             <p class="ml-2">
-                                Uploaded date: <a href="#"
-                                                  class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
+                                Uploaded date: <span
+                                                  class="text-gray-400">{{ $document->created_at->toDateString() }}</span>
                             </p>
                         </div>
                     </div>
