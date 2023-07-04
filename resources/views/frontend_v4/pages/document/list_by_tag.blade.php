@@ -32,53 +32,53 @@
                     @include('frontend_v4.components.document-list-item')
                 @endforeach
             </div>
+            {{-- Pagination--}}
             <div
-                class=" max-4xl xl:max-w-5xl mx-auto paginator  my-1 md:my-4 lg:mt-8 flex md:gap-4 items-center justify-center">
-                <a href="" class="inline-flex items-center gap-3 p-2 text-slate-300 text-sm md:text-base">
-                    <i class="fa-solid fa-chevron-left"></i>
-                    <span class="leading-8">Previous</span>
-                </a>
-                <div class="hidden md:flex gap-2">
-                    <a href=""
-                       class="paginator_item-2 inline-flex text-white bg-primary  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">1</span>
+                class="max-4xl xl:max-w-5xl mx-auto paginator my-1 md:my-4 lg:mt-8 flex md:gap-4 items-center justify-center">
+                @if ($documents->onFirstPage())
+                    <span class="inline-flex items-center gap-3 p-2 text-slate-300 text-sm md:text-base cursor-pointer">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span class="leading-8">Previous</span>
+        </span>
+                @else
+                    <a href="{{ $documents->previousPageUrl() }}"
+                       class="inline-flex items-center gap-3 p-2 text-primary text-sm md:text-base hover:bg-[#E6F7F4]">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        <span class="leading-8">Previous</span>
                     </a>
-                    <a href=""
-                       class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">2</span>
-                    </a> <a href=""
-                            class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">3</span>
-                    </a> <a href=""
-                            class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">4</span>
-                    </a> <a href=""
-                            class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">5</span>
-                    </a> <a href=""
-                            class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">6</span>
-                    </a> <a href=""
-                            class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">7</span>
-                    </a>
-                    <a href=""
-                       class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">8</span>
-                    </a>
-                    <a href=""
-                       class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4]  items-center rounded-full text-base w-8 h-8 ">
-                        <span class="grow text-center">9</span>
-                    </a>
+                @endif
 
+                <div class="hidden md:flex gap-2">
+                    @foreach ($documents->getUrlRange(1, $documents->lastPage()) as $page => $url)
+                        @if ($documents->currentPage() == $page)
+                            <a href="{{ $url }}"
+                               class="paginator_item-2 inline-flex text-white bg-primary items-center rounded-full text-base w-8 h-8">
+                                <span class="grow text-center">{{ $page }}</span>
+                            </a>
+                        @else
+                            <a href="{{ $url }}"
+                               class="paginator_item-2 inline-flex text-primary hover:bg-[#E6F7F4] items-center rounded-full text-base w-8 h-8">
+                                <span class="grow text-center">{{ $page }}</span>
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
 
-                <a href=""
-                   class="inline-flex items-center gap-3  hover:bg-[#E6F7F4] rounded-4xl px-4 py-1 text-primary text-sm md:text-base">
-                    <span class="leading-8">Next</span>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </a>
+                @if ($documents->hasMorePages())
+                    <a href="{{ $documents->nextPageUrl() }}"
+                       class="inline-flex items-center gap-3 hover:bg-[#E6F7F4] rounded-4xl px-4 py-1 text-primary text-sm md:text-base">
+                        <span class="leading-8">Next</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                @else
+                    <span
+                        class="inline-flex items-center gap-3 rounded-4xl px-4 py-1 text-slate-300 text-sm md:text-base cursor-pointer">
+            <span class="leading-8">Next</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </span>
+                @endif
             </div>
+
         </div>
     </div>
 @endsection
