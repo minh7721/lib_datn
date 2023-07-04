@@ -73,7 +73,7 @@ class DocumentController extends Controller
         $documents = Document::where('active', true)
             ->where('is_public', true)
             ->where('title', 'like', '%' . $searchQuery . '%')
-            ->limit(10)->get();
+            ->paginate(20);
         return view('frontend_v4.pages.search.search', compact('documents'));
     }
 
