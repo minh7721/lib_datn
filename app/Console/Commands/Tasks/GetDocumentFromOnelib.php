@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Tasks;
 
 use App\Models\Document;
+use App\Models\Tag;
 use App\Service\MakePDF;
 use App\Service\MakeText;
 use GuzzleHttp\Client;
@@ -128,6 +129,16 @@ class GetDocumentFromOnelib extends Command
                         $document->original_format = $formattedSize;
                         $document->full_text = $full_text;
                         $document->save();
+                        $tags = Tag::all();
+                        if ($tags){
+                            $randomTags = $tags->random(mt_rand(3, 10));
+                            foreach ($randomTags as $randomTag) {
+                                \DB::table('document_tag')->insert([
+                                    'document_id' => $document->id,
+                                    'tag_id' => $randomTag->id,
+                                ]);
+                            }
+                        }
                         $this->info('Successful data collection: '.$document->id);
                     } else {
 
