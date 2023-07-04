@@ -13,7 +13,7 @@ class TagController extends Controller
         $tag = Tag::where('slug', $slug)->first();
         $documents = Document::whereHas('tags', function ($query) use ($tag){
             $query->where('tag_id', $tag->id);
-        })->get();
+        })->paginate(20);
         return view('frontend_v4.pages.document.list_by_tag', compact('tag','documents'));
     }
 }
