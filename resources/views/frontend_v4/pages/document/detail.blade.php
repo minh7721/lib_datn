@@ -3,6 +3,7 @@
 
 @push('title')
     <title>Libshare - {{ $document->title }}</title>
+    <meta name="description" content="{{ $document->title }}">
 @endpush
 
 @push('before_styles')

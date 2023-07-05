@@ -2,6 +2,7 @@
 
 @push('title')
     <title>Libshare - {{ $tag->name }}</title>
+    <meta name="description" content="{{ $tag->name }}">
 @endpush
 @push('before_styles')
 @endpush

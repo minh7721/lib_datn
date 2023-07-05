@@ -2,6 +2,7 @@
 
 @push('title')
     <title>Libshare - The world's leading document sharing platform</title>
+    <meta name="description" content="Libshare - The world's leading document sharing platform with 1.000.000+ document">
 @endpush
 
 @push('before_styles')
