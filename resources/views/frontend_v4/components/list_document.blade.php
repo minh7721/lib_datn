@@ -1,9 +1,15 @@
+@php
+    $directory = 'assets_v4/images/documents';
+    $files = \Illuminate\Support\Facades\File::files($directory);
+    $randomFile = $files[array_rand($files)];
+@endphp
+
 <a href="{{ route('document.detail', ['slug' => $document->slug]) }}"
    class="w-full h-96">
     <div
         class="flex flex-col gap-4 border border-slate-300 border-solid rounded-lg px-8 py-5 hover:shadow-card h-full hover:shadow-xl">
         <div class="aspect-[3/4] bg-slate-100 h-1/2 lg:h-1/3 xl:h-1/2">
-            <img src="https://data03.123doks.com/thumbv2/123dok/004/400/4400743/cover.webp" alt=""
+            <img src="{{ $randomFile }}" alt=""
                  class="w-full h-full object-cover">
         </div>
         <div class="grow flex flex-col justify-around   ">

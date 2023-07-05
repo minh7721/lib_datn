@@ -1,4 +1,8 @@
 @extends('frontend_v4.layouts.master')
+
+@push('title')
+    <title>Libshare - {{ $category->name }}</title>
+@endpush
 @push('before_styles')
 @endpush
 

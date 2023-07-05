@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ url(config('app.favicon', 'favicon.ico')) }}" type="image/x-icon">
     <link rel="icon" href="{{ url(config('app.favicon', 'favicon.ico')) }}" type="image/x-icon">
-    <title>{{ $document ? "Libshare - {$document->title}" : "Libshare - The world's leading document sharing platform" }}</title>
+    @stack('title')
     @stack('before_styles')
     {{--    {!! SEO::generate(true) !!} --}}
 

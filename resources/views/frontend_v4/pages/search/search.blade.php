@@ -1,4 +1,5 @@
 @extends('frontend_v4.layouts.master')
+
 @push('before_styles')
 @endpush
 @push('after_styles')

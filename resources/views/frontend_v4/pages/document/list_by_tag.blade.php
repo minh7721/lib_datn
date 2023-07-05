@@ -1,4 +1,8 @@
 @extends('frontend_v4.layouts.master')
+
+@push('title')
+    <title>Libshare - {{ $tag->name }}</title>
+@endpush
 @push('before_styles')
 @endpush
 

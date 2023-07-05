@@ -1,4 +1,9 @@
 @extends('frontend_v4.layouts.master')
+
+@push('title')
+    <title>Libshare - The world's leading document sharing platform</title>
+@endpush
+
 @push('before_styles')
 @endpush
 

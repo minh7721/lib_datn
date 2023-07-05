@@ -1,5 +1,10 @@
 @extends('frontend_v4.layouts.master')
 
+
+@push('title')
+    <title>Libshare - {{ $document->title }}</title>
+@endpush
+
 @push('before_styles')
 @endpush
 
@@ -993,12 +998,17 @@
                     <h2 class="lg:font-medium lg:text-center font-semibold text-xl">Other related documents</h2>
                     <div class="flex flex-wrap mt-4 xl:px-6">
                         @foreach($top_documents as $top_document)
+                            @php
+                                $directory = 'assets_v4/images/documents';
+                                $files = \Illuminate\Support\Facades\File::files($directory);
+                                $randomFile = $files[array_rand($files)];
+                            @endphp
                             <div class="w-full md:w-1/2 lg:w-full flex flex-col px-1 pb-3">
                                 <div class="flex lg:block p-1 border border-gray-200 rounded-1.5lg hover:shadow-hover">
                                     <a href="{{ route('document.detail', ['slug' => $top_document->slug]) }}"
                                        class="block rounded h-28 lg:h-32 xl:h-40 w-2/5 lg:w-full py-3 lg:py-0 overflow-hidden">
-                                        <img class=""
-                                             src="https://data03.123doks.com/thumbv2/123dok/000/068/68235/cover.webp"
+                                        <img class="w-full h-full"
+                                             src="{{ asset($randomFile) }}"
                                              alt="">
                                     </a>
                                     <div class="p-3 text-default-lighter">
