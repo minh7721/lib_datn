@@ -390,7 +390,7 @@
     <div class="bg-white py-4 px-4" :class="open_comment_responsive && 'h-full'">
         <div class="container mx-auto flex flex-col">
             <div class="font-thin flex gap-4 items-center mb-3">
-                <a href class="text-primary">Home</a>
+                <a href="{{ route('document.home.index') }}" class="text-primary">Home</a>
                 <i class="fa-solid fa-chevron-right"></i>
                 <span>Document</span>
             </div>
@@ -513,13 +513,13 @@
                         <div class="flex lg:flex-row flex-col mt-5 gap-3">
                             <div class=" font-medium flex flex-row text-default-lighter">
                                 <i class="fa-solid fa-user mt-1"></i>
-                                <a href="#" class="hover:underline ml-2">{{ $document->user->name }}</a>
+                                <p class="hover:underline ml-2">{{ $document->user->name }}</p>
                             </div>
                             <div class="lg:ml-16 md:mt-0 font-medium flex flex-row text-default-lighter">
                                 <i class="fa-solid fa-calendar-days mt-1"></i>
                                 <p class="ml-2">
-                                    Uploaded date: <a href="#"
-                                                      class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</a>
+                                    Uploaded date: <span
+                                                      class="text-gray-400 hover:underline">{{ $document->created_at->toDateString() }}</span>
                                 </p>
                             </div>
                         </div>
