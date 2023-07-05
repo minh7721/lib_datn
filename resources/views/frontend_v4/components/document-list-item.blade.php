@@ -17,12 +17,11 @@
                class="font-medium md:font-semibold text-primary text-sm lg:text-base line-clamp-2  mb-2 md:mb-0">
                 {{ $document->title }} </a>
             <div class="flex flex-col md:flex-row gap-2 md:gap-4 lg:gap-8 text-xs lg:text-base">
-                <a href=""
-                   class=" order-1 inline-flex gap-1.5 lg:gap-2 items-center min-w-max lg:flex-grow-0 hover:text-primary">
+                <p class=" order-1 inline-flex gap-1.5 lg:gap-2 items-center min-w-max lg:flex-grow-0 hover:text-primary">
                     <i class="fa-solid fa-user w-4"></i>
                     <span class="">{{ $document->user->name }}</span>
-                </a>
-                <a href="{{ route('document.category.list', ['slug', $document->categories->slug]) }}" class="flex gap-1.5 lg:gap-2 items-center order-3 md:order-2 hover:text-primary">
+                </p>
+                <a href="{{ route('document.category.list', ['slug' => $document->categories->slug]) }}" class="flex gap-1.5 lg:gap-2 items-center order-3 md:order-2 hover:text-primary">
                     <i class="fa-solid fa-book w-4"></i>
                     <span class="line-clamp-1">{{ $document->categories->name }}</span>
                 </a>

@@ -22,7 +22,7 @@
                 <span class="text-default-lighter">
                     <i class="fa-solid fa-angle-right text-sm"></i>
                 </span>
-                <a class="text-default-lighter">{{ $tag->name }}</a>
+                <p class="text-default-lighter">{{ $tag->name }}</p>
             </div>
         </div>
     </div>
