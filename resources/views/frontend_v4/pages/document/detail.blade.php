@@ -1007,7 +1007,7 @@
                                 <div class="flex lg:block p-1 border border-gray-200 rounded-1.5lg hover:shadow-hover">
                                     <a href="{{ route('document.detail', ['slug' => $top_document->slug]) }}"
                                        class="block rounded h-28 lg:h-32 xl:h-40 w-2/5 lg:w-full py-3 lg:py-0 overflow-hidden">
-                                        <img class="w-full h-full"
+                                        <img class=""
                                              src="{{ asset($randomFile) }}"
                                              alt="">
                                     </a>
